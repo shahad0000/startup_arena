@@ -18,7 +18,9 @@ function SignUp() {
       {/* signup steps */}
       <div className="flex justify-center items-center gap-4">
         <div className="py-1 px-1 rounded-full bg-[#1E40AF]">
-          <p className="py-2 px-4 rounded-full bg-[#1E40AF] text-lg font-bold text-white">1</p>
+          <p className="py-2 px-4 rounded-full bg-[#1E40AF] text-lg font-bold text-white">
+            1
+          </p>
         </div>
         <div>
           <p>
@@ -26,16 +28,22 @@ function SignUp() {
           </p>
         </div>
         <div className="py-1 px-1 rounded-full bg-[#1E40AF]">
-          <p className="py-2 px-4 rounded-full bg-white text-lg font-bold text-black">2</p>
+          <p className="py-2 px-4 rounded-full bg-white text-lg font-bold text-black">
+            2
+          </p>
         </div>
       </div>
-      <div className="p-5 shadow-2xl rounded-lg flex justify-center items-center gap-15 ">
+      <div className="p-5  rounded-lg flex justify-center items-center gap-15 ">
         <img src={investmentIdea} alt="" className="h-100" />
         <div>
           {/* form start */}
-          <div className="text-black">
-            <p className="text-sm font-medium">Select Your Role:</p>
-            <div className="flex items-center justify-between p-3 gap-4">
+          <div className="text-black flex flex-col items-center justify-center w-100">
+            <div className="flex items-center justify-between p-3 gap-4 w-full">
+              <p className="text-sm font-medium text-start">
+            Select Your Role:
+              </p>
+            </div>
+            <div className="flex items-center justify-between p-3 gap-4 w-full">
               <div className="flex flex-col justify-center items-center gap-1 border border-gray-300 rounded-lg w-20 hover:bg-blue-500 hover:text-white py-2 px-2">
                 <SiCashapp />
                 <p className="text-sm font-medium">Investor</p>
@@ -49,8 +57,8 @@ function SignUp() {
                 <p className="text-sm font-medium">critic</p>
               </div>
             </div>
-            <div>
-              <div className="flex flex-col p-1 gap-1">
+            <div className="flex flex-col items-center justify-center w-100">
+              <div className="flex flex-col p-1 gap-1 w-full">
                 <label className="text-sm font-medium">Email</label>
                 <input
                   type="text"
@@ -60,7 +68,7 @@ function SignUp() {
                   Pleas Enter Valid Email
                 </span>
               </div>
-              <div className="flex flex-col p-1 gap-1">
+              <div className="flex flex-col p-1 gap-1 w-full">
                 <label className="text-sm font-medium">Password</label>
                 <input
                   type="password"
@@ -70,7 +78,7 @@ function SignUp() {
                   Password should be grater than 8 letters
                 </span>
               </div>
-              <div className="flex flex-col p-1 gap-1">
+              <div className="flex flex-col p-1 gap-1 w-full">
                 <label className="text-sm font-medium">Confirm Password</label>
                 <input
                   type="password"

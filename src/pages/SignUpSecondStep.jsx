@@ -34,9 +34,9 @@ function SignUpSecondStep() {
           </p>
         </div>
       </div>
-      <div className="p-5 shadow-2xl rounded-lg flex justify-center items-center gap-15 ">
+      <div className="p-5  rounded-lg flex justify-center items-center gap-15 ">
         <img src={investmentIdea} alt="" className="h-100" />
-        <div>
+        <div className="flex flex-col items-center justify-center w-100">
           {/* form start */}
           <div className="text-black flex flex-col p-1 gap-2 w-full">
             <div className="flex flex-col gap-3">
