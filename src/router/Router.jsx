@@ -7,6 +7,8 @@ import SubmitIdeaForm from "../pages/SubmitIdeaForm";
 import MyIdeas from "../pages/MyIdeas";
 import AllIdeas from "../pages/ExploreStartupIdeas";
 import FeaturedIdeas from "../pages/FeaturedIdeas";
+import IdeaAnalysis from "../pages/IdeaAnalysis";
+import IdeaDetails from "../pages/IdeaDetails";
 
 const Layout = () => {
   return (
@@ -29,6 +31,9 @@ const router = createBrowserRouter([
       { path: "/MyIdeas", element: <MyIdeas/> },
       { path: "/AllIdeas", element:<AllIdeas/>  },
       { path: "/FeaturedIdeas", element:<FeaturedIdeas/>  },
+      { path: "/IdeaAnalysis/:id", element:<IdeaAnalysis/>  },
+      { path: "/detailIdea/:id", element:<IdeaDetails/>  },
+
 
 
     ],
