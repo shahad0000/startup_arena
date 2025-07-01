@@ -8,34 +8,37 @@ import { FaLinkedin } from "react-icons/fa6";
 import { FaFacebook } from "react-icons/fa6";
 import { FaInstagram } from "react-icons/fa6";
 import { FaStar } from "react-icons/fa6";
+
 function LandingPage() {
   return (
     <>
       <div className="">
         {/* Nav Section */}
-        <section className=" flex flex-col items-center w-full min-h-screen min-w-screen  bg-linear-to-b from-[#1E40AF] to-white">
+        <section className=" flex flex-col items-center  min-h-screen max-w-screen  bg-linear-to-b from-[#1E40AF] to-white">
           <nav className="flex items-center justify-between h-20 w-full">
             {/* Logo */}
             {/* <img src="" alt="" /> */}
-            <p className="text-2xl text-blue-700 font-bold w-80 text-center">
+            <p className="text-2xl text-blue-700 font-bold w-50 text-center">
               Startup Arena Hub
             </p>
-            <ul className="flex items-center justify-between gap-5">
-              <li className="text-gray-800 font-medium text-sm hover:text-blue-500">
-                Home
-              </li>
-              <li className="text-gray-800 font-medium text-sm hover:text-blue-500">
-                Explore
-              </li>
-              <li className="text-gray-800 font-medium text-sm hover:text-blue-500">
-                Dashboard
-              </li>
-              <li className="text-gray-800 font-medium text-sm hover:text-blue-500">
-                Watch Meetings
-              </li>
-            </ul>
-            <div className="w-50">
-              <button className="py-1 px-6 border rounded-lg bg-[#1E40AF] text-white font-medium hover:bg-blue-700 ">
+            <div className=" fixed w-full flex justify-center items-start top-5">
+              <ul className="flex items-center justify-around py-2 px-2 bg-white w-150 rounded-lg">
+                <li className="text-gray-600 font-medium text-sm hover:text-blue-500">
+                  Home
+                </li>
+                <li className="text-gray-600 font-medium text-sm hover:text-blue-500">
+                  Explore
+                </li>
+                <li className="text-gray-600 font-medium text-sm hover:text-blue-500">
+                  Dashboard
+                </li>
+                <li className="text-gray-600 font-medium  text-sm hover:text-blue-500">
+                  Watch Meetings
+                </li>
+              </ul>
+            </div>
+            <div className="flex justify-center  w-50">
+              <button className="py-1 px-6 rounded border   text-white  hover:bg-blue-800s font-medium  ">
                 SignIn
               </button>
             </div>
@@ -43,39 +46,34 @@ function LandingPage() {
           {/* </section> */}
           {/* section two */}
           {/* <section> */}
-          <div className="">
-            <div className="flex items-center justify-center  py-5">
-              <div className=" px-4 py-6 flex flex-col justify-center gap-5 text-white">
+          <div className="w-full">
+            <div className="flex py-5">
+              <div className=" px-4 py-6 w-full flex flex-col items-center justify-center gap-5 text-white">
                 <div className="flex flex-col gap-3 ">
-                  <p className="text-4xl font-bold text-center">
+                  <p className="text-4xl w-150 font-bold text-center">
                     Turn Your Startup Ideas Into Reality
                   </p>
-                  <p className="text-lg text-center">
+                  <p className="text-lg text-center w-150">
                     Submit your startup concepts, get valuable feedback from our
                     community, and connect with investors ready to fund your
                     next big idea.
                   </p>
                 </div>
                 <div className="flex justify-center items-center gap-5 ">
-                  <button className="bg-[#FFBF00] py-3 px-5 rounded-lg text-black font-medium flex items-center gap-3 ">
+                  <button className="bg-[#FFBF00] hover:bg-[#d2ba74] py-3 px-5 rounded-lg text-black font-medium flex items-center gap-3 ">
                     <MdRocketLaunch /> Submit Your Startup Idea
                   </button>
-                  <button className="border font-medium py-3 px-5 rounded-lg hover:bg-white hover:text-blue-600">
+                  <button className=" font-medium py-3 bg-blue-600 px-5 rounded-lg hover:bg-white hover:text-blue-600">
                     SignIn
                   </button>
                 </div>
               </div>
-              <div className="w-2/4 flex justify-center">
-                <img
-                  src={headerImage}
-                  alt=""
-                  className="w-100 h-80 bg-cover rounded-lg"
-                />
-              </div>
             </div>
           </div>
           <div className="h-40 flex flex-col items-center justify-center">
-            <p className=" text-center text-3xl font-bold text-[#1E40AF]">How It Works</p>
+            <p className=" text-center text-3xl font-bold text-[#1E40AF]">
+              How It Works
+            </p>
             <p className="text-center text-[#1E40AF] font-medium text-lg ">
               Three simple steps to get your startup idea in front of investors
               and the community
@@ -84,8 +82,14 @@ function LandingPage() {
         </section>
         {/* section three */}
         <section>
-          <div className="flex justify-center gap-5 p-5 items-start h-70">
-            <div className="flex flex-col items-center justify-center gap-3 w-80">
+          <div className="flex justify-center gap-5  items-start h-70">
+            <div
+              className="flex flex-col items-center justify-center gap-3 w-80 rounded-lg
+             transform 
+             transition-all duration-300 ease-in-out 
+             hover:scale-120
+             "
+            >
               <p className="py-3 px-5 rounded-full bg-[#1E40AF] w-fit text-lg font-bold text-white">
                 1
               </p>
@@ -95,7 +99,13 @@ function LandingPage() {
                 and choose relevant industry tags.
               </p>
             </div>
-            <div className="flex flex-col items-center justify-center gap-3 w-80">
+            <div
+              className="flex flex-col items-center justify-center gap-3 w-80 rounded-lg
+             transform 
+             transition-all duration-300 ease-in-out 
+             hover:scale-120 
+             "
+            >
               <p className="py-3 px-5 rounded-full bg-[#FFCC00] w-fit text-lg font-bold text-white">
                 2
               </p>
@@ -105,7 +115,13 @@ function LandingPage() {
                 critics, entrepreneurs, and industry experts.
               </p>
             </div>
-            <div className="flex flex-col items-center justify-center gap-3 w-80">
+            <div
+              className="flex flex-col items-center justify-center gap-3 w-80 rounded-lg
+             transform 
+             transition-all duration-300 ease-in-out 
+             hover:scale-120
+             "
+            >
               <p className="py-3 px-5 rounded-full bg-[#3ABB6B] w-fit text-lg font-bold text-white">
                 3
               </p>
@@ -230,8 +246,15 @@ function LandingPage() {
         <section>
           <div className="flex justify-center items-center gap-5 p-5">
             {/* rating card 1 */}
-            <div>
-              <div className="flex flex-col gap-5 w-80 border-2  border-gray-100 shadow shadow-gray-400 p-4 rounded-lg">
+            <div className="h-50 flex items-center justify-center">
+              <div
+                className="flex flex-col gap-5 w-80 border-2 bg-white  border-gray-100 shadow p-4 rounded-lg
+                           transform 
+             transition-all duration-300 ease-in-out 
+             hover:scale-120
+             hover:shadow-2xl 
+              "
+              >
                 <div className="flex items-center justify-between ">
                   <p className="flex items-center  text-[#FFCB00] font-bold">
                     <FaStar />
@@ -257,7 +280,14 @@ function LandingPage() {
             </div>
             {/* rating card 2 */}
             <div>
-              <div className="flex flex-col gap-5 w-80 border-2  border-gray-100 shadow shadow-gray-400 p-4 rounded-lg">
+              <div
+                className="flex flex-col gap-5 w-80 border-2 bg-white  border-gray-100 shadow p-4 rounded-lg
+                           transform 
+             transition-all duration-300 ease-in-out 
+             hover:scale-120
+             hover:shadow-2xl 
+              "
+              >
                 <div className="flex items-center justify-between ">
                   <p className="flex items-center  text-[#FFCB00] font-bold">
                     <FaStar />
@@ -283,7 +313,14 @@ function LandingPage() {
             </div>
             {/* rating card 3 */}
             <div>
-              <div className="flex flex-col gap-5 w-80 border-2  border-gray-100 shadow shadow-gray-400 p-4 rounded-lg">
+              <div
+                className="flex flex-col gap-5 w-80 border-2 bg-white  border-gray-100 shadow p-4 rounded-lg
+                           transform 
+             transition-all duration-300 ease-in-out 
+             hover:scale-120
+             hover:shadow-2xl 
+              "
+              >
                 <div className="flex items-center justify-between ">
                   <p className="flex items-center  text-[#FFCB00] font-bold">
                     <FaStar />

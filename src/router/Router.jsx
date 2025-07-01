@@ -3,6 +3,7 @@ import LandingPage from "../pages/LandingPage";
 import SignUp from "../pages/SignUp";
 import SignIn from "../pages/SignIn";
 import SignUpSecondStep from "../pages/SignUpSecondStep";
+import SubmitIdeaForm from "../pages/SubmitIdeaForm";
 import MyIdeas from "../pages/MyIdeas";
 import AllIdeas from "../pages/ExploreStartupIdeas";
 import FeaturedIdeas from "../pages/FeaturedIdeas";
@@ -24,6 +25,7 @@ const router = createBrowserRouter([
       { path: "/signup", element: <SignUp /> },
       { path: "/signupTwo", element: <SignUpSecondStep /> },
       { path: "/signin", element: <SignIn /> },
+      { path: "/submitIdea", element: <SubmitIdeaForm /> },
       { path: "/MyIdeas", element: <MyIdeas/> },
       { path: "/AllIdeas", element:<AllIdeas/>  },
       { path: "/FeaturedIdeas", element:<FeaturedIdeas/>  },
