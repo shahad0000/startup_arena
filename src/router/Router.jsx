@@ -3,6 +3,7 @@ import LandingPage from "../pages/LandingPage";
 import SignUp from "../pages/SignUp";
 import SignIn from "../pages/SignIn";
 import SignUpSecondStep from "../pages/SignUpSecondStep";
+import SubmitIdeaForm from "../pages/SubmitIdeaForm";
 
 const Layout = () => {
   return (
@@ -21,6 +22,7 @@ const router = createBrowserRouter([
       { path: "/signup", element: <SignUp /> },
       { path: "/signupTwo", element: <SignUpSecondStep /> },
       { path: "/signin", element: <SignIn /> },
+      { path: "/submitIdea", element: <SubmitIdeaForm /> },
     ],
   },
   {

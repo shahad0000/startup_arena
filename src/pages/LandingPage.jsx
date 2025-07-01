@@ -83,7 +83,13 @@ function LandingPage() {
         {/* section three */}
         <section>
           <div className="flex justify-center gap-5  items-start h-70">
-            <div className="flex flex-col items-center justify-center gap-3 w-80">
+            <div
+              className="flex flex-col items-center justify-center gap-3 w-80 rounded-lg
+             transform 
+             transition-all duration-300 ease-in-out 
+             hover:scale-120
+             "
+            >
               <p className="py-3 px-5 rounded-full bg-[#1E40AF] w-fit text-lg font-bold text-white">
                 1
               </p>
@@ -93,7 +99,13 @@ function LandingPage() {
                 and choose relevant industry tags.
               </p>
             </div>
-            <div className="flex flex-col items-center justify-center gap-3 w-80">
+            <div
+              className="flex flex-col items-center justify-center gap-3 w-80 rounded-lg
+             transform 
+             transition-all duration-300 ease-in-out 
+             hover:scale-120 
+             "
+            >
               <p className="py-3 px-5 rounded-full bg-[#FFCC00] w-fit text-lg font-bold text-white">
                 2
               </p>
@@ -103,7 +115,13 @@ function LandingPage() {
                 critics, entrepreneurs, and industry experts.
               </p>
             </div>
-            <div className="flex flex-col items-center justify-center gap-3 w-80">
+            <div
+              className="flex flex-col items-center justify-center gap-3 w-80 rounded-lg
+             transform 
+             transition-all duration-300 ease-in-out 
+             hover:scale-120
+             "
+            >
               <p className="py-3 px-5 rounded-full bg-[#3ABB6B] w-fit text-lg font-bold text-white">
                 3
               </p>
@@ -228,8 +246,15 @@ function LandingPage() {
         <section>
           <div className="flex justify-center items-center gap-5 p-5">
             {/* rating card 1 */}
-            <div>
-              <div className="flex flex-col gap-5 w-80 border-2  border-gray-100 shadow shadow-gray-400 p-4 rounded-lg">
+            <div className="h-50 flex items-center justify-center">
+              <div
+                className="flex flex-col gap-5 w-80 border-2 bg-white  border-gray-100 shadow p-4 rounded-lg
+                           transform 
+             transition-all duration-300 ease-in-out 
+             hover:scale-120
+             hover:shadow-2xl 
+              "
+              >
                 <div className="flex items-center justify-between ">
                   <p className="flex items-center  text-[#FFCB00] font-bold">
                     <FaStar />
@@ -255,7 +280,14 @@ function LandingPage() {
             </div>
             {/* rating card 2 */}
             <div>
-              <div className="flex flex-col gap-5 w-80 border-2  border-gray-100 shadow shadow-gray-400 p-4 rounded-lg">
+              <div
+                className="flex flex-col gap-5 w-80 border-2 bg-white  border-gray-100 shadow p-4 rounded-lg
+                           transform 
+             transition-all duration-300 ease-in-out 
+             hover:scale-120
+             hover:shadow-2xl 
+              "
+              >
                 <div className="flex items-center justify-between ">
                   <p className="flex items-center  text-[#FFCB00] font-bold">
                     <FaStar />
@@ -281,7 +313,14 @@ function LandingPage() {
             </div>
             {/* rating card 3 */}
             <div>
-              <div className="flex flex-col gap-5 w-80 border-2  border-gray-100 shadow shadow-gray-400 p-4 rounded-lg">
+              <div
+                className="flex flex-col gap-5 w-80 border-2 bg-white  border-gray-100 shadow p-4 rounded-lg
+                           transform 
+             transition-all duration-300 ease-in-out 
+             hover:scale-120
+             hover:shadow-2xl 
+              "
+              >
                 <div className="flex items-center justify-between ">
                   <p className="flex items-center  text-[#FFCB00] font-bold">
                     <FaStar />
