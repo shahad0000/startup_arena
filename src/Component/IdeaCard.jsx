@@ -8,7 +8,7 @@ export const IdeaCard = ({ ideas }) => {
     <>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-y-6 gap-x-4">
         {ideas.map((idea) => (
-          <div key={idea.id} className="bg-white border border-[#E0E0E0] rounded-lg p-4 relative transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-1 ">
+          <div key={idea.id} className="bg-white border border-[#E0E0E0] rounded-lg p-4 relative transform transition-transform duration-300 ease-in-out hover:translate-y-1 hover:scale-105">
             <div className="absolute right-4 top-4 text-amber-300  px-2 py-1 rounded flex items-center gap-1">
               <GoArrowUp /> {idea.totalUpvotes}
             </div>

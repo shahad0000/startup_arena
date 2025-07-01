@@ -3,46 +3,43 @@ import { GoArrowUp } from 'react-icons/go';
 import { FiEdit3 } from 'react-icons/fi';
 import { BiDotsVerticalRounded } from 'react-icons/bi';
 
-const tagColors = {
-  Featured: 'bg-green-100 text-green-800',
-  Health: 'bg-red-100 text-red-600',
-  Education: 'bg-purple-100 text-purple-700',
-  Tech: 'bg-blue-100 text-blue-700'
-};
+import tagColors from "../Component/CatagoryColors"
+
 
 const submittedIdeas = [
   {
     id: 1,
     title: 'EcoTrack - Carbon Footprint App',
     description: 'A tool to track and reduce your carbon footprint.',
-    votes: 113,
-    tag: 'Featured'
+    totalUpvotes: 113,
+    categorys: 'Fitness'
   },
   {
     id: 2,
     title: 'HealthTrack - Wellness App',
     description: 'An app to monitor your health and wellness.',
-    votes: 23,
-    tag: 'Health'
+    totalUpvotes: 23,
+    categorys: 'Health'
   },
   {
     id: 3,
     title: 'EduLearn - Learning Platform',
     description: 'A platform for online learning and education.',
-    votes: 68,
-    tag: 'Education'
+    totalUpvotes: 68,
+    categorys: 'Education'
   },
   {
     id: 4,
     title: 'FitTrack - Fitness App',
     description: 'An app to track your fitness goals and progress.',
-    votes: 25,
-    tag: 'Tech'
+    totalUpvotes: 25,
+    categorys: 'Technology'
   }
 ];
 
 export default function MyIdeas() {
   const [showPopup, setShowPopup] = useState(false);
+  const [activeMenu, setActiveMenu] = useState(null);
 
   return (
     <div className="bg-white px-4 md:px-10 py-10 text-[#333] max-w-4xl mx-auto">
@@ -105,21 +102,34 @@ export default function MyIdeas() {
         {submittedIdeas.map((idea) => (
           <div key={idea.id} className="bg-white border border-gray-200 rounded-md p-4 flex justify-between items-start">
             <div>
-              <h4 className="font-medium text-base mb-1">{idea.title}</h4>
+              <div className='flex gap-2 '>
+              <h4 className="font-medium text-base mb-1">{idea.title}</h4> <span className="flex items-center text-amber-400 font-medium">
+                  <GoArrowUp className="mr-1" /> {idea.totalUpvotes}
+                </span></div>
               <p className="text-sm text-gray-600 mb-2">{idea.description}</p>
               <div className="flex items-center gap-2 text-sm">
-                <span className="flex items-center text-yellow-700 font-medium">
-                  <GoArrowUp className="mr-1" /> {idea.votes}
-                </span>
-                {idea.tag && (
-                  <span className={`${tagColors[idea.tag]} px-2 py-1 rounded-full text-xs`}>{idea.tag}</span>
+                
+                {idea.categorys && (
+                  <span className={`${tagColors[idea.categorys]} px-2 py-1 rounded-full text-xs`}>{idea.categorys}</span>
                 )}
               </div>
             </div>
-            <button className="text-gray-500 hover:text-gray-700">
-              <BiDotsVerticalRounded size={20} />
-            </button>
-          </div>
+       <div className="relative">
+                <button
+                  className="text-gray-500 hover:text-gray-700"
+                  onClick={() => setActiveMenu(activeMenu === idea.id ? null : idea.id)}
+                >
+                  <BiDotsVerticalRounded size={20} />
+                </button>
+                {activeMenu === idea.id && (
+                  <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 shadow-md rounded-md z-10">
+                    <button className="block w-full px-4 py-2 text-sm text-left hover:bg-gray-100">View Detail</button>
+                    <button className="block w-full px-4 py-2 text-sm text-left hover:bg-gray-100">Analysis</button>
+                    <button className="block w-full px-4 py-2 text-sm text-left text-red-600 hover:bg-gray-100">Delete</button>
+                  </div>
+                )}
+              </div>
+            </div>
         ))}
       </div>
 
