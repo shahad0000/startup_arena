@@ -14,7 +14,7 @@ export default function SubmitIdeaForm() {
         </div>
         <div className="flex items-center justify-center  w-full gap-5">
           <div>
-            <img src={SubmitIdea} alt="" className=" w-200" />
+            <img src={SubmitIdea} alt="" className="giw-200" />
           </div>
           {/* idea title */}
           <div className="flex flex-col w-full gap-2">
