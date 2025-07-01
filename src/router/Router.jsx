@@ -4,8 +4,6 @@ import SignUp from "../pages/SignUp";
 import SignIn from "../pages/SignIn";
 import SignUpSecondStep from "../pages/SignUpSecondStep";
 import SubmitIdeaForm from "../pages/SubmitIdeaForm";
-import Nav from "../user/components/Nav";
-import Support from "../user/components/Support";
 
 const Layout = () => {
   return (
@@ -25,7 +23,6 @@ const router = createBrowserRouter([
       { path: "/signupTwo", element: <SignUpSecondStep /> },
       { path: "/signin", element: <SignIn /> },
       { path: "/submitIdea", element: <SubmitIdeaForm /> },
-      { path: "/support", element: <Support /> },
     ],
   },
   {
