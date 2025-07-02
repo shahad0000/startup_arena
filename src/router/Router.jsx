@@ -13,6 +13,7 @@ import IdeaDetails from "../pages/IdeaDetails";
 const Layout = () => {
   return (
     <>
+    
       <Outlet />
     </>
   );
