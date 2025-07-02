@@ -3,13 +3,14 @@ import { FaRegLightbulb } from "react-icons/fa";
 import { SiCashapp } from "react-icons/si";
 import { FaStar } from "react-icons/fa";
 import { investmentIdea } from "../public/ExporImage";
+import { Link } from "react-router";
 
 function SignUp() {
   return (
     <div className="flex flex-col min-h-screen min-w-screen justify-center items-center p-3">
       {/* signup text */}
       <div className="p-3">
-        <p className="text-2xl font-bold text-center p-3">SIGNUP</p>
+        <p className="text-2xl font-bold text-center p-3">SIGN UP</p>
         <p className="text-lg font-bold text-center">Create New Account</p>
         <p className="text-sm font-medium text-center text-[#9CA3AF] ">
           Join our startup community
@@ -40,7 +41,7 @@ function SignUp() {
           <div className="text-black flex flex-col items-center justify-center w-100">
             <div className="flex items-center justify-between p-3 gap-4 w-full">
               <p className="text-sm font-medium text-start">
-            Select Your Role:
+                Select Your Role:
               </p>
             </div>
             <div className="flex items-center justify-between p-3 gap-4 w-full">
@@ -88,10 +89,21 @@ function SignUp() {
                   Confirm password should br equal password
                 </span>
               </div>
-              <div className="w-full flex items-center justify-center">
+              <div className="w-full flex items-center justify-center mt-3">
                 <button className="text-sm font-medium py-2 w-full rounded-lg bg-[#1E40AF] text-white">
                   Next
                 </button>
+              </div>
+              <div>
+                <p className="text-sm text-center text-gray-600 mt-4">
+                  Already have an account?
+                  <Link
+                    to="/signin"
+                    className="text-[#1E40AF] hover:underline font-medium"
+                  >
+                    Sign in
+                  </Link>
+                </p>
               </div>
             </div>
           </div>

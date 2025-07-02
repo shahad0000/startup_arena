@@ -1,14 +1,15 @@
 import { GoArrowUp } from "react-icons/go";
-import tagColors from "../Component/CatagoryColors"
-
-
+import tagColors from "../Component/CatagoryColors";
 
 export const IdeaCard = ({ ideas }) => {
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-y-6 gap-x-4">
         {ideas.map((idea) => (
-          <div key={idea.id} className="bg-white border border-[#E0E0E0] rounded-lg p-4 relative transform transition-transform duration-300 ease-in-out hover:translate-y-1 hover:scale-105">
+          <div
+            key={idea.id}
+            className="bg-white border border-[#E0E0E0] rounded-lg p-4 relative transform transition-transform duration-300 ease-in-out hover:translate-y-1 hover:scale-105"
+          >
             <div className="absolute right-4 top-4 text-amber-300  px-2 py-1 rounded flex items-center gap-1">
               <GoArrowUp /> {idea.totalUpvotes}
             </div>
@@ -17,7 +18,9 @@ export const IdeaCard = ({ ideas }) => {
               {idea.categorys.map((category, idx) => (
                 <span
                   key={idx}
-                  className={`${tagColors[category] || 'bg-gray-200 text-gray-700'} px-2 py-1 text-xs rounded-full`}
+                  className={`${
+                    tagColors[category] || "bg-gray-200 text-gray-700"
+                  } px-2 py-1 text-xs rounded-full`}
                 >
                   {category}
                 </span>
@@ -30,14 +33,18 @@ export const IdeaCard = ({ ideas }) => {
               {idea.description}
             </p>
 
-<p className="text-[14px] flex gap-2 font-semibold text-[#666666] my-3">
-            <p className=" text-black">Target market:</p>  <p className="text-blue-800 ">{idea.targetMarket}</p>
-            </p>
+            <div className="text-[14px] flex gap-2 font-semibold text-[#666666] my-3">
+              <p className=" text-black">Target market:</p>{" "}
+              <p className="text-blue-800 ">{idea.targetMarket}</p>
+            </div>
 
             <div className="flex items-center gap-3">
               <div className="text-[13px] text-[#888888]">
-                by {idea.founder}<br />
-                <span className="italic text-xs font-light">{idea.createdAt}</span>
+                by {idea.founder}
+                <br />
+                <span className="italic text-xs font-light">
+                  {idea.createdAt}
+                </span>
               </div>
             </div>
           </div>
