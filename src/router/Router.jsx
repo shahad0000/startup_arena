@@ -9,6 +9,7 @@ import AllIdeas from "../pages/ExploreStartupIdeas";
 import FeaturedIdeas from "../pages/FeaturedIdeas";
 import IdeaAnalysis from "../pages/IdeaAnalysis";
 import IdeaDetails from "../pages/IdeaDetails";
+import WatchMeetings from "../pages/WatchMeetings ";
 
 const Layout = () => {
   return (
@@ -29,14 +30,12 @@ const router = createBrowserRouter([
       { path: "/signupTwo", element: <SignUpSecondStep /> },
       { path: "/signin", element: <SignIn /> },
       { path: "/submitIdea", element: <SubmitIdeaForm /> },
-      { path: "/MyIdeas", element: <MyIdeas/> },
-      { path: "/AllIdeas", element:<AllIdeas/>  },
-      { path: "/FeaturedIdeas", element:<FeaturedIdeas/>  },
-      { path: "/IdeaAnalysis/:id", element:<IdeaAnalysis/>  },
-      { path: "/detailIdea/:id", element:<IdeaDetails/>  },
-
-
-
+      { path: "/MyIdeas", element: <MyIdeas /> },
+      { path: "/AllIdeas", element: <AllIdeas /> },
+      { path: "/FeaturedIdeas", element: <FeaturedIdeas /> },
+      { path: "/IdeaAnalysis/:id", element: <IdeaAnalysis /> },
+      { path: "/detailIdea/:id", element: <IdeaDetails /> },
+      { path: "/watchMeeting", element: <WatchMeetings /> },
     ],
   },
   {
