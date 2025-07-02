@@ -1,8 +1,8 @@
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router";
 import LandingPage from "../pages/LandingPage";
-import SignUp from "../pages/SignUp";
+import SignUp from "../Component/SignUpFirstStep";
 import SignIn from "../pages/SignIn";
-import SignUpSecondStep from "../pages/SignUpSecondStep";
+import SignUpSecondStep from "../Component/SignUpSecondStep";
 import SubmitIdeaForm from "../pages/SubmitIdeaForm";
 import MyIdeas from "../pages/MyIdeas";
 import AllIdeas from "../pages/ExploreStartupIdeas";
@@ -12,6 +12,7 @@ import IdeaDetails from "../pages/IdeaDetails";
 import WatchMeetings from "../pages/WatchMeetings";
 import React from "react";
 import ScheduleMeetingForm from "../pages/ScheduleMeetingForm";
+import SignUpForm from "../pages/SignUp";
 
 const Layout = () => {
   return (
@@ -27,8 +28,7 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { path: "/", element: <LandingPage /> },
-      { path: "/signup", element: <SignUp /> },
-      { path: "/signupTwo", element: <SignUpSecondStep /> },
+      { path: "/signup", element: <SignUpForm /> },
       { path: "/signin", element: <SignIn /> },
       { path: "/submitIdea", element: <SubmitIdeaForm /> },
       { path: "/MyIdeas", element: <MyIdeas /> },

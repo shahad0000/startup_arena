@@ -11,11 +11,22 @@ export const signIn = async (email, password) => {
   return response.data;
 };
 
-export const signUp = async (email, password, role) => {
-  const response = await axios.post(
-    `http://localhost:3000/api/auth/signup`,
-    { email, password, role },
-    { withCredentials: true }
-  );
-  return response.data;
-};
+export const signUp = async (formData) => {
+    const response = await axios.post(
+      `http://localhost:3000/api/auth/signup`,
+      {
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+        role: formData.role,
+        age: Number(formData.age),
+        gender: formData.gender,
+        country: formData.country,
+        city: formData.city,
+      },
+      { withCredentials: true }
+    );
+  
+    return response.data;
+  };
+  
