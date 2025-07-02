@@ -87,7 +87,7 @@ function LandingPage() {
               className="flex flex-col items-center justify-center gap-3 w-80 rounded-lg
              transform 
              transition-all duration-300 ease-in-out 
-             hover:scale-120
+             hover:scale-105  
              "
             >
               <p className="py-3 px-5 rounded-full bg-[#1E40AF] w-fit text-lg font-bold text-white">
@@ -103,7 +103,7 @@ function LandingPage() {
               className="flex flex-col items-center justify-center gap-3 w-80 rounded-lg
              transform 
              transition-all duration-300 ease-in-out 
-             hover:scale-120 
+             hover:scale-105
              "
             >
               <p className="py-3 px-5 rounded-full bg-[#FFCC00] w-fit text-lg font-bold text-white">
@@ -119,7 +119,7 @@ function LandingPage() {
               className="flex flex-col items-center justify-center gap-3 w-80 rounded-lg
              transform 
              transition-all duration-300 ease-in-out 
-             hover:scale-120
+             hover:scale-105
              "
             >
               <p className="py-3 px-5 rounded-full bg-[#3ABB6B] w-fit text-lg font-bold text-white">
@@ -251,7 +251,7 @@ function LandingPage() {
                 className="flex flex-col gap-5 w-80 border-2 bg-white  border-gray-100 shadow p-4 rounded-lg
                            transform 
              transition-all duration-300 ease-in-out 
-             hover:scale-120
+             hover:scale-103
              hover:shadow-2xl 
               "
               >
@@ -284,7 +284,7 @@ function LandingPage() {
                 className="flex flex-col gap-5 w-80 border-2 bg-white  border-gray-100 shadow p-4 rounded-lg
                            transform 
              transition-all duration-300 ease-in-out 
-             hover:scale-120
+             hover:scale-103
              hover:shadow-2xl 
               "
               >
@@ -317,7 +317,7 @@ function LandingPage() {
                 className="flex flex-col gap-5 w-80 border-2 bg-white  border-gray-100 shadow p-4 rounded-lg
                            transform 
              transition-all duration-300 ease-in-out 
-             hover:scale-120
+             hover:scale-103
              hover:shadow-2xl 
               "
               >
