@@ -10,11 +10,13 @@ import FeaturedIdeas from "../pages/FeaturedIdeas";
 import IdeaAnalysis from "../pages/IdeaAnalysis";
 import IdeaDetails from "../pages/IdeaDetails";
 import WatchMeetings from "../pages/WatchMeetings ";
+import Nav from "../user/components/Nav";
+import UserProfile from "../Component/UserProfile";
 
 const Layout = () => {
   return (
     <>
-    
+    <Nav/>
       <Outlet />
     </>
   );
@@ -36,6 +38,8 @@ const router = createBrowserRouter([
       { path: "/IdeaAnalysis/:id", element: <IdeaAnalysis /> },
       { path: "/detailIdea/:id", element: <IdeaDetails /> },
       { path: "/watchMeeting", element: <WatchMeetings /> },
+      //{ path: "/profile", element: <UserProfile/> },
+
     ],
   },
   {
