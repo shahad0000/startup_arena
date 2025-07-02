@@ -4,7 +4,7 @@ const API = import.meta.env.VITE_API_URL;
 
 export const signIn = async (email, password) => {
   const response = await axios.post(
-    `http://localhost:3000/api/auth/signin`,
+    `${API}auth/signin`,
     { email, password },
     { withCredentials: true }
   );
