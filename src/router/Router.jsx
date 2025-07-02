@@ -10,6 +10,11 @@ import FeaturedIdeas from "../pages/FeaturedIdeas";
 import IdeaAnalysis from "../pages/IdeaAnalysis";
 import IdeaDetails from "../pages/IdeaDetails";
 import WatchMeetings from "../pages/WatchMeetings ";
+import React from "react";
+import { createBrowserRouter, RouterProvider } from "react-router";
+import Layout from "../components/Layout";
+import Home from "../pages/Home";
+import ScheduleMeetingForm from "../pages/ScheduleMeetingForm";
 
 const Layout = () => {
   return (
@@ -63,6 +68,11 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       // { path: "/", element: <LandingPage /> }
+=======
+      { path: "/", element: <Home /> },
+      { path: "/schedule-meeting", element: <ScheduleMeetingForm /> },
+
+>>>>>>> Stashed changes
     ],
   },
 ]);
