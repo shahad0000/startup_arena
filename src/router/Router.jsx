@@ -13,6 +13,9 @@ import WatchMeetings from "../pages/WatchMeetings";
 import React from "react";
 import ScheduleMeetingForm from "../pages/ScheduleMeetingForm";
 import SignUpForm from "../pages/SignUp";
+import AdminLogin from "../admin/pages/AdminLogin";
+import AdminDashboard from "../admin/pages/AdminDashboard";
+import ManageComments from "../admin/pages/ManageComments";
 
 const Layout = () => {
   return (
@@ -43,7 +46,9 @@ const router = createBrowserRouter([
     path: "/admin",
     element: <Layout />,
     children: [
-      // { path: "/", element: <LandingPage /> }
+      { index: true, element: <AdminLogin /> },
+      { path: "adminDashboard", element: <AdminDashboard /> },
+      { path: "manageComments", element: <ManageComments /> },
     ],
   },
   {
@@ -65,7 +70,6 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       // { path: "/", element: <LandingPage /> }
-
     ],
   },
 ]);
