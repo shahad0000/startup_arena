@@ -95,23 +95,26 @@ export default function IdeaDetails() {
         <div className="bg-white border border-gray-200 rounded-md p-4 sm:p-6 space-y-4">
           <div>
             <h1 className="text-xl font-bold">{idea.title}</h1>
-            <div className="flex gap-3 items-center">
+            <div className="flex flex-wrap items-center justify-between text-sm text-gray-500 mt-1">
               <p>{idea.founderId?.name}</p>
               <p className="flex gap-1 items-center">
                 <CiCalendar className="mt-0.5" />
                 {new Date(idea.createdAt).toLocaleDateString()}
               </p>
-              <span className="inline-block mt-2 px-2 py-1 text-xs bg-blue-100 text-blue-800 rounded">
-                {idea.category}
-              </span>
             </div>
+            <span className="inline-block mt-2 px-2 py-1 text-xs bg-blue-100 text-blue-800 rounded">
+              {idea.category}
+            </span>
           </div>
 
           <div className="flex flex-col md:flex-row gap-4">
             <div className="border border-gray-100 rounded p-4 text-sm text-gray-700 flex-1 whitespace-pre-line">
               {idea.description}
               <p className="mt-2 text-blue-800 ">
-                <Link className="flex gap-1">
+                <Link
+                  to={idea.mvpLink || "#"}
+                  className="flex gap-1 text-blue-800 hover:underline"
+                >
                   <GoLinkExternal className="mt-1" /> MVP Document
                 </Link>
               </p>
