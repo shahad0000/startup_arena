@@ -2,8 +2,9 @@ import { useState } from "react";
 import SignUpFirstStep from "../Component/SignUpFirstStep";
 import SignUpSecondStep from "../Component/SignUpSecondStep";
 import { signUp } from "../services/auth.services";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import Swal from "sweetalert2";
+import { SlArrowLeft } from "react-icons/sl";
 const SignUpForm = () => {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
@@ -67,6 +68,8 @@ const SignUpForm = () => {
 
   return (
     <>
+     
+
       {step === 1 && (
         <SignUpFirstStep formData={formData} setFormData={setFormData} onNext={goNext} />
       )}
