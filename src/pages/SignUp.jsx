@@ -68,7 +68,14 @@ const SignUpForm = () => {
 
   return (
     <>
-     
+    <div className="">
+           <Link
+             to="/"
+             className="inline-flex items-center justify-start text-blue-500 hover:underline"
+           >
+             <SlArrowLeft className="mr-1" /> Back
+           </Link>
+         </div>
 
       {step === 1 && (
         <SignUpFirstStep formData={formData} setFormData={setFormData} onNext={goNext} />
