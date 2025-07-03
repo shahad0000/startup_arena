@@ -8,6 +8,7 @@ import { FaLinkedin } from "react-icons/fa6";
 import { FaFacebook } from "react-icons/fa6";
 import { FaInstagram } from "react-icons/fa6";
 import { FaStar } from "react-icons/fa6";
+import { Link } from "react-router";
 
 function LandingPage() {
   return (
@@ -63,9 +64,9 @@ function LandingPage() {
                   <button className="bg-[#FFBF00] hover:bg-[#d2ba74] py-3 px-5 rounded-lg text-black font-medium flex items-center gap-3 ">
                     <MdRocketLaunch /> Submit Your Startup Idea
                   </button>
-                  <button className=" font-medium py-3 bg-blue-600 px-5 rounded-lg hover:bg-white hover:text-blue-600">
+                  <Link to="/signin" className=" font-medium py-3 bg-blue-600 px-5 rounded-lg hover:bg-white hover:text-blue-600">
                     SignIn
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>
