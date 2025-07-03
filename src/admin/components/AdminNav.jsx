@@ -5,9 +5,7 @@ export default function AdminNav() {
   return (
     <nav className="bg-white shadow-md px-6 py-3 flex justify-between items-center">
       {/* Logo / Title */}
-      <div className="text-xl font-bold text-blue-600">
-        Admin Panel
-      </div>
+      <div className="text-xl font-bold text-blue-600">Admin Panel</div>
 
       {/* Navigation Links */}
       <div className="space-x-4 text-sm font-medium">
@@ -29,7 +27,9 @@ export default function AdminNav() {
         >
           Users
         </Link>
-        <button className="text-red-600 hover:text-red-700 transition">
+      </div>
+      <div className="space-x-4 text-sm font-medium">
+        <button className="text-white py-2 px-3 bg-red-500/45 rounded-md hover:text-red-700 transition">
           Logout
         </button>
       </div>
