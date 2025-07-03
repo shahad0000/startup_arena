@@ -4,7 +4,7 @@ const API = import.meta.env.VITE_API_URL;
 
 export const signIn = async (email, password) => {
   const response = await axios.post(
-    `${API}auth/signin`,
+    `${API}/auth/signin`,
     { email, password },
     { withCredentials: true }
   );
@@ -28,5 +28,17 @@ export const signUp = async (formData) => {
     );
   
     return response.data;
+  };
+
+  export const getCurrentUser = async () => {
+    try {
+      const res = await axios.get("http://localhost:3000/api/users/me", {
+        withCredentials: true,
+      });
+      return res.data;
+    } catch (err) {
+      console.error("Failed to fetch current user", err);
+      return null;
+    }
   };
   

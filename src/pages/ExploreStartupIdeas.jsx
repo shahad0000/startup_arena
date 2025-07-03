@@ -1,45 +1,35 @@
-import React from "react"
+import React, { useEffect, useState } from "react";
 import { IdeaCard } from "../Component/IdeaCard"
 import { IoSearch } from "react-icons/io5"
+import { fetchAllIdeas } from "../services/ideas.service";
+import { getCurrentUser } from "../services/auth.service";
 
-const ideas = [
-  {
-    id: 1,
-    title: "AI-powered Tax Assistant",
-    description:
-      "A smart assistant that helps freelancers and small businesses calculate, track, and file their taxes using AI.",
-    categorys: ["Technology"],
-    founder: "Alex Chen",
-    targetMarket: "Saudi Arabia",
-    createdAt: "2 days ago",
-    totalUpvotes: 123,
-  },
-  {
-    id: 2,
-    title: "Online Language Exchange",
-    description:
-      "A platform that connects people worldwide for language learning through video chats and AI corrections.",
-    categorys: ["Education"],
-    founder: "Maria Gomez",
-    createdAt: "5 days ago",
-    targetMarket: "Kuwait",
-
-    totalUpvotes: 89,
-  },
-  {
-    id: 3,
-    title: "Sustainable Grocery Delivery",
-    description:
-      "Eco-friendly grocery delivery using electric bikes and reusable packaging in urban cities.",
-    categorys: ["Sustainability"],
-    founder: "Omar Al-Salem",
-    targetMarket: "UAE",
-    createdAt: "1 week ago",
-    totalUpvotes: 64,
-  },
-]
 
 export default function AllIdeas() {
+  const [ideas, setIdeas] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const [ideasData, userData] = await Promise.all([
+          fetchAllIdeas(),
+          getCurrentUser(),
+        ]);
+        setIdeas(ideasData);
+        setCurrentUser(userData);
+      } catch (err) {
+        console.error("Error loading ideas or user:", err);
+        setError("Failed to load data");
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadData();
+  }, []);
+
   return (
     <div className="bg-[#FAFAFA] px-4 md:px-8 py-10 text-[#333333]">
       {/* Header */}
@@ -79,7 +69,17 @@ export default function AllIdeas() {
         </div>
       </div>
 
-      <IdeaCard ideas={ideas} />
+            {/* Content */}
+            {loading ? (
+        <p className="text-center text-sm">Loading ideas...</p>
+      ) : error ? (
+        <p className="text-center text-red-500">{error}</p>
+      ) : ideas.length === 0 ? (
+        <p className="text-center">No ideas found.</p>
+      ) : (
+        <IdeaCard ideas={ideas} userRole={currentUser?.role}   />
+      )}
+
     </div>
   )
 }

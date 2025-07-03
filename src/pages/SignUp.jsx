@@ -1,7 +1,7 @@
 import { useState } from "react";
 import SignUpFirstStep from "../Component/SignUpFirstStep";
 import SignUpSecondStep from "../Component/SignUpSecondStep";
-import { signUp } from "../services/auth.services";
+import { signUp } from "../services/auth.service";
 import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
 const SignUpForm = () => {
