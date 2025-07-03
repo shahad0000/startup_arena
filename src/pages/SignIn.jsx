@@ -7,6 +7,7 @@ import { signIn } from "../services/auth.service";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { Link } from "react-router";
+import { SlArrowLeft } from "react-icons/sl";
 function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -26,73 +27,89 @@ function SignIn() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen min-w-screen justify-center items-center p-3">
-      {/* signup text */}
-      <div className="p-7 shadow-2xl rounded-lg flex justify-center items-center  gap-15 ">
-        <img src={investmentIdea} alt="" className="h-100" />
-        <div>
-          {/* form start */}
-          <div className="text-black">
-            <div className="p-3">
-              <p className="text-2xl font-bold text-center p-3">SIGN IN</p>
+    <>
+      <div className="flex flex-col min-h-screen justify-center items-center p-3 bg-gray-100">
+        <div className="w-full max-w-4xl shadow-2xl rounded-lg bg-white flex flex-col md:flex-row justify-center items-center gap-6 p-5">
+          {/* Left Section - Image & Back Link */}
+          <div className="flex flex-col items-center text-center md:text-left md:items-start">
+            <div className="mb-4">
+              <Link
+                to="/"
+                className="inline-flex items-center justify-start text-blue-500 hover:underline"
+              >
+                <SlArrowLeft className="mr-1" /> Back
+              </Link>
             </div>
-            <form
-              onSubmit={handleSubmit}
-              className="flex flex-col items-center justify-center p-4 gap-3 w-100"
-            >
-              <div className="flex flex-col p-1 gap-1 w-full">
-                <label className="text-sm font-medium">Email</label>
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  autoComplete="email"
-                  placeholder="Enter your email address"
-                  className="border border-gray-400 rounded-sm pl-2 h-7 outline-none "
-                />
-                {/* <span className=" text-xs text-[#9CA3AF] ">
-                  Pleas Enter Valid Email
-                </span> */}
+            <img
+              src={investmentIdea}
+              alt="Investment Idea"
+              className="hidden md:block h-40 sm:h-60 md:h-80 object-contain"
+            />
+          </div>
+
+          {/* Right Section - Sign In Form */}
+          <div className="w-full max-w-md mt-6 md:mt-0">
+            <div className="text-black">
+              <div className="p-3">
+                <p className="text-2xl font-bold text-center">SIGN IN</p>
               </div>
-              <div className="flex flex-col p-1 gap-1 w-full">
-                <label className="text-sm font-medium">Password</label>
-                <input
-                  type="password"
-                  value={password}
-                  autoComplete="current-password"
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••••••"
-                  className="border border-gray-400 rounded-sm pl-2 h-7 outline-none "
-                />
-                {/* <span className=" text-xs text-[#9CA3AF] ">
-                  Password should be grater than 8 letters
-                </span> */}
-              </div>
-              <div className="w-full flex items-center justify-center mt-3">
-                <button
-                  type="submit"
-                  className="text-sm font-medium py-2 w-full rounded-lg bg-[#1E40AF] text-white cursor-pointer"
-                >
-                  SIGN IN
-                </button>
-              </div>
-              <div>
-                <p className="text-sm text-center text-gray-600 mt-4">
-                  Already have an account?
-                  <Link
-                    to="/signup"
-                    className="text-[#1E40AF] hover:underline font-medium"
+              <form onSubmit={handleSubmit} className="flex flex-col w-full">
+                <div className="flex flex-col p-1 gap-1 w-full">
+                  <label className="text-sm font-medium">Email</label>
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    autoComplete="email"
+                    className="border border-gray-400 rounded-sm pl-2 h-7 outline-none"
+                  />
+                  <span className="text-xs text-[#9CA3AF]">
+                    Please Enter Valid Email
+                  </span>
+                </div>
+                <div className="flex flex-col p-1 gap-1 w-full">
+                  <label className="text-sm font-medium">Password</label>
+                  <input
+                    type="password"
+                    value={password}
+                    autoComplete="current-password"
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="border border-gray-400 rounded-sm pl-2 h-7 outline-none"
+                  />
+                  <span className="text-xs text-[#9CA3AF]">
+                    Password should be greater than 8 letters
+                  </span>
+                </div>
+                <div className="w-full flex items-center justify-center mt-3">
+                  <button
+                    type="submit"
+                    className="text-sm font-medium py-2 w-full rounded-lg bg-[#1E40AF] text-white cursor-pointer hover:bg-blue-800 transition"
                   >
-                    Sign up
-                  </Link>
-                </p>
-              </div>
-              {error && <p className="text-red-700 text-xs mt-2">{error}</p>}
-            </form>
+                    SIGN IN
+                  </button>
+                </div>
+                <div className="mt-4 text-center">
+                  <p className="text-sm text-gray-600">
+                    Already have an account?
+                    <Link
+                      to="/signup"
+                      className="text-[#1E40AF] hover:underline font-medium ml-1"
+                    >
+                      Sign up
+                    </Link>
+                  </p>
+                </div>
+                {error && (
+                  <p className="text-red-700 text-xs mt-2 text-center">
+                    {error}
+                  </p>
+                )}
+              </form>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

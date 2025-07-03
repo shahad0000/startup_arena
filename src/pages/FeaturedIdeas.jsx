@@ -43,6 +43,7 @@ function FeaturedIdeas() {
 const featuredIdeas = ideas.filter(idea => idea.totalUpvotes >= 100);
 
   return (
+    <>
     <div className="bg-[#FAFAFA] px-4 md:px-8 py-10 text-[#333333]">
       {/* Header */}
       <div className="text-center mb-10">
@@ -80,7 +81,7 @@ High-performing ideas with <span className='font-bold'> 100+</span> community vo
       </div>
       <IdeaCard ideas={featuredIdeas} />
     </div>
-
+</>
     )
 }
 

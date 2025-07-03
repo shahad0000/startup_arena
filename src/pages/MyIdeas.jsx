@@ -4,6 +4,7 @@ import { FiEdit3 } from 'react-icons/fi';
 import { BiDotsVerticalRounded } from 'react-icons/bi';
 
 import tagColors from "../Component/CatagoryColors"
+import { Link } from 'react-router';
 
 
 const submittedIdeas = [
@@ -42,60 +43,21 @@ export default function MyIdeas() {
   const [activeMenu, setActiveMenu] = useState(null);
 
   return (
-    <div className="bg-white px-4 md:px-10 py-10 text-[#333] max-w-4xl mx-auto">
+    <div className="bg-white px-4 md:px-10 py-10 text-[#333]  mx-auto">
       {/* Header */}
       <div className="mb-6">
         <h1 className="text-xl font-bold">My Ideas</h1>
         <p className="text-sm text-gray-500">View and edit your personal details</p>
       </div>
-{/* 
-      <div className="bg-gray-50 border border-gray-200 rounded-md p-5 mb-8 cursor-pointer" onClick={() => setShowPopup(true)}>
-        <div className="flex flex-col md:flex-row md:items-center justify-between">
-          <div className="space-y-1 mb-4 md:mb-0">
-            <h2 className="text-lg font-semibold">John Doe</h2>
-            <p className="text-sm text-gray-600">john.doe@example.com</p>
-            <div className="flex gap-2 mt-2">
-              <span className="inline-block px-2 py-1 text-xs bg-gray-200 text-gray-700 rounded">Founder</span>
-              <span className="inline-block px-2 py-1 text-xs bg-blue-100 text-blue-800 rounded">Country: USA</span>
-              <span className="inline-block px-2 py-1 text-xs bg-pink-100 text-pink-700 rounded">Gender: Male</span>
-            </div>
-          </div>
-          <button className="text-blue-600 hover:text-blue-800">
-            <FiEdit3 size={20} />
-          </button>
-        </div>
-      </div>
-
-      {showPopup && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
-            <h2 className="text-lg font-bold mb-4">User Information</h2>
-            <div className="space-y-2 text-sm">
-              <p><strong>Name:</strong> John Doe</p>
-              <p><strong>Email:</strong> john.doe@example.com</p>
-              <p><strong>Role:</strong> Founder</p>
-              <p><strong>Country:</strong> USA</p>
-              <p><strong>Gender:</strong> Male</p>
-            </div>
-            <div className="mt-6 text-right">
-              <button
-                className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-                onClick={() => setShowPopup(false)}
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      )} */}
-
 
       {/* Submitted Ideas */}
       <div className="flex justify-between items-center mb-5">
         <h3 className="font-semibold text-lg">Your Submitted Ideas</h3>
-        <button className="bg-yellow-400 text-white px-4 py-2 text-sm rounded-md hover:bg-yellow-500">
+        <Link
+        to={"/submitIdea"}
+        className="bg-yellow-400 text-white px-4 py-2 text-sm rounded-md hover:bg-yellow-500">
           Add Idea +
-        </button>
+        </Link>
       </div>
 
       <div className="space-y-4 mb-12">
@@ -123,8 +85,8 @@ export default function MyIdeas() {
                 </button>
                 {activeMenu === idea.id && (
                   <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 shadow-md rounded-md z-10">
-                    <button className="block w-full px-4 py-2 text-sm text-left hover:bg-gray-100">View Detail</button>
-                    <button className="block w-full px-4 py-2 text-sm text-left hover:bg-gray-100">Analysis</button>
+                    <Link className="block w-full px-4 py-2 text-sm text-left hover:bg-gray-1200">View Detail</Link>
+                    <Link className="block w-full px-4 py-2 text-sm text-left hover:bg-gray-100">Analysis</Link>
                     <button className="block w-full px-4 py-2 text-sm text-left text-red-600 hover:bg-gray-100">Delete</button>
                   </div>
                 )}
@@ -133,12 +95,7 @@ export default function MyIdeas() {
         ))}
       </div>
 
-      {/* Logout Section */}
-      <div className="border-t pt-6">
-        <button className="bg-red-600 text-white px-6 py-2 rounded-md hover:bg-red-700">
-          Logout Account
-        </button>
-      </div>
+      
     </div>
   );
 }  
