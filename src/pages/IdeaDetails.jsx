@@ -80,10 +80,10 @@ export default function IdeaDetails() {
     if (!newComment.trim()) return;
 
     try {
-      const createdComment = await postComment(id, newComment); // ✅ Correct usage
+      const createdComment = await postComment(id, newComment); 
       setComments([
         {
-          author: createdComment.userId?.name || "You", // ✅ real user or fallback
+          author: createdComment.userId?.name || "You", 
           content: createdComment.text,
           time: new Date(createdComment.createdAt).toLocaleString(),
           upvotes: createdComment.totalUpvotes || 0,
@@ -198,7 +198,7 @@ export default function IdeaDetails() {
           {/* Comment List */}
           {comments.map((comment) => (
             <div
-              key={comment.id}
+              key={comment._id}
               className="border border-gray-100 rounded p-3 text-sm text-gray-700 space-y-2"
             >
               <div className="flex justify-between">
