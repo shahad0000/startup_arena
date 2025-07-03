@@ -6,6 +6,7 @@ import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
 import { RiSendPlaneFill } from "react-icons/ri";
 import { IoIosArrowBack } from "react-icons/io";
 import { fetchIdeaById } from "../services/ideas.service";
+import { fetchCommentsByIdeaId, postComment } from "../services/comments.service";
 
 export default function IdeaDetails() {
   const { id } = useParams();
@@ -22,10 +23,20 @@ export default function IdeaDetails() {
     const loadIdea = async () => {
       try {
         const data = await fetchIdeaById(id);
+        const commentsData = await fetchCommentsByIdeaId(id);
+
         setIdea(data.data);
         setUpvote(data.data.totalUpvotes || 0);
         setDownvote(data.data.totalDownvotes || 0);
-        setComments(data.comments || []);
+        setComments(
+          commentsData.map((c) => ({
+            author: c.userId?.name || "Unknown",
+            content: c.text,
+            time: new Date(c.createdAt).toLocaleString(),
+            upvotes: c.totalUpvotes,
+            downvotes: c.totalDownvotes,
+          }))
+        );
       } catch (err) {
         console.error("Error fetching idea:", err);
         setError("Idea not found");
@@ -65,22 +76,32 @@ export default function IdeaDetails() {
     }
   };
 
-  const handleCommentSubmit = () => {
+  const handleCommentSubmit = async () => {
     if (!newComment.trim()) return;
-    const comment = {
-      author: "You",
-      content: newComment,
-      time: "Just now",
-      likes: 0,
-    };
-    setComments([comment, ...comments]);
-    setNewComment("");
+
+    try {
+      const createdComment = await postComment(id, newComment); // ✅ Correct usage
+      setComments([
+        {
+          author: createdComment.userId?.name || "You", // ✅ real user or fallback
+          content: createdComment.text,
+          time: new Date(createdComment.createdAt).toLocaleString(),
+          upvotes: createdComment.totalUpvotes || 0,
+          downvotes: createdComment.totalDownvotes || 0,
+        },
+        ...comments,
+      ]);
+
+      setNewComment("");
+    } catch (error) {
+      console.error("Failed to post comment:", error);
+    }
   };
 
   if (loading) return <p className="p-6">Loading idea...</p>;
   if (error) return <p className="p-6 text-red-500">{error}</p>;
   if (!idea) return <p className="p-6">Idea not found.</p>;
-  console.log(idea);
+
   return (
     <>
       <Link
@@ -175,9 +196,9 @@ export default function IdeaDetails() {
           </div>
 
           {/* Comment List */}
-          {comments.map((comment, index) => (
+          {comments.map((comment) => (
             <div
-              key={index}
+              key={comment.id}
               className="border border-gray-100 rounded p-3 text-sm text-gray-700 space-y-2"
             >
               <div className="flex justify-between">
@@ -186,23 +207,21 @@ export default function IdeaDetails() {
               </div>
               <p>{comment.content}</p>
 
-              {/* Comment Voting Buttons */}
-              <div className="flex gap-1 justify-end items-center">
+              <div className="flex gap-2 justify-end items-center">
                 <button
                   className="p-1.5 rounded-full bg-gray-100 text-green-600 hover:bg-green-50"
                   aria-label="Like"
                 >
                   <FaChevronUp size={16} />
                 </button>
-
-                <span className="font-medium text-sm">{comment.likes}</span>
-
+                <span className="text-green-600 text-sm font-medium">{comment.upvotes}</span>
                 <button
                   className="p-1.5 rounded-full bg-gray-100 text-red-600 hover:bg-red-50"
                   aria-label="Dislike"
                 >
                   <FaChevronDown size={16} />
                 </button>
+                <span className="text-red-600 text-sm font-medium">{comment.downvotes}</span>
               </div>
             </div>
           ))}
