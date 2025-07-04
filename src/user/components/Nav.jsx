@@ -26,7 +26,7 @@ function classNames(...classes) {
 function Nav() {
   const location = useLocation()
   const [showProfile, setShowProfile] = useState(false)
-
+const [user] = useState({ role: "founder" }); 
   return (
     <>
       {/* NAVBAR */}
@@ -75,18 +75,21 @@ function Nav() {
                     className="flex items-center rounded-full focus:outline-none focus:ring-2 focus:ring-blue-900"
                   >
                     <span className="sr-only">Open user menu</span>
-                    <div className="flex gap-3">
-    <Link
+                    <div className="flex gap-5">
+                    {user?.role === "founder" && (
+      <Link
         to={"/submitIdea"}
-        className="bg-yellow-400 text-white px-1 py-2  text-sm rounded-md hover:bg-yellow-500">
-          Add Idea +
-        </Link>
-                    <img
-                      src="https://plus.unsplash.com/premium_photo-1690407617542-2f210cf20d7e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D"
-                      alt="Profile"
-                      className="w-10 h-10 rounded-full object-cover ring-4 ring-blue-300 shadow-md"
-                    />
-</div>
+        className="bg-yellow-400 text-white px-1 py-2 text-sm rounded-md hover:bg-yellow-500"
+      >
+        Add Idea +
+      </Link>
+    )}
+                      <img
+                        src="https://plus.unsplash.com/premium_photo-1690407617542-2f210cf20d7e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D"
+                        alt="Profile"
+                        className="w-10 h-10 rounded-full object-cover ring-4 ring-blue-300 shadow-md"
+                      />
+                    </div>
                   </MenuButton>
                 </Menu>
               </div>
@@ -128,6 +131,12 @@ function Nav() {
                 </Link>
               )
             })}
+            <Link
+              to={"/submitIdea"}
+              className="bg-yellow-400 text-white px-1 py-2  text-sm rounded-md hover:bg-yellow-500"
+            >
+              Add Idea +
+            </Link>
           </div>
         </DisclosurePanel>
       </Disclosure>
