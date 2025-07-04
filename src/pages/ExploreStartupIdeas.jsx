@@ -28,7 +28,14 @@ export default function AllIdeas() {
         setLoading(false);
       }
     };
+
+    const fetchUser = async () => {
+      const user = await getCurrentUser();
+      setCurrentUser(user);
+    };
+
     loadData();
+    fetchUser();
   }, []);
 
   return (

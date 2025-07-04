@@ -6,30 +6,40 @@ import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
 import { RiSendPlaneFill } from "react-icons/ri";
 import { IoIosArrowBack } from "react-icons/io";
 import { fetchIdeaById } from "../services/ideas.service";
-import { fetchCommentsByIdeaId, postComment } from "../services/comments.service";
+import {
+  fetchCommentsByIdeaId,
+  postComment,
+} from "../services/comments.service";
+import { voteIdea } from "../services/ideas.service";
+import { getCurrentUser } from "../services/auth.service";
+import { fetchUserVote } from "../services/ideas.service";
+import { voteOnComment } from "../services/comments.service";
 
 export default function IdeaDetails() {
   const { id } = useParams();
   const [idea, setIdea] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [upvote, setUpvote] = useState(0);
-  const [downvote, setDownvote] = useState(0);
   const [newComment, setNewComment] = useState("");
   const [comments, setComments] = useState([]);
   const [voteStatus, setVoteStatus] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null);
+  const [netVotes, setNetVotes] = useState(0);
 
   useEffect(() => {
-    const loadIdea = async () => {
+    const init = async () => {
       try {
-        const data = await fetchIdeaById(id);
-        const commentsData = await fetchCommentsByIdeaId(id);
+        const user = await getCurrentUser();
+        setCurrentUser(user);
 
-        setIdea(data.data);
-        setUpvote(data.data.totalUpvotes || 0);
-        setDownvote(data.data.totalDownvotes || 0);
+        const ideaData = await fetchIdeaById(id);
+        setIdea(ideaData.data);
+        setNetVotes(ideaData.data.totalUpvotes - ideaData.data.totalDownvotes);
+
+        const commentsData = await fetchCommentsByIdeaId(id);
         setComments(
           commentsData.map((c) => ({
+            id: c._id,
             author: c.userId?.name || "Unknown",
             content: c.text,
             time: new Date(c.createdAt).toLocaleString(),
@@ -37,53 +47,53 @@ export default function IdeaDetails() {
             downvotes: c.totalDownvotes,
           }))
         );
+
+        if (user?.id) {
+          const vote = await fetchUserVote(user.id, id);
+          setVoteStatus(vote === 1 ? "up" : vote === -1 ? "down" : null);
+        }
       } catch (err) {
-        console.error("Error fetching idea:", err);
         setError("Idea not found");
       } finally {
         setLoading(false);
       }
     };
 
-    loadIdea();
+    init();
   }, [id]);
 
-  const handleUpvote = () => {
-    if (voteStatus === "up") {
-      setUpvote((prev) => prev - 1);
-      setVoteStatus(null);
-    } else if (voteStatus === "down") {
-      setUpvote((prev) => prev + 2);
-      setDownvote((prev) => prev - 1);
-      setVoteStatus("up");
-    } else {
-      setUpvote((prev) => prev + 1);
-      setVoteStatus("up");
+  const handleUpvote = async () => {
+    try {
+      const res = await voteIdea(id, voteStatus === "up" ? 0 : 1);
+      const { totalUpvotes, totalDownvotes } = res.data.totalVotes;
+
+      setNetVotes(totalUpvotes - totalDownvotes);
+      setVoteStatus(voteStatus === "up" ? null : "up");
+    } catch (err) {
+      console.error("Error voting up:", err);
     }
   };
 
-  const handleDownvote = () => {
-    if (voteStatus === "down") {
-      setDownvote((prev) => prev - 1);
-      setVoteStatus(null);
-    } else if (voteStatus === "up") {
-      setDownvote((prev) => prev + 2);
-      setUpvote((prev) => prev - 1);
-      setVoteStatus("down");
-    } else {
-      setDownvote((prev) => prev + 1);
-      setVoteStatus("down");
+  const handleDownvote = async () => {
+    try {
+      const res = await voteIdea(id, voteStatus === "down" ? 0 : -1);
+      const { totalUpvotes, totalDownvotes } = res.data.totalVotes;
+
+      setNetVotes(totalUpvotes - totalDownvotes);
+      setVoteStatus(voteStatus === "down" ? null : "down");
+    } catch (err) {
+      console.error("Error voting down:", err);
     }
   };
 
   const handleCommentSubmit = async () => {
     if (!newComment.trim()) return;
-
     try {
-      const createdComment = await postComment(id, newComment); 
+      const createdComment = await postComment(id, newComment);
       setComments([
         {
-          author: createdComment.userId?.name || "You", 
+          id: createdComment._id,
+          author: createdComment.userId?.name || "You",
           content: createdComment.text,
           time: new Date(createdComment.createdAt).toLocaleString(),
           upvotes: createdComment.totalUpvotes || 0,
@@ -95,6 +105,34 @@ export default function IdeaDetails() {
       setNewComment("");
     } catch (error) {
       console.error("Failed to post comment:", error);
+    }
+  };
+
+  const handleCommentVote = async (commentId, voteValue) => {
+    try {
+      const result = await voteOnComment({
+        commentId,
+        ideaId: idea._id,
+        vote: voteValue,
+      });
+      console.log("Vote result:", result);
+
+      setComments((prevComments) =>
+        prevComments.map((c) =>
+          c.id === commentId
+            ? {
+                ...c,
+                upvotes: result.data.upvotes,
+                downvotes: result.data.downvotes,
+              }
+            : c
+        )
+      );
+    } catch (err) {
+      console.error(
+        "Error voting on comment:",
+        err?.response?.data?.message || err.message
+      );
     }
   };
 
@@ -143,8 +181,9 @@ export default function IdeaDetails() {
 
             <div className="flex flex-row md:flex-col items-center justify-center gap-2 md:gap-0">
               <button
+                disabled={!currentUser}
                 onClick={handleUpvote}
-                className={`p-2 rounded-full ${
+                className={`p-2 rounded-full transition ${
                   voteStatus === "up"
                     ? "bg-green-100 text-green-700"
                     : "bg-gray-100 text-green-600 hover:bg-green-50"
@@ -155,12 +194,13 @@ export default function IdeaDetails() {
               </button>
 
               <span className="font-medium my-1 min-w-[20px] text-center">
-                {upvote}
+                {netVotes}
               </span>
 
               <button
+                disabled={!currentUser}
                 onClick={handleDownvote}
-                className={`p-2 rounded-full ${
+                className={`p-2 rounded-full transition ${
                   voteStatus === "down"
                     ? "bg-red-100 text-red-700"
                     : "bg-gray-100 text-red-600 hover:bg-red-50"
@@ -181,7 +221,7 @@ export default function IdeaDetails() {
 
           <textarea
             className="w-full border border-gray-300 rounded p-2 text-sm"
-            placeholder="Add comment ..."
+            placeholder="Add comment..."
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)}
           ></textarea>
@@ -198,7 +238,7 @@ export default function IdeaDetails() {
           {/* Comment List */}
           {comments.map((comment) => (
             <div
-              key={comment._id}
+              key={comment.id}
               className="border border-gray-100 rounded p-3 text-sm text-gray-700 space-y-2"
             >
               <div className="flex justify-between">
@@ -210,18 +250,24 @@ export default function IdeaDetails() {
               <div className="flex gap-2 justify-end items-center">
                 <button
                   className="p-1.5 rounded-full bg-gray-100 text-green-600 hover:bg-green-50"
-                  aria-label="Like"
+                  aria-label="upvote"
+                  onClick={() => handleCommentVote(comment.id, 1)}
                 >
                   <FaChevronUp size={16} />
                 </button>
-                <span className="text-green-600 text-sm font-medium">{comment.upvotes}</span>
+                <span className="text-green-600 text-sm font-medium">
+                  {comment.upvotes}
+                </span>
                 <button
                   className="p-1.5 rounded-full bg-gray-100 text-red-600 hover:bg-red-50"
-                  aria-label="Dislike"
+                  aria-label="downvote"
+                  onClick={() => handleCommentVote(comment.id, -1)}
                 >
                   <FaChevronDown size={16} />
                 </button>
-                <span className="text-red-600 text-sm font-medium">{comment.downvotes}</span>
+                <span className="text-red-600 text-sm font-medium">
+                  {comment.downvotes}
+                </span>
               </div>
             </div>
           ))}

@@ -76,9 +76,9 @@ function LandingPage() {
                 </ul>
               </div>
               <div className="flex justify-center md:justify-end">
-                <button className="py-1 px-6 rounded border text-white hover:bg-blue-700 font-medium">
+                <Link to="/signin" className="py-1 px-6 rounded border text-white hover:bg-blue-700 font-medium">
                   SignIn
-                </button>
+                </Link>
               </div>
             </div>
           </nav>

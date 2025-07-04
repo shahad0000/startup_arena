@@ -12,33 +12,31 @@ export const signIn = async (email, password) => {
 };
 
 export const signUp = async (formData) => {
-    const response = await axios.post(
-      `http://localhost:3000/api/auth/signup`,
-      {
-        name: formData.name,
-        email: formData.email,
-        password: formData.password,
-        role: formData.role,
-        age: Number(formData.age),
-        gender: formData.gender,
-        country: formData.country,
-        city: formData.city,
-      },
-      { withCredentials: true }
-    );
-  
-    return response.data;
-  };
+  const response = await axios.post(
+    `${API}/auth/signup`,
+    {
+      name: formData.name,
+      email: formData.email,
+      password: formData.password,
+      role: formData.role,
+      age: Number(formData.age),
+      gender: formData.gender,
+      country: formData.country,
+      city: formData.city,
+    },
+    { withCredentials: true }
+  );
+  return response.data;
+};
 
-  export const getCurrentUser = async () => {
-    try {
-      const res = await axios.get("http://localhost:3000/api/users/me", {
-        withCredentials: true,
-      });
-      return res.data;
-    } catch (err) {
-      console.error("Failed to fetch current user", err);
-      return null;
-    }
-  };
-  
+export const getCurrentUser = async () => {
+  try {
+    const res = await axios.get(`${API}/users/me`, {
+      withCredentials: true,
+    });
+    return res.data;
+  } catch (err) {
+    console.error("Failed to fetch current user", err);
+    return null;
+  }
+};

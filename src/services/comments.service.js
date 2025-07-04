@@ -17,3 +17,18 @@ export const postComment = async (ideaId, text) => {
   );
   return res.data.data;
 };
+
+export const voteOnComment = async ({ commentId, ideaId, vote, userId }) => {
+  const res = await axios.post(
+    `${API}/comments/vote`,
+    {
+      commentId,
+      ideaId,
+      vote,
+      userId,
+    },
+    { withCredentials: true }
+  );
+
+  return res.data;
+};

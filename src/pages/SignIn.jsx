@@ -1,14 +1,10 @@
 import React from "react";
-import { FaRegLightbulb } from "react-icons/fa";
-import { SiCashapp } from "react-icons/si";
-import { FaStar } from "react-icons/fa";
 import { investmentIdea } from "../public/ExporImage";
 import { signIn } from "../services/auth.service";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { Link } from "react-router";
-import { SlArrowLeft } from "react-icons/sl";
-import { IoArrowBackCircleSharp } from "react-icons/io5";
+
 function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -33,7 +29,7 @@ function SignIn() {
         <div>
           <div className="p-3">
             <p className="text-2xl font-bold text-center">SIGN IN</p>
-            <p className="font-medium text-gray-600">Welcome Bake!</p>
+            <p className="font-medium text-gray-600">Welcome Back!</p>
           </div>
         </div>
         <div className="w-full max-w-4xl  rounded-lg bg-white flex flex-col md:flex-row justify-center items-center gap-6 p-5">
@@ -49,28 +45,29 @@ function SignIn() {
           {/* Right Section - Sign In Form */}
           <div className="w-full max-w-md mt-6 md:mt-0">
             <div className="text-black">
-              <form onSubmit={handleSubmit} className="flex flex-col w-full">
+              <form onSubmit={handleSubmit} className="flex flex-col w-full gap-2">
                 <div className="flex flex-col p-1 gap-1 w-full">
-                  <label className="text-sm font-medium">Email</label>
+                  <label className="text-md font-medium">Email</label>
                   <input
                     type="email"
-                    value={email}
                     name="email"
+                    value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    autoComplete="email"
+                    placeholder="e.g. user@example.com"
                     className="border border-gray-400 rounded-sm pl-2 h-7 outline-none"
                   />
                   <span className="text-xs text-[#9CA3AF]">
-                    Please Enter Valid Email
+                    Please enter your email address
                   </span>
                 </div>
                 <div className="flex flex-col p-1 gap-1 w-full">
-                  <label className="text-sm font-medium">Password</label>
+                  <label className="text-md font-medium">Password</label>
                   <input
                     type="password"
                     value={password}
                     autoComplete="current-password"
                     onChange={(e) => setPassword(e.target.value)}
+                    placeholder="••••••••"
                     className="border border-gray-400 rounded-sm pl-2 h-7 outline-none"
                   />
                   <span className="text-xs text-[#9CA3AF]">
