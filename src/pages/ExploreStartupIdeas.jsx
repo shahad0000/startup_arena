@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { IdeaCard } from "../Component/IdeaCard"
-import { IoSearch } from "react-icons/io5"
+import { IdeaCard } from "../Component/IdeaCard";
+import { IoSearch } from "react-icons/io5";
 import { fetchAllIdeas } from "../services/ideas.service";
 import { getCurrentUser } from "../services/auth.service";
-
 
 export default function AllIdeas() {
   const [ideas, setIdeas] = useState([]);
@@ -27,7 +26,14 @@ export default function AllIdeas() {
         setLoading(false);
       }
     };
+    
+    const fetchUser = async () => {
+      const user = await getCurrentUser();
+      setCurrentUser(user);
+    };
+
     loadData();
+    fetchUser();
   }, []);
 
   return (
@@ -56,30 +62,27 @@ export default function AllIdeas() {
         </div>
 
         <div className="flex flex-wrap justify-end gap-4 w-full md:w-2/3">
-          {["All createdAt", "Most Upvoted"].map(
-            (label, i) => (
-              <select
-                key={i}
-                className="border border-[#E0E0E0] rounded-lg px-4 py-2 text-sm text-[#333333]"
-              >
-                <option>{label}</option>
-              </select>
-            )
-          )}
+          {["All createdAt", "Most Upvoted"].map((label, i) => (
+            <select
+              key={i}
+              className="border border-[#E0E0E0] rounded-lg px-4 py-2 text-sm text-[#333333]"
+            >
+              <option>{label}</option>
+            </select>
+          ))}
         </div>
       </div>
 
-            {/* Content */}
-            {loading ? (
+      {/* Content */}
+      {loading ? (
         <p className="text-center text-sm">Loading ideas...</p>
       ) : error ? (
         <p className="text-center text-red-500">{error}</p>
       ) : ideas.length === 0 ? (
         <p className="text-center">No ideas found.</p>
       ) : (
-        <IdeaCard ideas={ideas} userRole={currentUser?.role}   />
+        <IdeaCard ideas={ideas} userRole={currentUser?.role} />
       )}
-
     </div>
-  )
+  );
 }

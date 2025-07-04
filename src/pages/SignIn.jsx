@@ -1,14 +1,10 @@
 import React from "react";
-import { FaRegLightbulb } from "react-icons/fa";
-import { SiCashapp } from "react-icons/si";
-import { FaStar } from "react-icons/fa";
 import { investmentIdea } from "../public/ExporImage";
 import { signIn } from "../services/auth.service";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { Link } from "react-router";
-import { SlArrowLeft } from "react-icons/sl";
-import { IoArrowBackCircleSharp } from "react-icons/io5";
+
 function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -54,9 +50,9 @@ function SignIn() {
                   <label className="text-sm font-medium">Email</label>
                   <input
                     type="email"
+                    name="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    autoComplete="email"
                     className="border border-gray-400 rounded-sm pl-2 h-7 outline-none"
                   />
                   <span className="text-xs text-[#9CA3AF]">
