@@ -39,7 +39,9 @@ function Nav() {
                 {/* <p className="text-2xl font-bold text-[#1E40AF]">
                   Startup Arena
                 </p> */}
-                <img src={fullLogo} alt="" className="h-35" />
+                <Link to="/" >
+                  <img src={fullLogo} alt="" className="h-35" />
+                </Link>
               </div>
 
               <div className="hidden sm:flex space-x-6">
