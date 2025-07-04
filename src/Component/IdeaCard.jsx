@@ -21,7 +21,7 @@ export const IdeaCard = ({ ideas = [], userRole }) => {
     <>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-y-6 gap-x-4">
         {ideas.map((idea) => (
-          <div
+          <Link
             key={idea._id}
             className="bg-white border border-[#E0E0E0] rounded-lg p-4 relative transform transition-transform duration-300 ease-in-out hover:translate-1 hover:scale-100"
           >
@@ -40,7 +40,7 @@ export const IdeaCard = ({ ideas = [], userRole }) => {
               </span>
             </div>
 
-            <Link to={`/detailIdea/${idea._id}`}  className="text-[18px] font-semibold mb-2">{idea.title}</Link>
+            <h2 className="text-[18px] font-semibold mb-2">{idea.title}</h2>
 
             <p className="text-[14px] text-[#666666] line-clamp-3">
               {idea.description}
@@ -73,7 +73,7 @@ export const IdeaCard = ({ ideas = [], userRole }) => {
                 </div>
               )}
             </div>
-          </div>
+          </Link>
         ))}
       </div>
 
