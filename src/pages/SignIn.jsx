@@ -8,6 +8,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { Link } from "react-router";
 import { SlArrowLeft } from "react-icons/sl";
+import { IoArrowBackCircleSharp } from "react-icons/io5";
 function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -29,33 +30,30 @@ function SignIn() {
   return (
     <>
       <div className="flex flex-col min-h-screen justify-center items-center p-3 bg-white">
+        <div>
+          <div>
+            <div className="p-3">
+              <p className="text-2xl font-bold text-center p-3">SIGNUP</p>
+              <p className="text-lg text-[#9CA3AF] font-medium text-center">
+                Welcome Back
+              </p>
+            </div>
+          </div>
+        </div>
         <div className="w-full max-w-4xl  rounded-lg bg-white flex flex-col md:flex-row justify-center items-center gap-6 p-5">
           {/* Left Section - Image & Back Link */}
           <div className="flex flex-col items-center text-center md:text-left md:items-start">
-            <div className="mb-4">
-              <Link
-                to="/"
-                className="inline-flex items-center justify-start text-[#1E40AF] hover:underline"
-              >
-                <SlArrowLeft className="mr-1" /> Back
-              </Link>
-            </div>
-            <div></div>
             <img
               src={investmentIdea}
               alt="Investment Idea"
-              className="hidden md:block h-40 sm:h-60 md:h-80 object-contain"
+              className="hidden md:block h-40 sm:h-60 md:h-80 object-contain w-100"
             />
           </div>
 
           {/* Right Section - Sign In Form */}
-          <div className="w-full max-w-md mt-6 md:mt-0">
+          <div className=" max-w-md mt-6 md:mt-0 w-100">
             <div className="text-black">
-              <div className="p-3">
-                <p className="text-2xl font-bold text-center">SIGN IN</p>
-                <p className=" font-medium text-center text-gray-600">Welcome Back</p>
-              </div>
-              <form onSubmit={handleSubmit} className="flex flex-col gap-3 w-full">
+              <form onSubmit={handleSubmit} className="flex flex-col w-full">
                 <div className="flex flex-col p-1 gap-1 w-full">
                   <label className="text-sm font-medium">Email</label>
                   <input
@@ -88,7 +86,7 @@ function SignIn() {
                 </div>
                 <div className="mt-4 text-center">
                   <p className="text-sm text-gray-600">
-                    Already have an account?
+                    If you do not have an account yet!
                     <Link
                       to="/signup"
                       className="text-[#1E40AF] hover:underline font-medium ml-1"
