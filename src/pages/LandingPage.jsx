@@ -11,6 +11,7 @@ import { FaStar } from "react-icons/fa6"
 import { Link } from "react-router"
 import { useState } from "react"
 import { GoArrowUp } from "react-icons/go"
+import image from "../public/images/Startup-life-amico.png"
 
 function LandingPage() {
   const [isOpen, setIsOpen] = useState(false)
@@ -61,7 +62,6 @@ function LandingPage() {
             >
               <div className="w-full flex justify-center md:justify-center">
                 <ul className="flex flex-col md:flex-row gap-4 my-4 md:my-0 text-center">
-                  <li className="hover:text-yellow-300 cursor-pointer">Home</li>
                   <li className="hover:text-yellow-300 cursor-pointer">
                     Explore
                   </li>
@@ -83,26 +83,30 @@ function LandingPage() {
         </section>
 
         {/* Hero Section */}
-        <section className="bg-gradient-to-b from-blue-800 to-white py-12 px-4">
-          <div className="container mx-auto text-center">
-            <h1 className="text-3xl sm:text-4xl font-bold mb-4 text-white">
-              Turn Your Startup Ideas Into Reality
-            </h1>
-            <p className="text-lg text-white max-w-2xl mx-auto mb-6">
-              Submit your startup concepts, get valuable feedback from our
-              community, and connect with investors ready to fund your next big
-              idea.
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <button className="flex items-center text-center gap-2 bg-yellow-400 text-black py-3 px-6 rounded hover:bg-yellow-500">
-                <MdRocketLaunch /> Submit Your Startup Idea
-              </button>
-              <Link
-                to="/signin"
-                className="bg-blue-600 text-white py-3 px-6 rounded hover:bg-blue-700"
-              >
-                SignIn
-              </Link>
+        <section className="bg-gradient-to-b from-blue-800 to-white py-16 px-4">
+          <div className="container mx-auto flex flex-col lg:flex-row items-center justify-between gap-12">
+            <div className="lg:w-1/2 text-center lg:text-left">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-6 text-white leading-tight">
+                Turn Your Startup Ideas Into Reality
+              </h1>
+              <p className="text-lg text-white max-w-xl mx-auto lg:mx-0 mb-8">
+                Submit your startup concepts, get valuable feedback from our
+                community, and connect with investors ready to fund your next
+                big idea.
+              </p>
+              <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
+                <button className="flex items-center justify-center gap-2 bg-yellow-400 text-black py-3 px-6 rounded hover:bg-yellow-500 transition-all duration-300 shadow-md">
+                  <MdRocketLaunch size={22} /> Submit Your Startup Idea
+                </button>
+              </div>
+            </div>
+
+            <div className="lg:w-1/2 w-full max-w-md mx-auto">
+              <img
+                src={image}
+                alt="Startup Illustration"
+                className="w-full h-auto rounded-lg "
+              />
             </div>
           </div>
         </section>
@@ -110,10 +114,8 @@ function LandingPage() {
         {/* How It Works */}
         <section className="py-12 px-4 bg-white">
           <div className="container mx-auto text-center">
-            <h2 className="text-3xl font-bold text-blue-800 mb-2">
-              How It Works
-            </h2>
-            <p className="text-lg text-blue-800 max-w-2xl mx-auto">
+            <h2 className="text-3xl font-bold  mb-2">How It Works</h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Three simple steps to get your startup idea in front of investors
               and the community
             </p>
@@ -207,7 +209,7 @@ function LandingPage() {
                     Education
                   </span>
                   <span className="flex items-center text-yellow-300 font-bold">
-                    <GoArrowUp /> 430
+                    <GoArrowUp /> 423
                   </span>
                 </div>
                 <h3 className="text-lg font-bold mb-2">
@@ -228,7 +230,7 @@ function LandingPage() {
                     Health
                   </span>
                   <span className="flex items-center text-yellow-300 font-bold">
-                    <GoArrowUp /> 430
+                    <GoArrowUp /> 412
                   </span>
                 </div>
                 <h3 className="text-lg font-bold mb-2">
@@ -268,63 +270,68 @@ function LandingPage() {
 
         {/* Testimonials / Ratings */}
         <section className="py-12 px-4 bg-white">
-          <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="container mx-auto flex flex-col gap-6">
             {/* Rating Card */}
-            <div className="border border-gray-200 rounded-lg shadow p-4 hover:shadow-xl transition transform hover:scale-105">
-              <div className="flex mb-2 text-yellow-500">
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
+            <div className="flex flex-col sm:flex-row justify-between items-center mb-6">
+              <h2 className="text-3xl font-bold text-center sm:text-left ">
+                Testimonials
+              </h2>
+            </div>{" "}
+            <div className="container m-0 grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="border border-gray-200 rounded-lg shadow p-4 hover:shadow-xl transition transform hover:scale-105">
+                <div className="flex mb-2 text-yellow-500">
+                  <FaStar />
+                  <FaStar />
+                  <FaStar />
+                  <FaStar />
+                  <FaStar />
+                </div>
+                <p className="text-sm text-gray-600 mb-4">
+                  Explore the latest advancements in technology that can drive
+                  your startup forward.
+                </p>
+                <div className="text-xs text-gray-500">
+                  <p>By: Shouq Alkharj</p>
+                </div>
               </div>
-              <p className="text-sm text-gray-600 mb-4">
-                Explore the latest advancements in technology that can drive
-                your startup forward.
-              </p>
-              <div className="text-xs text-gray-500">
-                <p>By: Shouq Alkharj</p>
+              <div className="border border-gray-200 rounded-lg shadow p-4 hover:shadow-xl transition transform hover:scale-105">
+                <div className="flex mb-2 text-yellow-500">
+                  <FaStar />
+                  <FaStar />
+                  <FaStar />
+                  <FaStar />
+                  <FaStar />
+                </div>
+                <p className="text-sm text-gray-600 mb-4">
+                  Amazing community feedback helped me refine my product before
+                  launch. The analytics are incredibly detailed.
+                </p>
+                <div className="text-xs text-gray-500">
+                  <p>By:Abdualrhman Qassem</p>
+                </div>
               </div>
-            </div>
-
-            <div className="border border-gray-200 rounded-lg shadow p-4 hover:shadow-xl transition transform hover:scale-105">
-              <div className="flex mb-2 text-yellow-500">
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-              </div>
-              <p className="text-sm text-gray-600 mb-4">
-                Amazing community feedback helped me refine my product before
-                launch. The analytics are incredibly detailed.
-              </p>
-              <div className="text-xs text-gray-500">
-                <p>By:Abdualrhman Qassem</p>
-              </div>
-            </div>
-
-            <div className="border border-gray-200 rounded-lg shadow p-4 hover:shadow-xl transition transform hover:scale-105">
-              <div className="flex mb-2 text-yellow-500">
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-              </div>
-              <p className="text-sm text-gray-600 mb-4">
-                As an investor, this platform saves me time by showing only the
-                most promising, community-validated ideas
-              </p>
-              <div className="text-xs text-gray-500">
-                <p>By: Shahad Riyadh</p>
+              <div className="border border-gray-200 rounded-lg shadow p-4 hover:shadow-xl transition transform hover:scale-105">
+                <div className="flex mb-2 text-yellow-500">
+                  <FaStar />
+                  <FaStar />
+                  <FaStar />
+                  <FaStar />
+                  <FaStar />
+                </div>
+                <p className="text-sm text-gray-600 mb-4">
+                  As an investor, this platform saves me time by showing only
+                  the most promising, community-validated ideas
+                </p>
+                <div className="text-xs text-gray-500">
+                  <p>By: Shahad Riyadh</p>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
         {/* CTA Section */}
-        <section className="bg-blue-800 text-white py-12 px-4">
+        {/*  <section className="bg-blue-800 text-white py-12 px-4">
           <div className="container mx-auto text-center">
             <h2 className="text-3xl font-bold mb-4">
               Ready to Launch Your Startup?
@@ -343,7 +350,7 @@ function LandingPage() {
             </div>
           </div>
         </section>
-
+ */}
         {/* Footer */}
         <footer className="bg-[#0B1841] text-white py-8 px-4">
           <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">

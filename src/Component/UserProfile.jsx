@@ -55,7 +55,7 @@ function UserProfile() {
   };
 
   return (
-    <div className=" mx-auto bg-gradient-to-br from-white via-gray-50 to-white rounded-3xl shadow-2xl overflow-hidden p-10 space-y-6 border border-gray-200">
+    <div className=" mx-auto bg-gradient-to-br from-white via-gray-50 to-white rounded-3xl shadow-2xl overflow-hidden p-7 space-y-6 border border-gray-200">
       {/* Avatar */}
       <div className="flex flex-col items-center space-y-2">
         <div
@@ -96,7 +96,7 @@ function UserProfile() {
           </>
         ) : (
           <>
-            <h2 className="text-2xl font-bold text-gray-800">{name}</h2></>)}
+            <h2 className=" text-xl font-bold text-center text-gray-800 border-b-2 border-white focus:outline-none">{name}</h2></>)}
             <p className="text-gray-400 text-sm cursor-not-allowed select-none">{email}</p>
           
         
@@ -110,7 +110,7 @@ function UserProfile() {
             <span className="text-gray-800 font-semibold">{gender}</span>
          
         </div>
-        <div className="flex justify-between">
+        <div className="flex justify-between gap-2 md:gap-26">
           <span className="font-medium text-gray-600">Country:</span>
   
             <span className="text-gray-800 font-semibold">{country}</span>

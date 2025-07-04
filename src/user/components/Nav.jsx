@@ -26,7 +26,7 @@ function classNames(...classes) {
 function Nav() {
   const location = useLocation()
   const [showProfile, setShowProfile] = useState(false)
-
+const [user] = useState({ role: "founder" }); 
   return (
     <>
       {/* NAVBAR */}
@@ -76,12 +76,14 @@ function Nav() {
                   >
                     <span className="sr-only">Open user menu</span>
                     <div className="flex gap-5">
-                      <Link
-                        to={"/submitIdea"}
-                        className="hidden sm:block bg-yellow-400 text-white px-1 py-2 text-sm rounded-md hover:bg-yellow-500"
-                      >
-                        Add Idea +
-                      </Link>
+                    {user?.role === "founder" && (
+      <Link
+        to={"/submitIdea"}
+        className="bg-yellow-400 text-white px-1 py-2 text-sm rounded-md hover:bg-yellow-500"
+      >
+        Add Idea +
+      </Link>
+    )}
                       <img
                         src="https://plus.unsplash.com/premium_photo-1690407617542-2f210cf20d7e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D"
                         alt="Profile"
