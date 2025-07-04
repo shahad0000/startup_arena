@@ -11,6 +11,7 @@ import { FaStar } from "react-icons/fa6"
 import { Link } from "react-router"
 import { useState } from "react"
 import { GoArrowUp } from "react-icons/go"
+import { logoWhite } from "../public/ExporImage"
 import image from "../public/images/Startup-life-amico.png"
 
 function LandingPage() {
@@ -20,11 +21,12 @@ function LandingPage() {
     <>
       <div className="min-h-screen bg-white text-gray-800">
         {/* Navbar */}
-        <section className="sticky top-0 z-50 bg-blue-800 text-white py-4 px-4">
+        <section className="sticky top-0 z-50 bg-blue-800 text-white py-1 px-1">
           <nav className="container mx-auto flex flex-col md:flex-row items-center md:justify-between">
             {/* Logo + Hamburger */}
             <div className="w-full flex justify-between items-center md:w-auto">
-              <p className=" font-bold">Startup Arena Hub</p>
+              {/* <p className=" font-bold">Startup Arena Hub</p> */}
+              <img src={logoWhite} alt="" className="h-18 w-20" />
               <button
                 className="md:hidden text-white focus:outline-none"
                 onClick={() => setIsOpen(!isOpen)}

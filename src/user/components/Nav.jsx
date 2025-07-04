@@ -48,7 +48,7 @@ function Nav() {
                 {navigation.map((item) => {
                   const isActive = location.pathname === item.to;
                   return (
-                    <Link
+                    <Link 
                       key={item.name}
                       to={item.to}
                       aria-current={isActive ? "page" : undefined}

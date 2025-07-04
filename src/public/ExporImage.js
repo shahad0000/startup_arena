@@ -4,6 +4,7 @@ import SubmitIdea from "./images/SubmitIdea.png";
 import FindingIdeas from "./images/FindingIdeas.png";
 import logo from "./images/logo.png";
 import fullLogo from "./images/fullLogo.png";
+import logoWhite from "./images/logoWhite.png";
 
 export {
   headerImage,
@@ -12,4 +13,5 @@ export {
   FindingIdeas,
   logo,
   fullLogo,
+  logoWhite,
 };
