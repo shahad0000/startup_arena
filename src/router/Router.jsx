@@ -16,12 +16,15 @@ import AdminDashboard from "../admin/pages/AdminDashboard"
 import ManageComments from "../admin/pages/ManageComments"
 import WatchMeetings from "../pages/WatchMeetings"
 import Nav from "../user/components/Nav"
+import Support from "../user/components/Support"
+import Footer from "../user/components/Footer"
 
 const Layout = () => {
   return (
     <>
       <Nav />
       <Outlet />
+      <Footer/>
     </>
   )
 }
@@ -35,6 +38,7 @@ const router = createBrowserRouter([
       { path: "/signup", element: <SignUpForm /> },
       { path: "/signin", element: <SignIn /> }, */
       { path: "/submitIdea", element: <SubmitIdeaForm /> },
+      { path: "/support", element: <Support /> },
       { path: "/MyIdeas", element: <MyIdeas /> },
       { path: "/AllIdeas", element: <AllIdeas /> },
       { path: "/FeaturedIdeas", element: <FeaturedIdeas /> },
