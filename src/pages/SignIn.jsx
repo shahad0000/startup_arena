@@ -55,6 +55,7 @@ function SignIn() {
                   <input
                     type="email"
                     value={email}
+                    name="email"
                     onChange={(e) => setEmail(e.target.value)}
                     autoComplete="email"
                     className="border border-gray-400 rounded-sm pl-2 h-7 outline-none"
