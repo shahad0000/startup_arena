@@ -62,8 +62,8 @@ function LandingPage() {
                 isOpen ? "block" : "hidden"
               }`}
             >
-              <div className="w-full flex justify-center md:justify-center">
-                <ul className="flex flex-col md:flex-row gap-4 my-4 md:my-0 text-center">
+              <div className="w-full flex justify-center md:justify-center ">
+                <ul className="flex flex-col md:flex-row gap-10 my-4 md:my-0 text-center">
                   <li className="hover:text-yellow-300 cursor-pointer">
                     Explore
                   </li>
@@ -128,7 +128,7 @@ function LandingPage() {
         <section className="py-12 px-4 bg-white">
           <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Step 1 */}
-            <div className="text-center p-6 rounded-lg shadow hover:shadow-lg transition transform hover:scale-105">
+            <div className="text-center p-6 rounded-lg  transition transform hover:scale-105">
               <p className="inline-block py-2 px-4 rounded-full bg-blue-800 text-white font-bold mb-4">
                 1
               </p>
@@ -140,7 +140,7 @@ function LandingPage() {
             </div>
 
             {/* Step 2 */}
-            <div className="text-center p-6 rounded-lg shadow hover:shadow-lg transition transform hover:scale-105">
+            <div className="text-center p-6 rounded-lg  transition transform hover:scale-105">
               <p className="inline-block py-2 px-4 rounded-full bg-yellow-400 text-white font-bold mb-4">
                 2
               </p>
@@ -154,7 +154,7 @@ function LandingPage() {
             </div>
 
             {/* Step 3 */}
-            <div className="text-center p-6 rounded-lg shadow hover:shadow-lg transition transform hover:scale-105">
+            <div className="text-center p-6 rounded-lg transition transform hover:scale-105">
               <p className="inline-block py-2 px-4 rounded-full bg-green-600 text-white font-bold mb-4">
                 3
               </p>
@@ -357,6 +357,7 @@ function LandingPage() {
         <footer className="bg-[#0B1841] text-white py-8 px-4">
           <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
             <div>
+              <img src={logoWhite} alt="" className="w-18 h-16"/>
               <h3 className="text-lg font-bold mb-2">Startup Evaluation Hub</h3>
               <p className="text-sm text-gray-300">
                 Connecting innovative startups with investors and community
