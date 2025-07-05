@@ -1,30 +1,32 @@
-import { headerImage } from "../public/ExporImage"
-import { MdRocketLaunch } from "react-icons/md"
-import { FaArrowUp } from "react-icons/fa6"
-import { FaArrowRight } from "react-icons/fa"
-import { AiFillLike } from "react-icons/ai"
-import { FaXTwitter } from "react-icons/fa6"
-import { FaLinkedin } from "react-icons/fa6"
-import { FaFacebook } from "react-icons/fa6"
-import { FaInstagram } from "react-icons/fa6"
-import { FaStar } from "react-icons/fa6"
-import { Link } from "react-router"
-import { useState } from "react"
-import { GoArrowUp } from "react-icons/go"
-import image from "../public/images/Startup-life-amico.png"
+import { headerImage } from "../public/ExporImage";
+import { MdRocketLaunch } from "react-icons/md";
+import { FaArrowUp } from "react-icons/fa6";
+import { FaArrowRight } from "react-icons/fa";
+import { AiFillLike } from "react-icons/ai";
+import { FaXTwitter } from "react-icons/fa6";
+import { FaLinkedin } from "react-icons/fa6";
+import { FaFacebook } from "react-icons/fa6";
+import { FaInstagram } from "react-icons/fa6";
+import { FaStar } from "react-icons/fa6";
+import { Link } from "react-router";
+import { useState } from "react";
+import { GoArrowUp } from "react-icons/go";
+import { logoWhite } from "../public/ExporImage";
+import image from "../public/images/Startup-life-amico.png";
 
 function LandingPage() {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
       <div className="min-h-screen bg-white text-gray-800">
         {/* Navbar */}
-        <section className="sticky top-0 z-50 bg-blue-800 text-white py-4 px-4">
+        <section className="sticky top-0 z-50 bg-blue-800 text-white py-1 px-1">
           <nav className="container mx-auto flex flex-col md:flex-row items-center md:justify-between">
             {/* Logo + Hamburger */}
             <div className="w-full flex justify-between items-center md:w-auto">
-              <p className=" font-bold">Startup Arena Hub</p>
+              {/* <p className=" font-bold">Startup Arena Hub</p> */}
+              <img src={logoWhite} alt="" className="h-18 w-20" />
               <button
                 className="md:hidden text-white focus:outline-none"
                 onClick={() => setIsOpen(!isOpen)}
@@ -60,8 +62,8 @@ function LandingPage() {
                 isOpen ? "block" : "hidden"
               }`}
             >
-              <div className="w-full flex justify-center md:justify-center">
-                <ul className="flex flex-col md:flex-row gap-4 my-4 md:my-0 text-center">
+              <div className="w-full flex justify-center md:justify-center ">
+                <ul className="flex flex-col md:flex-row gap-10 my-4 md:my-0 text-center">
                   <li className="hover:text-yellow-300 cursor-pointer">
                     Explore
                   </li>
@@ -74,9 +76,11 @@ function LandingPage() {
                 </ul>
               </div>
               <div className="flex justify-center md:justify-end">
-                <button className="py-1 px-6 rounded border text-white hover:bg-blue-700 font-medium">
-                  SignIn
-                </button>
+                <Link to="signin">
+                  <button className="py-1 px-6 rounded border text-white hover:bg-blue-700 font-medium">
+                    SignIn
+                  </button>
+                </Link>
               </div>
             </div>
           </nav>
@@ -126,7 +130,7 @@ function LandingPage() {
         <section className="py-12 px-4 bg-white">
           <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Step 1 */}
-            <div className="text-center p-6 rounded-lg shadow hover:shadow-lg transition transform hover:scale-105">
+            <div className="text-center p-6 rounded-lg  transition transform hover:scale-105">
               <p className="inline-block py-2 px-4 rounded-full bg-blue-800 text-white font-bold mb-4">
                 1
               </p>
@@ -138,7 +142,7 @@ function LandingPage() {
             </div>
 
             {/* Step 2 */}
-            <div className="text-center p-6 rounded-lg shadow hover:shadow-lg transition transform hover:scale-105">
+            <div className="text-center p-6 rounded-lg  transition transform hover:scale-105">
               <p className="inline-block py-2 px-4 rounded-full bg-yellow-400 text-white font-bold mb-4">
                 2
               </p>
@@ -152,7 +156,7 @@ function LandingPage() {
             </div>
 
             {/* Step 3 */}
-            <div className="text-center p-6 rounded-lg shadow hover:shadow-lg transition transform hover:scale-105">
+            <div className="text-center p-6 rounded-lg transition transform hover:scale-105">
               <p className="inline-block py-2 px-4 rounded-full bg-green-600 text-white font-bold mb-4">
                 3
               </p>
@@ -355,6 +359,7 @@ function LandingPage() {
         <footer className="bg-[#0B1841] text-white py-8 px-4">
           <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
             <div>
+              <img src={logoWhite} alt="" className="w-18 h-16" />
               <h3 className="text-lg font-bold mb-2">Startup Evaluation Hub</h3>
               <p className="text-sm text-gray-300">
                 Connecting innovative startups with investors and community
@@ -412,7 +417,7 @@ function LandingPage() {
         </footer>
       </div>
     </>
-  )
+  );
 }
 
-export default LandingPage
+export default LandingPage;

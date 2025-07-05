@@ -56,11 +56,11 @@ export default function AdminLogin() {
          
         </div>
 
-        {/* Welcome Text */}
-        <h2 className="text-xl font-bold mb-1">Welcome Back, Admin</h2>
-        <p className="text-gray-500 text-sm mb-6">
-          Sign in to your admin panel
-        </p>
+          {/* Welcome Text */}
+          <h2 className="text-xl font-bold mb-1">Welcome Back, Admin</h2>
+          <p className="text-gray-500 text-sm mb-6">
+            Sign in to your admin panel
+          </p>
 
         <form onSubmit={handleLogin}>
           {/* Email Field */}
