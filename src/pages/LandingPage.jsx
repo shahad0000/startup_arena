@@ -1,21 +1,21 @@
-import { headerImage } from "../public/ExporImage"
-import { MdRocketLaunch } from "react-icons/md"
-import { FaArrowUp } from "react-icons/fa6"
-import { FaArrowRight } from "react-icons/fa"
-import { AiFillLike } from "react-icons/ai"
-import { FaXTwitter } from "react-icons/fa6"
-import { FaLinkedin } from "react-icons/fa6"
-import { FaFacebook } from "react-icons/fa6"
-import { FaInstagram } from "react-icons/fa6"
-import { FaStar } from "react-icons/fa6"
-import { Link } from "react-router"
-import { useState } from "react"
-import { GoArrowUp } from "react-icons/go"
-import { logoWhite } from "../public/ExporImage"
-import image from "../public/images/Startup-life-amico.png"
+import { headerImage } from "../public/ExporImage";
+import { MdRocketLaunch } from "react-icons/md";
+import { FaArrowUp } from "react-icons/fa6";
+import { FaArrowRight } from "react-icons/fa";
+import { AiFillLike } from "react-icons/ai";
+import { FaXTwitter } from "react-icons/fa6";
+import { FaLinkedin } from "react-icons/fa6";
+import { FaFacebook } from "react-icons/fa6";
+import { FaInstagram } from "react-icons/fa6";
+import { FaStar } from "react-icons/fa6";
+import { Link } from "react-router";
+import { useState } from "react";
+import { GoArrowUp } from "react-icons/go";
+import { logoWhite } from "../public/ExporImage";
+import image from "../public/images/Startup-life-amico.png";
 
 function LandingPage() {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
@@ -76,8 +76,10 @@ function LandingPage() {
                 </ul>
               </div>
               <div className="flex justify-center md:justify-end">
-                <Link to="/signin" className="py-1 px-6 rounded border text-white hover:bg-blue-700 font-medium">
-                  SignIn
+                <Link to="signin">
+                  <button className="py-1 px-6 rounded border text-white hover:bg-blue-700 font-medium">
+                    SignIn
+                  </button>
                 </Link>
               </div>
             </div>
@@ -357,7 +359,7 @@ function LandingPage() {
         <footer className="bg-[#0B1841] text-white py-8 px-4">
           <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
             <div>
-              <img src={logoWhite} alt="" className="w-18 h-16"/>
+              <img src={logoWhite} alt="" className="w-18 h-16" />
               <h3 className="text-lg font-bold mb-2">Startup Evaluation Hub</h3>
               <p className="text-sm text-gray-300">
                 Connecting innovative startups with investors and community
@@ -415,7 +417,7 @@ function LandingPage() {
         </footer>
       </div>
     </>
-  )
+  );
 }
 
-export default LandingPage
+export default LandingPage;
