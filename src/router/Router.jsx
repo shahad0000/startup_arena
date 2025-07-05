@@ -16,6 +16,10 @@ import AdminDashboard from "../admin/pages/AdminDashboard"
 import ManageComments from "../admin/pages/ManageComments"
 import WatchMeetings from "../pages/WatchMeetings"
 import Nav from "../user/components/Nav"
+import NavAdmin from "../admin/pages/NavAdmin"
+
+
+
 
 const Layout = () => {
   return (
@@ -25,6 +29,8 @@ const Layout = () => {
     </>
   )
 }
+
+
 
 const router = createBrowserRouter([
   {
@@ -46,7 +52,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/admin",
-    element: <Layout />,
+    
     children: [
       { index: true, element: <AdminLogin /> },
       { path: "adminDashboard", element: <AdminDashboard /> },
@@ -59,29 +65,11 @@ const router = createBrowserRouter([
       { index: true, path: "/", element: <LandingPage /> },
       { path: "/signup", element: <SignUpForm /> },
       { path: "/signin", element: <SignIn /> },
+      { path: "admin", element:  <AdminLogin />   },
+
     ],
   },
-  {
-    path: "/investor",
-    element: <Layout />,
-    children: [
-      // { path: "/", element: <LandingPage /> }
-    ],
-  },
-  {
-    path: "/founder",
-    element: <Layout />,
-    children: [
-      // { path: "/", element: <LandingPage /> }
-    ],
-  },
-  {
-    path: "/critic",
-    element: <Layout />,
-    children: [
-      // { path: "/", element: <LandingPage /> }
-    ],
-  },
+  
 ])
 
 const Router = () => {
