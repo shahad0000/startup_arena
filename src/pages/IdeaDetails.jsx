@@ -284,7 +284,7 @@ export default function IdeaDetails() {
                       setTargetType("comment");
                       setShowModal(true);
                     }}
-                    className="mt-3 text-sm bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
+                    className="mt-3 text-sm text-blue-600 px-3 py-1 rounded "
                   >
                     Request Meeting
                   </button>
