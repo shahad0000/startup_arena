@@ -18,6 +18,7 @@ import WatchMeetings from "../pages/WatchMeetings"
 import Nav from "../user/components/Nav"
 import Support from "../user/components/Support"
 import Footer from "../user/components/Footer"
+import VentureBoard from "../pages/VentureBoard"
 
 const Layout = () => {
   return (
@@ -42,6 +43,7 @@ const router = createBrowserRouter([
       { path: "/MyIdeas", element: <MyIdeas /> },
       { path: "/AllIdeas", element: <AllIdeas /> },
       { path: "/FeaturedIdeas", element: <FeaturedIdeas /> },
+      { path: "/venture-board", element: <VentureBoard /> },
       { path: "/IdeaAnalysis/:id", element: <IdeaAnalysis /> },
       { path: "/detailIdea/:id", element: <IdeaDetails /> },
       { path: "/watchMeeting", element: <WatchMeetings /> },

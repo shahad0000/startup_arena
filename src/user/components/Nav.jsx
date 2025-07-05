@@ -15,7 +15,7 @@ import { fullLogo } from "../../public/ExporImage";
 
 const navigation = [
   { name: "Explore", to: "/AllIdeas" },
-  { name: "Venture Board", to: "/FeaturedIdeas" },
+  { name: "Venture Board", to: "/venture-board" },
   { name: "Watch Meeting", to: "/watchMeeting" },
   { name: "My Ideas", to: "/MyIdeas" },
 ];
