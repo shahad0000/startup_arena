@@ -14,8 +14,8 @@ import { IoClose } from "react-icons/io5";
 import { fullLogo } from "../../public/ExporImage";
 
 const navigation = [
-  { name: "All Ideas", to: "/AllIdeas" },
-  { name: "Featured Ideas", to: "/FeaturedIdeas" },
+  { name: "Explore", to: "/AllIdeas" },
+  { name: "Venture Board", to: "/FeaturedIdeas" },
   { name: "Watch Meeting", to: "/watchMeeting" },
   { name: "My Ideas", to: "/MyIdeas" },
 ];
