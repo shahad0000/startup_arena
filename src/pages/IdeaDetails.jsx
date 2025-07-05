@@ -14,6 +14,8 @@ import { voteIdea } from "../services/ideas.service";
 import { getCurrentUser } from "../services/auth.service";
 import { fetchUserVote } from "../services/ideas.service";
 import { voteOnComment } from "../services/comments.service";
+import RequestMeetingModal from "../Component/RequestMeetingModal";
+import { scheduleMeeting } from "../services/zoom.service";
 
 export default function IdeaDetails() {
   const { id } = useParams();
@@ -25,6 +27,32 @@ export default function IdeaDetails() {
   const [voteStatus, setVoteStatus] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
   const [netVotes, setNetVotes] = useState(0);
+  const [showModal, setShowModal] = useState(false);
+  const [targetId, setTargetId] = useState(null);
+  const [targetType, setTargetType] = useState("comment");
+  const [formData, setFormData] = useState({
+    topic: "",
+    start_time: "",
+    duration: 30,
+    isPrivate: false,
+  });
+
+  const handleSubmitMeeting = async (e) => {
+    e.preventDefault();
+    try {
+      const payload = {
+        ...formData,
+        userId: "me",
+        targetType,
+        targetId,
+      };
+      const meeting = await scheduleMeeting(payload);
+      console.log("Meeting created:", meeting);
+      setShowModal(false);
+    } catch (err) {
+      console.error("Error creating meeting:", err);
+    }
+  };
 
   useEffect(() => {
     const init = async () => {
@@ -40,6 +68,7 @@ export default function IdeaDetails() {
         setComments(
           commentsData.map((c) => ({
             id: c._id,
+            user: c.userId,
             author: c.userId?.name || "Unknown",
             content: c.text,
             time: new Date(c.createdAt).toLocaleString(),
@@ -248,6 +277,18 @@ export default function IdeaDetails() {
               <p>{comment.content}</p>
 
               <div className="flex gap-2 justify-end items-center">
+                {currentUser?.id === idea.founderId?.id && (
+                  <button
+                    onClick={() => {
+                      setTargetId(comment.id);
+                      setTargetType("comment");
+                      setShowModal(true);
+                    }}
+                    className="mt-3 text-sm bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
+                  >
+                    Request Meeting
+                  </button>
+                )}
                 <button
                   className="p-1.5 rounded-full bg-gray-100 text-green-600 hover:bg-green-50"
                   aria-label="upvote"
@@ -272,6 +313,14 @@ export default function IdeaDetails() {
             </div>
           ))}
         </div>
+        {/* Request Meeting Modal */}
+        <RequestMeetingModal
+          isOpen={showModal}
+          onClose={() => setShowModal(false)}
+          onSubmit={handleSubmitMeeting}
+          formData={formData}
+          setFormData={setFormData}
+        />
       </div>
     </>
   );
