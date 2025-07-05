@@ -2,18 +2,49 @@ import React, { useState } from "react";
 import { GoArrowUp } from "react-icons/go";
 import tagColors from "../Component/CatagoryColors";
 import { Link } from "react-router";
+import RequestMeetingModal from "./RequestMeetingModal.jsx";
+import { scheduleMeeting } from "../services/zoom.service"; 
 
 export const IdeaCard = ({ ideas = [], userRole }) => {
   const [showModal, setShowModal] = useState(false);
-  const [selectedIdea, setSelectedIdea] = useState(null);
+  const [IdeaId, setIdeaId] = useState(null);
 
-  const openModal = (idea) => {
-    setSelectedIdea(idea);
+  const [formData, setFormData] = useState({
+    topic: "",
+    start_time: "",
+    duration: 30,
+    isPrivate: false,
+  });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const payload = {
+        ...formData,
+        userId: "me",
+        targetType: "idea",
+        targetId: IdeaId,
+      };
+
+      const meeting = await scheduleMeeting(payload);
+      console.log("Meeting created:", meeting);
+      closeModal();
+      setFormData({
+        topic: "",
+        start_time: "",
+        duration: 30,
+        isPrivate: false,
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const openModal = () => {
     setShowModal(true);
   };
 
   const closeModal = () => {
-    setSelectedIdea(null);
     setShowModal(false);
   };
 
@@ -40,7 +71,12 @@ export const IdeaCard = ({ ideas = [], userRole }) => {
               </span>
             </div>
 
-            <Link to={`/detailIdea/${idea._id}`}  className="text-[18px] font-semibold mb-2">{idea.title}</Link>
+            <Link
+              to={`/detailIdea/${idea._id}`}
+              className="text-[18px] font-semibold mb-2"
+            >
+              {idea.title}
+            </Link>
 
             <p className="text-[14px] text-[#666666] line-clamp-3">
               {idea.description}
@@ -65,7 +101,10 @@ export const IdeaCard = ({ ideas = [], userRole }) => {
               {userRole === "investor" && (
                 <div>
                   <button
-                    onClick={() => openModal(idea)}
+                    onClick={() => {
+                      setIdeaId(idea._id);
+                      openModal();
+                    }}
                     className="mt-4 bg-[#1E40AF] text-white px-4 py-2 rounded hover:bg-[#1e40afc6] w-full"
                   >
                     Request Meeting
@@ -85,62 +124,13 @@ export const IdeaCard = ({ ideas = [], userRole }) => {
       </div>
 
       {/* Modal */}
-      {showModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm bg-black/30">
-          <div className="bg-white w-full max-w-md mx-auto rounded-xl p-6 shadow-xl">
-            <div className=" w-full flex flex-col justify-start items-start py-4 ">
-              <p className=" font-bold  text-center">Request Meeting :-</p>
-              <p className="text-xl font-bold  text-center">
-                {selectedIdea?.title}
-              </p>
-            </div>
-
-            <form className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium">Topic</label>
-                <input
-                  type="text"
-                  placeholder="Enter topic"
-                  className="w-full border px-3 py-2 rounded"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium">Date & Time</label>
-                <input
-                  type="datetime-local"
-                  className="w-full border px-3 py-2 rounded"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium">
-                  Duration (minutes)
-                </label>
-                <input
-                  type="number"
-                  placeholder="e.g. 30"
-                  className="w-full border px-3 py-2 rounded"
-                />
-              </div>
-
-              <div className="flex justify-end gap-3 pt-4">
-                <button
-                  type="button"
-                  onClick={closeModal}
-                  className="px-4 py-2 border rounded hover:bg-gray-100"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="px-4 py-2 bg-[#1E40AF] text-white rounded hover:bg-blue-700"
-                >
-                  Submit
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
+      <RequestMeetingModal
+          isOpen={showModal}
+          onClose={closeModal}
+          onSubmit={handleSubmit}
+          formData={formData}
+          setFormData={setFormData}
+        />
     </>
   );
 };
