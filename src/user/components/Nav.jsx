@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { FaChevronDown } from "react-icons/fa";
+import React, { useEffect, useState } from "react";
 import {
   Disclosure,
   DisclosureButton,
@@ -12,10 +11,11 @@ import { Link, useLocation } from "react-router";
 import UserProfile from "../../Component/UserProfile";
 import { IoClose } from "react-icons/io5";
 import { fullLogo } from "../../public/ExporImage";
+import { getCurrentUser } from "../../services/auth.service";
 
 const navigation = [
   { name: "Explore", to: "/AllIdeas" },
-  { name: "Venture Board", to: "/FeaturedIdeas" },
+  { name: "Venture Board", to: "/venture-board" },
   { name: "Watch Meeting", to: "/watchMeeting" },
   { name: "My Ideas", to: "/MyIdeas" },
 ];
@@ -27,7 +27,20 @@ function classNames(...classes) {
 function Nav() {
   const location = useLocation();
   const [showProfile, setShowProfile] = useState(false);
-  const [user] = useState({ role: "founder" });
+  const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const user = await getCurrentUser();
+        setCurrentUser(user);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchUser();
+  }, []);
+
   return (
     <>
       {/* NAVBAR */}
@@ -39,7 +52,7 @@ function Nav() {
                 {/* <p className="text-2xl font-bold text-[#1E40AF]">
                   Startup Arena
                 </p> */}
-                <Link to="/" >
+                <Link to="/">
                   <img src={fullLogo} alt="" className="h-35" />
                 </Link>
               </div>
@@ -48,7 +61,7 @@ function Nav() {
                 {navigation.map((item) => {
                   const isActive = location.pathname === item.to;
                   return (
-                    <Link 
+                    <Link
                       key={item.name}
                       to={item.to}
                       aria-current={isActive ? "page" : undefined}
@@ -68,29 +81,35 @@ function Nav() {
               {/* USER BUTTON */}
               <div className="flex items-center">
                 <Menu as="div" className="relative ml-3">
-                  <MenuButton
-                    onClick={() => setShowProfile(true)}
-                    className="flex items-center rounded-full focus:outline-none focus:ring-2 focus:ring-[#1E40AF]"
-                  >
-                    <span className="sr-only">Open user menu</span>
-                    <div className="flex items-center gap-5">
-                      {user?.role === "founder" && (
+                  {currentUser ? (
+                    <MenuButton
+                      onClick={() => setShowProfile(true)}
+                      className="flex items-center rounded-full focus:outline-none focus:ring-2 focus:ring-[#1E40AF]"
+                    >
+                      <span className="sr-only">Open user menu</span>
+                      <div className="flex items-center gap-5">
+                        {currentUser?.role === "founder" && (
+                          <div>
+                            <Link
+                              to={"/submitIdea"}
+                              className="bg-[#1E40AF] text-white px-4 py-2 text-sm rounded-md font-medium hover:bg-blue-900"
+                            >
+                              Add Idea +
+                            </Link>
+                          </div>
+                        )}
                         <div>
-                          <Link
-                            to={"/submitIdea"}
-                            className="bg-[#1E40AF] text-white px-4 py-2 text-sm rounded-md font-medium hover:bg-blue-900"
-                          >
-                            <button>Add Idea +</button>
-                          </Link>
+                          <img
+                            src="https://plus.unsplash.com/premium_photo-1690407617542-2f210cf20d7e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D"
+                            alt="Profile"
+                            className="w-10 h-10 rounded-full object-cover ring-4 ring-blue-300 shadow-md"
+                          />
                         </div>
-                      )}
-                      <img
-                        src="https://plus.unsplash.com/premium_photo-1690407617542-2f210cf20d7e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D"
-                        alt="Profile"
-                        className="w-10 h-10 rounded-full object-cover ring-4 ring-blue-300 shadow-md"
-                      />
-                    </div>
-                  </MenuButton>
+                      </div>
+                    </MenuButton>
+                  ) : (
+                    <Link to="/signin">Sign in</Link>
+                  )}
                 </Menu>
               </div>
             </div>

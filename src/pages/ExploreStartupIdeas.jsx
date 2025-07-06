@@ -4,7 +4,6 @@ import { IoSearch } from "react-icons/io5";
 import { fetchAllIdeas } from "../services/ideas.service";
 import { getCurrentUser } from "../services/auth.service";
 import { FindingIdeas } from "../public/ExporImage";
-import Footer from "../user/components/Footer";
 
 export default function AllIdeas() {
   const [ideas, setIdeas] = useState([]);
@@ -29,13 +28,7 @@ export default function AllIdeas() {
       }
     };
 
-    const fetchUser = async () => {
-      const user = await getCurrentUser();
-      setCurrentUser(user);
-    };
-
     loadData();
-    fetchUser();
   }, []);
 
   return (

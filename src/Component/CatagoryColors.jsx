@@ -9,6 +9,18 @@ const tagColors = {
   entertainment: 'bg-purple-100 text-purple-800',
   travel: 'bg-orange-100 text-orange-800',
   marketing: 'bg-indigo-100 text-indigo-800',
+  agriculture: 'bg-lime-100 text-lime-800',
+  ecommerce: 'bg-emerald-100 text-emerald-800',
+  environment: 'bg-green-100 text-green-800',
+  transportation: 'bg-sky-100 text-sky-800',
+  'real estate': 'bg-stone-100 text-stone-800',
+  hospitality: 'bg-rose-100 text-rose-800',
+  'social impact': 'bg-slate-100 text-slate-800',
+  'artificial intelligence': 'bg-fuchsia-100 text-fuchsia-800',
+  gaming: 'bg-violet-100 text-violet-800',
+  manufacturing: 'bg-zinc-100 text-zinc-800',
+  logistics: 'bg-amber-100 text-amber-800',
+  other: 'bg-gray-100 text-gray-800',
 };
 
 export default tagColors;
