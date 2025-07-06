@@ -29,17 +29,22 @@ function Nav() {
   const [showProfile, setShowProfile] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
 
+  const fetchUser = async () => {
+    try {
+      const user = await getCurrentUser();
+      setCurrentUser(user);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const user = await getCurrentUser();
-        setCurrentUser(user);
-      } catch (err) {
-        console.error(err);
-      }
-    };
     fetchUser();
   }, []);
+
+  const handleProfileUpdate = async () => {
+    await fetchUser();
+  };
 
   return (
     <>
@@ -100,7 +105,7 @@ function Nav() {
                         )}
                         <div>
                           <img
-                            src="https://plus.unsplash.com/premium_photo-1690407617542-2f210cf20d7e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D"
+                            src={ currentUser?.profilePic || "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png" }
                             alt="Profile"
                             className="w-10 h-10 rounded-full object-cover ring-4 ring-blue-300 shadow-md"
                           />
@@ -169,7 +174,7 @@ function Nav() {
             >
               <IoClose />
             </button>
-            <UserProfile />
+            <UserProfile onUpdate={handleProfileUpdate} />
           </div>
         </div>
       )}
