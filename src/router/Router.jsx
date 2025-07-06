@@ -19,6 +19,8 @@ import Support from "../user/components/Support"
 import Footer from "../user/components/Footer"
 import VentureBoard from "../pages/VentureBoard"
 import NavAdmin from "../admin/pages/NavAdmin"
+import Landing from "../pages/Landing"
+import ReportManagement from "../admin/pages/ReportManagement"
 
 
 
@@ -61,12 +63,13 @@ const router = createBrowserRouter([
       { index: true, element: <AdminLogin /> },
       { path: "adminDashboard", element: <AdminDashboard /> },
       { path: "manageComments", element: <ManageComments /> },
+      { path: "manageReport", element: <ReportManagement/>},
     ],
   },
   {
     path: "/",
     children: [
-      { index: true, path: "/", element: <LandingPage /> },
+      { index: true, path: "/", element: <Landing /> },
       { path: "/signup", element: <SignUpForm /> },
       { path: "/signin", element: <SignIn /> },
       { path: "admin", element:  <AdminLogin />   },

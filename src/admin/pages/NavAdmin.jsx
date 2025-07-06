@@ -15,6 +15,9 @@ function NavAdmin() {
         <Link to={"/admin/manageComments"} className="text-sm text-gray-700 hover:text-black">
           Manage Comments
         </Link>
+        <Link to={"/admin/manageReport"} className="text-sm text-gray-700 hover:text-black">
+          Manage Report
+        </Link>
       </div>
 
         <button
