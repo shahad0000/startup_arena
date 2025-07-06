@@ -79,7 +79,7 @@ function Nav() {
                             to={"/submitIdea"}
                             className="bg-[#1E40AF] text-white px-4 py-2 text-sm rounded-md font-medium hover:bg-blue-900"
                           >
-                            <button>Add Idea +</button>
+                            Add Idea +
                           </Link>
                         </div>
                       )}
