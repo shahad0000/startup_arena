@@ -2,18 +2,25 @@ import React, { useEffect, useState } from "react";
 import { IdeaCard } from "../Component/IdeaCard";
 import { IoSearch } from "react-icons/io5";
 import { fetchVentureBoard } from "../services/venture-board.service";
+import { getCurrentUser } from "../services/auth.service";
 
 function VentureBoard() {
   const [ideas, setIdeas] = useState([]);
+  const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const loadIdeas = async () => {
       try {
-        const data = await fetchVentureBoard();
-        setIdeas(data.data);
+        const [ventureData, userData] = await Promise.all([
+          fetchVentureBoard(),
+          getCurrentUser(),
+        ]);
+        setIdeas(ventureData.data);
+        setCurrentUser(userData);
+
       } catch (err) {
-        console.log(err);
+        console.error(err);
       } finally {
         setLoading(false);
       }
@@ -21,7 +28,8 @@ function VentureBoard() {
     loadIdeas();
   }, []);
 
-  if (loading) return <p className="p-6 text-center">Loading Venture Board...</p>;
+  if (loading)
+    return <p className="p-6 text-center">Loading Venture Board...</p>;
 
   return (
     <>
@@ -29,7 +37,7 @@ function VentureBoard() {
         {/* Header */}
         <div className="text-center mb-10">
           <h1 className="text-[28px] font-bold font-inter">
-            The Venture Board{" "}
+            The Venture Board
           </h1>
           <p className="text-[16px] text-[#888888] font-inter">
             High-performing ideas with <span className="font-bold"> 100+ </span>
@@ -61,7 +69,7 @@ function VentureBoard() {
             ))}
           </div>
         </div>
-        <IdeaCard ideas={ideas} />
+        <IdeaCard ideas={ideas} userRole={currentUser?.role} />
       </div>
     </>
   );

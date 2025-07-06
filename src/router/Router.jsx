@@ -6,7 +6,6 @@ import SignUpSecondStep from "../Component/SignUpSecondStep"
 import SubmitIdeaForm from "../pages/SubmitIdeaForm"
 import MyIdeas from "../pages/MyIdeas"
 import AllIdeas from "../pages/ExploreStartupIdeas"
-import FeaturedIdeas from "../pages/FeaturedIdeas"
 import IdeaAnalysis from "../pages/IdeaAnalysis"
 import IdeaDetails from "../pages/IdeaDetails"
 import ScheduleMeetingForm from "../Component/RequestMeetingModal"
@@ -42,7 +41,6 @@ const router = createBrowserRouter([
       { path: "/support", element: <Support /> },
       { path: "/MyIdeas", element: <MyIdeas /> },
       { path: "/AllIdeas", element: <AllIdeas /> },
-      { path: "/FeaturedIdeas", element: <FeaturedIdeas /> },
       { path: "/venture-board", element: <VentureBoard /> },
       { path: "/IdeaAnalysis/:id", element: <IdeaAnalysis /> },
       { path: "/detailIdea/:id", element: <IdeaDetails /> },

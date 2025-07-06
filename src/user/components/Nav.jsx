@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { FaChevronDown } from "react-icons/fa";
 import {
   Disclosure,
   DisclosureButton,
