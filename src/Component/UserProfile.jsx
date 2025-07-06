@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from "react"
 import { FiLogOut } from "react-icons/fi";
 import { TbUpload } from "react-icons/tb";
-import { getCurrentUser, updateProfile } from "../services/auth.service";
+import { getCurrentUser, logOut, updateProfile } from "../services/auth.service";
+import { useNavigate } from "react-router";
 
 function UserProfile({ onUpdate }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -13,24 +14,15 @@ function UserProfile({ onUpdate }) {
   const [avatar, setAvatar] = useState("https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png");
   const fileInputRef = useRef();
  useEffect(() => {
-    const savedData = JSON.parse(localStorage.getItem("profileData"));
-    if (savedData) {
-      setName(savedData.name || name);
-      setEmail(savedData.email || email);
-      setGender(savedData.gender || gender);
-      setCountry(savedData.country || country);
-      setCity(savedData.city || city);
-      setAvatar(savedData.avatar || avatar);
-    }
     const fetchUser = async () => {
       const data = await getCurrentUser();
       if (data) {
-        setName(data.name || savedData?.name || name);
-        setEmail(data.email || savedData?.email || email);
-        setGender(data.gender || savedData?.gender || gender);
-        setCountry(data.country || savedData?.country || country);
-        setCity(data.city || savedData?.city || city);
-        setAvatar(data.profilePic || savedData?.avatar || avatar);
+        setName(data.name || name);
+        setEmail(data.email || email);
+        setGender(data.gender || gender);
+        setCountry(data.country || country);
+        setCity(data.city || city);
+        setAvatar(data.profilePic || avatar);
       }
     };
     fetchUser();
@@ -45,7 +37,6 @@ function UserProfile({ onUpdate }) {
       city,
       avatar,
     };
-    localStorage.setItem("profileData", JSON.stringify(data));
     try {
       const updated = await updateProfile(avatar);
       if (updated?.profilePic) {
@@ -72,6 +63,18 @@ function UserProfile({ onUpdate }) {
 
   const toggleEdit = () => {
     setIsEditing((prev) => !prev);
+  };
+
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await logOut();
+      localStorage.removeItem("profileData");
+      navigate("/signin");
+    } catch (err) {
+      console.error("Logout failed", err);
+    }
   };
 
   return (
@@ -106,12 +109,14 @@ function UserProfile({ onUpdate }) {
       <div className="text-center space-y-1">
         {isEditing ? (
           <>
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="text-xl font-bold text-center text-gray-800 border-b-2 border-blue-400 focus:outline-none"
-            />
+              {/* <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="text-xl font-bold text-center text-gray-800 border-b-2 border-blue-400 focus:outline-none"
+              /> */}
+
+            <h2 className=" text-xl font-bold text-center text-gray-800 border-b-2 border-white focus:outline-none">{name}</h2>
            
           </>
         ) : (
@@ -153,7 +158,7 @@ function UserProfile({ onUpdate }) {
       </button>
 
       {/* Save Button */}
-      <button className="flex gap-1  justify-center w-full py-2 bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white  px-4 border border-red-500 hover:border-transparent rounded-full">
+      <button onClick={handleLogout} className="flex gap-1  justify-center w-full py-2 bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white  px-4 border border-red-500 hover:border-transparent rounded-full">
         <FiLogOut className="mt-1" /> LogOut
       </button>
     </div>
