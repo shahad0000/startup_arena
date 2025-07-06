@@ -3,7 +3,7 @@ import { GoArrowUp } from "react-icons/go";
 import tagColors from "../Component/CatagoryColors";
 import { Link } from "react-router";
 import RequestMeetingModal from "./RequestMeetingModal.jsx";
-import { scheduleMeeting } from "../services/zoom.service"; 
+import { scheduleMeeting } from "../services/zoom.service";
 
 export const IdeaCard = ({ ideas = [], userRole }) => {
   const [showModal, setShowModal] = useState(false);
@@ -52,9 +52,9 @@ export const IdeaCard = ({ ideas = [], userRole }) => {
     <>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-y-6 gap-x-4">
         {ideas.map((idea) => (
-          <Link
+          <div
             key={idea._id}
-            className="bg-white border border-[#E0E0E0] rounded-lg p-4 relative transform transition-transform duration-300 ease-in-out hover:translate-1 hover:scale-100"
+            className="bg-white drop-shadow-lg rounded-lg p-4 relative transform transition-transform duration-300 ease-in-out hover:translate-1 hover:scale-100"
           >
             <div className="absolute right-4 top-4 text-amber-300 px-2 py-1 rounded flex items-center gap-1">
               <GoArrowUp /> {idea.totalUpvotes}
@@ -71,12 +71,8 @@ export const IdeaCard = ({ ideas = [], userRole }) => {
               </span>
             </div>
 
-            <Link
-              to={`/detailIdea/${idea._id}`}
-              className="text-[18px] font-semibold mb-2"
-            >
-              {idea.title}
-            </Link>
+            <div className="text-[18px] font-semibold mb-2"> <Link           to={`/detailIdea/${idea._id}`}
+> {idea.title}</Link></div>
 
             <p className="text-[14px] text-[#666666] line-clamp-3">
               {idea.description}
@@ -101,7 +97,7 @@ export const IdeaCard = ({ ideas = [], userRole }) => {
               {userRole === "investor" && (
                 <div>
                   <button
-                    onClick={() => {
+                    onClick={() => { 
                       setIdeaId(idea._id);
                       openModal();
                     }}
@@ -112,7 +108,7 @@ export const IdeaCard = ({ ideas = [], userRole }) => {
                 </div>
               )}
             </div>
-          </Link>
+          </div>
         ))}
       </div>
 
@@ -125,12 +121,12 @@ export const IdeaCard = ({ ideas = [], userRole }) => {
 
       {/* Modal */}
       <RequestMeetingModal
-          isOpen={showModal}
-          onClose={closeModal}
-          onSubmit={handleSubmit}
-          formData={formData}
-          setFormData={setFormData}
-        />
+        isOpen={showModal}
+        onClose={closeModal}
+        onSubmit={handleSubmit}
+        formData={formData}
+        setFormData={setFormData}
+      />
     </>
   );
 };

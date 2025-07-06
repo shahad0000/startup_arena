@@ -1,10 +1,5 @@
 import React, { useEffect, useRef, useState } from "react"
-import { BsGenderMale } from "react-icons/bs"
-import { CiLogout } from "react-icons/ci";
 import { FiLogOut } from "react-icons/fi";
-import { HiOutlineGlobe } from "react-icons/hi";
-import { MdLocationPin } from "react-icons/md";
-import { PiGenderFemale } from "react-icons/pi"
 import { TbUpload } from "react-icons/tb";
 import { getCurrentUser, updateProfile } from "../services/auth.service";
 

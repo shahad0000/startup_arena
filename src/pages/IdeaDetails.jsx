@@ -16,6 +16,7 @@ import { fetchUserVote } from "../services/ideas.service";
 import { voteOnComment } from "../services/comments.service";
 import RequestMeetingModal from "../Component/RequestMeetingModal";
 import { scheduleMeeting } from "../services/zoom.service";
+import { FaStar } from "react-icons/fa";
 
 export default function IdeaDetails() {
   const { id } = useParams();
@@ -36,6 +37,7 @@ export default function IdeaDetails() {
     duration: 30,
     isPrivate: false,
   });
+  const [score, setScore] = useState(55);
 
   const handleSubmitMeeting = async (e) => {
     e.preventDefault();
@@ -199,12 +201,13 @@ export default function IdeaDetails() {
             <div className="border border-gray-100 rounded p-4 text-sm text-gray-700 flex-1 whitespace-pre-line">
               {idea.description}
               <p className="mt-2 text-blue-800 ">
-                <Link
-                  to={idea.mvpLink || "#"}
+                <a
+                href={idea.mvpLink || "#"}
+                  target="_blank"
                   className="flex gap-1 text-blue-800 hover:underline"
                 >
                   <GoLinkExternal className="mt-1" /> MVP Document
-                </Link>
+                </a>
               </p>
             </div>
 
@@ -268,10 +271,49 @@ export default function IdeaDetails() {
           {comments.map((comment) => (
             <div
               key={comment.id}
-              className="border border-gray-100 rounded p-3 text-sm text-gray-700 space-y-2"
+              className="border border-gray-300 rounded p-3 text-sm text-gray-700 space-y-2"
             >
               <div className="flex justify-between">
-                <strong>{comment.author}</strong>
+                <div className="flex items-center gap-3">
+                  <strong>{comment.author}</strong>
+                  <p>
+                    {/* {setScore(10)} */}
+                    {score >= 100 ? (
+                      <div className="flex items-center">
+                        <FaStar className="text-amber-400" />
+                        <FaStar className="text-amber-400" />
+                        <FaStar className="text-amber-400" />
+                        <FaStar className="text-amber-400" />
+                        <FaStar className="text-amber-400" />
+                      </div>
+                    ) : score >= 80 ? (
+                      <div className="flex items-center">
+                        <FaStar className="text-amber-400" />
+                        <FaStar className="text-amber-400" />
+                        <FaStar className="text-amber-400" />
+                        <FaStar className="text-amber-400" />
+                      </div>
+                    ) : score >= 60 ? (
+                      <div className="flex items-center">
+                        <FaStar className="text-amber-400" />
+                        <FaStar className="text-amber-400" />
+                        <FaStar className="text-amber-400" />
+                      </div>
+                    ) : score >= 40 ? (
+                      <div className="flex items-center">
+                        <FaStar className="text-amber-400" />
+                        <FaStar className="text-amber-400" />
+                      </div>
+                    ) : score >= 20 ? (
+                      <div className="flex items-center">
+                        <FaStar className="text-amber-400" />
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                  </p>
+                  {/* {score >= 30 ? "Good"} */}
+                </div>
                 <span className="text-xs text-gray-400">{comment.time}</span>
               </div>
               <p>{comment.content}</p>

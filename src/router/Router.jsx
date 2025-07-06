@@ -6,7 +6,6 @@ import SignUpSecondStep from "../Component/SignUpSecondStep"
 import SubmitIdeaForm from "../pages/SubmitIdeaForm"
 import MyIdeas from "../pages/MyIdeas"
 import AllIdeas from "../pages/ExploreStartupIdeas"
-import FeaturedIdeas from "../pages/FeaturedIdeas"
 import IdeaAnalysis from "../pages/IdeaAnalysis"
 import IdeaDetails from "../pages/IdeaDetails"
 import ScheduleMeetingForm from "../Component/RequestMeetingModal"
@@ -18,6 +17,11 @@ import WatchMeetings from "../pages/WatchMeetings"
 import Nav from "../user/components/Nav"
 import Support from "../user/components/Support"
 import Footer from "../user/components/Footer"
+import VentureBoard from "../pages/VentureBoard"
+import NavAdmin from "../admin/pages/NavAdmin"
+
+
+
 
 const Layout = () => {
   return (
@@ -28,6 +32,8 @@ const Layout = () => {
     </>
   )
 }
+
+
 
 const router = createBrowserRouter([
   {
@@ -41,7 +47,7 @@ const router = createBrowserRouter([
       { path: "/support", element: <Support /> },
       { path: "/MyIdeas", element: <MyIdeas /> },
       { path: "/AllIdeas", element: <AllIdeas /> },
-      { path: "/FeaturedIdeas", element: <FeaturedIdeas /> },
+      { path: "/venture-board", element: <VentureBoard /> },
       { path: "/IdeaAnalysis/:id", element: <IdeaAnalysis /> },
       { path: "/detailIdea/:id", element: <IdeaDetails /> },
       { path: "/watchMeeting", element: <WatchMeetings /> },
@@ -50,7 +56,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/admin",
-    element: <Layout />,
+    
     children: [
       { index: true, element: <AdminLogin /> },
       { path: "adminDashboard", element: <AdminDashboard /> },
@@ -63,29 +69,11 @@ const router = createBrowserRouter([
       { index: true, path: "/", element: <LandingPage /> },
       { path: "/signup", element: <SignUpForm /> },
       { path: "/signin", element: <SignIn /> },
+      { path: "admin", element:  <AdminLogin />   },
+
     ],
   },
-  {
-    path: "/investor",
-    element: <Layout />,
-    children: [
-      // { path: "/", element: <LandingPage /> }
-    ],
-  },
-  {
-    path: "/founder",
-    element: <Layout />,
-    children: [
-      // { path: "/", element: <LandingPage /> }
-    ],
-  },
-  {
-    path: "/critic",
-    element: <Layout />,
-    children: [
-      // { path: "/", element: <LandingPage /> }
-    ],
-  },
+  
 ])
 
 const Router = () => {

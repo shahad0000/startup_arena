@@ -4,7 +4,6 @@ import { IoSearch } from "react-icons/io5";
 import { fetchAllIdeas } from "../services/ideas.service";
 import { getCurrentUser } from "../services/auth.service";
 import { FindingIdeas } from "../public/ExporImage";
-import Footer from "../user/components/Footer";
 
 export default function AllIdeas() {
   const [ideas, setIdeas] = useState([]);
@@ -29,19 +28,13 @@ export default function AllIdeas() {
       }
     };
 
-    const fetchUser = async () => {
-      const user = await getCurrentUser();
-      setCurrentUser(user);
-    };
-
     loadData();
-    fetchUser();
   }, []);
 
   return (
-    <div className="bg-white  text-[#333333]">
+    <div className="bg-white font-ibm  text-[#333333]">
       {/* hero section */}
-      <div className="flex justify-between items-center px-8">
+      <div className="flex h-screen justify-between items-center px-8">
         <div className=" flex flex-col gap-2  w-6/12">
           <p className="text-4xl font-bold font-inter">All Startup Ideas</p>
           <p className="text-lg text-gray-600 font-inter">
@@ -66,7 +59,7 @@ export default function AllIdeas() {
           Discover innovative startup ideas from founders worldwide
         </p>
         {/* Filters Row */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-10 ">
+        <div className="flex flex-col bg-white p-2 rounded-lg drop-shadow-sm md:flex-row justify-between items-center gap-4 mb-10 ">
           <div className="relative w-full md:w-1/3">
             <span className="absolute left-3 top-2.5 text-[#888888]">
               <IoSearch />
@@ -75,7 +68,7 @@ export default function AllIdeas() {
             <input
               type="text"
               placeholder="Search ideas..."
-              className="w-full pl-10 pr-4 py-2 border border-[#E0E0E0] rounded-lg"
+              className="w-full pl-10 pr-4 py-2 border border-[#adadad] rounded-lg"
             />
           </div>
 
@@ -83,7 +76,7 @@ export default function AllIdeas() {
             {["All createdAt", "Most Upvoted"].map((label, i) => (
               <select
                 key={i}
-                className="border border-[#E0E0E0] rounded-lg px-4 py-2 text-sm text-[#333333]"
+                className="border border-[#adadad] rounded-lg px-4 py-2 text-sm text-[#333333]"
               >
                 <option>{label}</option>
               </select>
@@ -92,7 +85,7 @@ export default function AllIdeas() {
         </div>
 
         {/* Content */}
-        <div className="p-2 shadow-2xl border-gray-400 bg-white rounded-lg ">
+        <div className="p-2  border-gray-400  rounded-lg ">
           {loading ? (
             <p className="text-center text-sm">Loading ideas...</p>
           ) : error ? (

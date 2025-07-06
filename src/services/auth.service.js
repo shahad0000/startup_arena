@@ -52,3 +52,11 @@ export const updateProfile = async (profilePic) => {
   console.log(response.data)
   return response.data;
 };
+
+export const logOut = async () => {
+  try {
+    const res = await axios.post(`${API}/auth/signout`)
+  } catch (err) {
+    console.error(err)
+  }
+}
