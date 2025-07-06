@@ -1,31 +1,34 @@
 import React, { useEffect, useRef, useState } from "react"
 import { FiLogOut } from "react-icons/fi";
 import { TbUpload } from "react-icons/tb";
+import { getCurrentUser, logOut, updateProfile } from "../services/auth.service";
+import { useNavigate } from "react-router";
 
-function UserProfile() {
+function UserProfile({ onUpdate }) {
   const [isEditing, setIsEditing] = useState(false);
-  const [name, setName] = useState("Shouq Alkanhal");
-  const [email, setEmail] = useState("shouq@gmail.com");
-  const [gender, setGender] = useState("Female");
-  const [country, setCountry] = useState("Saudi Arabia");
-  const [city, setCity] = useState("Riyadh");
-  const [avatar, setAvatar] = useState(
-    "https://plus.unsplash.com/premium_photo-1690407617542-2f210cf20d7e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D"
-  );
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [gender, setGender] = useState("");
+  const [country, setCountry] = useState("");
+  const [city, setCity] = useState("");
+  const [avatar, setAvatar] = useState("https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png");
   const fileInputRef = useRef();
  useEffect(() => {
-    const savedData = JSON.parse(localStorage.getItem("profileData"));
-    if (savedData) {
-      setName(savedData.name || name);
-      setEmail(savedData.email || email);
-      setGender(savedData.gender || gender);
-      setCountry(savedData.country || country);
-      setCity(savedData.city || city);
-      setAvatar(savedData.avatar || avatar);
-    }
+    const fetchUser = async () => {
+      const data = await getCurrentUser();
+      if (data) {
+        setName(data.name || name);
+        setEmail(data.email || email);
+        setGender(data.gender || gender);
+        setCountry(data.country || country);
+        setCity(data.city || city);
+        setAvatar(data.profilePic || avatar);
+      }
+    };
+    fetchUser();
   }, []);
 
-  const handleSave = () => {
+  const handleSave = async () => {
     const data = {
       name,
       email,
@@ -34,19 +37,44 @@ function UserProfile() {
       city,
       avatar,
     };
-    localStorage.setItem("profileData", JSON.stringify(data));
+    try {
+      const updated = await updateProfile(avatar);
+      if (updated?.profilePic) {
+        setAvatar(updated.profilePic);
+      }
+      if (onUpdate) {
+        onUpdate();
+      }
+    } catch (err) {
+      console.error("Failed to update profile", err);
+    }
     setIsEditing(false);
   };
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setAvatar(imageUrl);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setAvatar(reader.result);
+      };
+      reader.readAsDataURL(file);
     }
   };
 
   const toggleEdit = () => {
     setIsEditing((prev) => !prev);
+  };
+
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await logOut();
+      localStorage.removeItem("profileData");
+      navigate("/signin");
+    } catch (err) {
+      console.error("Logout failed", err);
+    }
   };
 
   return (
@@ -81,12 +109,14 @@ function UserProfile() {
       <div className="text-center space-y-1">
         {isEditing ? (
           <>
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="text-xl font-bold text-center text-gray-800 border-b-2 border-blue-400 focus:outline-none"
-            />
+              {/* <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="text-xl font-bold text-center text-gray-800 border-b-2 border-blue-400 focus:outline-none"
+              /> */}
+
+            <h2 className=" text-xl font-bold text-center text-gray-800 border-b-2 border-white focus:outline-none">{name}</h2>
            
           </>
         ) : (
@@ -121,14 +151,14 @@ function UserProfile() {
 
       {/* Button */}
       <button
-        onClick={toggleEdit}
+        onClick={isEditing ? handleSave : toggleEdit}
         className="w-full py-2 mb-3 bg-blue-700 text-white font-semibold rounded-full hover:bg-blue-800 transition duration-200 shadow-md"
       >
         {isEditing ? "Save Profile" : "Edit Profile"}
       </button>
 
       {/* Save Button */}
-      <button className="flex gap-1  justify-center w-full py-2 bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white  px-4 border border-red-500 hover:border-transparent rounded-full">
+      <button onClick={handleLogout} className="flex gap-1  justify-center w-full py-2 bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white  px-4 border border-red-500 hover:border-transparent rounded-full">
         <FiLogOut className="mt-1" /> LogOut
       </button>
     </div>

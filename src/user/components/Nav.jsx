@@ -29,23 +29,28 @@ function Nav() {
   const [showProfile, setShowProfile] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
 
+  const fetchUser = async () => {
+    try {
+      const user = await getCurrentUser();
+      setCurrentUser(user);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const user = await getCurrentUser();
-        setCurrentUser(user);
-      } catch (err) {
-        console.error(err);
-      }
-    };
     fetchUser();
   }, []);
+
+  const handleProfileUpdate = async () => {
+    await fetchUser();
+  };
 
   return (
     <>
       {/* NAVBAR */}
       <Disclosure as="nav" className="bg-white border-b border-gray-300 ">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto py-1 max-w-7xl px-4 sm:px-6 lg:px-4">
           <div className="flex h-16 items-center justify-between">
             <div className="flex w-full justify-between items-center">
               <div className="flex items-center">
@@ -53,7 +58,7 @@ function Nav() {
                   Startup Arena
                 </p> */}
                 <Link to="/">
-                  <img src={fullLogo} alt="" className="h-35" />
+                  <img src={fullLogo} alt="" className="h-15" />
                 </Link>
               </div>
 
@@ -100,7 +105,7 @@ function Nav() {
                         )}
                         <div>
                           <img
-                            src="https://plus.unsplash.com/premium_photo-1690407617542-2f210cf20d7e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D"
+                            src={ currentUser?.profilePic || "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png" }
                             alt="Profile"
                             className="w-10 h-10 rounded-full object-cover ring-4 ring-blue-300 shadow-md"
                           />
@@ -142,8 +147,8 @@ function Nav() {
                   className={classNames(
                     isActive
                       ? "bg-[#1E40AF] text-white"
-                      : "text-gray-800 hover:bg-gray-200 hover:text-[#1E40AF]",
-                    "block rounded-md px-3 py-2 text-base font-medium transition"
+                      : "text-gray-800 hover:bg-gray-200 font-extrabold hover:text-[#1E40AF]",
+                    "block rounded-md px-3 py-2 text-base font-medium transition "
                   )}
                 >
                   {item.name}
@@ -169,7 +174,7 @@ function Nav() {
             >
               <IoClose />
             </button>
-            <UserProfile />
+            <UserProfile onUpdate={handleProfileUpdate} />
           </div>
         </div>
       )}

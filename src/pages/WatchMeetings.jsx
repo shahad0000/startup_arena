@@ -1,116 +1,112 @@
-import React, { useState } from "react"
-
-/* const randomColors = [
-  "bg-blue-200",
-  "bg-green-200",
-  "bg-yellow-200",
-  "bg-pink-200",
-  "bg-purple-200",
-  "bg-teal-200",
-] */
-
-const meetings = [
-  {
-    title: "AI-Powered Customer Service Platform",
-    time: "10:05",
-    name: "shouq",
-  },
-  {
-    title: "Telemedicine Platform for Rural Areas",
-    time: "10:25",
-    name: "shahad",
-  },
-  { title: "Blockchain Payment Gateway", time: "10:40", name: "saad" },
-  {
-    title: "Sustainable Fashion Marketplace",
-    time: "11:20",
-    name: "abdalrman",
-  },
-  { title: "Smart Grid Energy Management", time: "11:35", name: "shouq" },
-  {
-    title: `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sit maxime beatae a consectetur at architecto, provident illo deleniti. Delectus doloribus voluptate sapiente sit at iure earum quo illum libero veniam.`,
-    time: "11:35",
-    name: "shahad",
-  },
-]
-
+import React, { useEffect, useState } from "react";
+import { zoomRecordings } from "../services/zoom.service";
+import { FaFilter } from "react-icons/fa";
+import { FaVideo } from "react-icons/fa";
 const WatchMeetings = () => {
-/*   const [meetingCards] = useState(
-    meetings.map((meeting) => ({
-      ...meeting,
-      color: randomColors[Math.floor(Math.random() * randomColors.length)],
-    }))
-  ) */
+  const [meetings, setMeetings] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [search, setSearch] = useState("");
 
+  useEffect(() => {
+    const loadMeetings = async () => {
+      setLoading(true);
+      setError("");
+      try {
+        const meetingData = await zoomRecordings();
+        setMeetings(meetingData);
+        console.log(meetingData);
+      } catch (err) {
+        console.error("Zoom recordings error:", err);
+        setError("Failed to load meetings.");
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadMeetings();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-[50vh] text-gray-500">
+        Loading meetings...
+      </div>
+    );
+  }
+  const filterMeetings = meetings.filter((meeting) => {
+    return meeting.topic.toLowerCase().includes(search.toLocaleLowerCase());
+  });
+  if (error) {
+    return (
+      <div className="flex justify-center items-center min-h-[50vh] text-red-600">
+        {error}
+      </div>
+    );
+  }
   return (
     <div className="bg-[#FAFAFA] px-4 md:px-8 py-10 text-[#333333]">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-
-        <div className="mb-6 flex flex-col items-center">
-          <h1 className="text-xl font-bold">
-            {" "}
-            <p className="text-2xl font-bold">Watch Meetings</p>
+        <div className="mb-6 text-center">
+          <h1 className="text-3xl font-bold text-gray-900 flex justify-center items-center gap-2">
+            <FaVideo className="text-[#4561bf] text-4xl" />
+            Watch Meetings
           </h1>
-          <p className="text-sm text-gray-500">
-            {" "}
+          <p className="text-sm text-gray-500 mt-2">
             Explore recorded investor meetings and startup pitches
           </p>
+          <hr className="border-t border-gray-200 mt-4 w-12 mx-auto" />
         </div>
-
         {/* Filters Section */}
-    <div className="flex w-full  mb-6 justify-end ">
-  <div className="flex flex-col gap-2 items-start  ">
-   
-    <select
-      id="industry-select"
-      className="border border-[#E0E0E0] rounded-lg px-4 py-2 w-full max-w-xs text-sm text-[#333333]"
-    >
-      <option>All Industries</option>
-      <option>Technology</option>
-      <option>Healthcare</option>
-      <option>Finance</option>
-    </select>
-  </div>
-</div>
-
+        <div className="flex w-full mb-6 justify-end">
+          <div className="flex items-center w-full max-w-sm relative">
+            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[#1E40AF] text-base">
+              <FaFilter />
+            </span>
+            <input
+              type="text"
+              placeholder="Search meetings by topic..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="border border-gray-300 shadow-sm rounded-lg pl-10 pr-4 py-2 w-full text-sm text-gray-800 bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            />
+          </div>
+        </div>
         {/* Meeting Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-y-6 gap-x-4">
-          {meetings.map((meeting, index) => (
+          {filterMeetings.map((meeting, index) => (
             <div
               key={index}
-              className="bg- rounded-xl overflow-hidden shadow-md border border-gray-200 hover:shadow-xl transition duration-300"
+              className="bg-white rounded-xl overflow-hidden shadow-md border border-gray-200 cursor-pointer"
             >
-              <div
-                className={`h-32 w-full bg-black flex items-center justify-center`}
-              >
-                <p className="text-lg font-semibold text-white text-center line-clamp-2 px-4">
-                  {meeting.title}
-                </p>
+              <div className="aspect-video w-full">
+                <div className="relative w-full pb-[56.25%]">
+                  <iframe
+                    src={meeting.share_url}
+                    className="absolute top-0 left-0 w-full h-full rounded-t-xl border-0"
+                    allow="autoplay; fullscreen"
+                    allowFullScreen
+                  ></iframe>
+                </div>
               </div>
 
-              <div className="p-4">
-                <p className="text-sm text-gray-500 text-right mb-2">
-                  {meeting.time}
+              <div className="p-4 bg-white">
+                <p className="text-xs text-gray-500 mb-1">
+                  {new Date(meeting.start_time).toLocaleString()}
                 </p>
-
-                <div className="text-sm font-medium text-gray-700">
-                  by <span className="font-semibold">{meeting.name}</span>
-                </div>
+                <h3 className="text-base font-semibold text-gray-800 truncate">
+                  {meeting.topic}
+                </h3>
               </div>
             </div>
           ))}
         </div>
-
-        {/* Load More Button */}
-       <div className="flex justify-center mt-10">
-        <button className="border border-gray-300 px-6 py-3 rounded-[10px] text-[16px] font-medium focus:ring-opacity-50 transition duration-300 ease-in-out transform hover:scale-105 ">
-          Load More Ideas
-        </button>
-      </div>
+        <div className="flex justify-center mt-10 text-sm text-gray-400 italic">
+          You’ve reached the end. Stay tuned for more!
+        </div>{" "}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default WatchMeetings
+export default WatchMeetings;
