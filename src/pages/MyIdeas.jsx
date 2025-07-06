@@ -80,8 +80,8 @@ export default function MyIdeas() {
                   </button>
                   {activeMenu === idea._id && (
                     <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 shadow-md rounded-md z-10">
-                      <Link className="block w-full px-4 py-2 text-sm text-left hover:bg-gray-1200">View Detail</Link>
-                      <Link className="block w-full px-4 py-2 text-sm text-left hover:bg-gray-100">Analysis</Link>
+                      <Link to={`/detailIdea/${idea._id}`} className="block w-full px-4 py-2 text-sm text-left hover:bg-gray-1200">View Detail</Link>
+                      <Link to={`/IdeaAnalysis/${idea._id}`} className="block w-full px-4 py-2 text-sm text-left hover:bg-gray-100">Analysis</Link>
                       <button className="block w-full px-4 py-2 text-sm text-left text-red-600 hover:bg-gray-100">Delete</button>
                     </div>
                   )}
