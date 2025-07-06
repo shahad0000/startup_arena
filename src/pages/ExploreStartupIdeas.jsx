@@ -59,8 +59,8 @@ export default function AllIdeas() {
       {/* hero section */}
       <div className="flex h-screen justify-between items-center px-8">
         <div className=" flex flex-col gap-2  w-6/12">
-          <p className="text-4xl font-bold font-inter">All Startup Ideas</p>
-          <p className="text-lg text-gray-600 font-inter">
+          <p className="text-4xl font-bold font-inter text-end">All Startup Ideas</p>
+          <p className="text-lg text-end text-gray-600 font-inter">
             Turn your startup ideas into reality by sharing your concepts with a
             vibrant community of innovators, thinkers, and investors. Get
             valuable, constructive feedback to refine your vision, and build
@@ -69,7 +69,7 @@ export default function AllIdeas() {
             founders from across the globe.
           </p>
         </div>
-        <div className="w-6/12 flex justify-center">
+        <div className="w-6/12 flex justify-start ">
           <img src={FindingIdeas} alt="" className="w-100" />
         </div>
       </div>
