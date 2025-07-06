@@ -3,13 +3,13 @@ import { FiLogOut } from "react-icons/fi";
 import { TbUpload } from "react-icons/tb";
 import { getCurrentUser, updateProfile } from "../services/auth.service";
 
-function UserProfile() {
+function UserProfile({ onUpdate }) {
   const [isEditing, setIsEditing] = useState(false);
-  const [name, setName] = useState("Shouq Alkanhal");
-  const [email, setEmail] = useState("shouq@gmail.com");
-  const [gender, setGender] = useState("Female");
-  const [country, setCountry] = useState("Saudi Arabia");
-  const [city, setCity] = useState("Riyadh");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [gender, setGender] = useState("");
+  const [country, setCountry] = useState("");
+  const [city, setCity] = useState("");
   const [avatar, setAvatar] = useState("https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png");
   const fileInputRef = useRef();
  useEffect(() => {
@@ -47,7 +47,13 @@ function UserProfile() {
     };
     localStorage.setItem("profileData", JSON.stringify(data));
     try {
-      await updateProfile(avatar);
+      const updated = await updateProfile(avatar);
+      if (updated?.profilePic) {
+        setAvatar(updated.profilePic);
+      }
+      if (onUpdate) {
+        onUpdate();
+      }
     } catch (err) {
       console.error("Failed to update profile", err);
     }
