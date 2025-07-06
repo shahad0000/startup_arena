@@ -201,12 +201,13 @@ export default function IdeaDetails() {
             <div className="border border-gray-100 rounded p-4 text-sm text-gray-700 flex-1 whitespace-pre-line">
               {idea.description}
               <p className="mt-2 text-blue-800 ">
-                <Link
-                  to={idea.mvpLink || "#"}
+                <a
+                href={idea.mvpLink || "#"}
+                  target="_blank"
                   className="flex gap-1 text-blue-800 hover:underline"
                 >
                   <GoLinkExternal className="mt-1" /> MVP Document
-                </Link>
+                </a>
               </p>
             </div>
 
