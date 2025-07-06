@@ -45,7 +45,7 @@ function Nav() {
     <>
       {/* NAVBAR */}
       <Disclosure as="nav" className="bg-white border-b border-gray-300 ">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto py-1 max-w-7xl px-4 sm:px-6 lg:px-4">
           <div className="flex h-16 items-center justify-between">
             <div className="flex w-full justify-between items-center">
               <div className="flex items-center">
@@ -53,7 +53,7 @@ function Nav() {
                   Startup Arena
                 </p> */}
                 <Link to="/">
-                  <img src={fullLogo} alt="" className="h-35" />
+                  <img src={fullLogo} alt="" className="h-15" />
                 </Link>
               </div>
 
@@ -142,8 +142,8 @@ function Nav() {
                   className={classNames(
                     isActive
                       ? "bg-[#1E40AF] text-white"
-                      : "text-gray-800 hover:bg-gray-200 hover:text-[#1E40AF]",
-                    "block rounded-md px-3 py-2 text-base font-medium transition"
+                      : "text-gray-800 hover:bg-gray-200 font-extrabold hover:text-[#1E40AF]",
+                    "block rounded-md px-3 py-2 text-base font-medium transition "
                   )}
                 >
                   {item.name}
