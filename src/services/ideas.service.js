@@ -26,3 +26,17 @@ export const fetchUserVote = async (userId, ideaId) => {
   const res = await axios.get(`${API}/ideas/${ideaId}/votes/user/${userId}`);
   return res.data.value; 
 };
+
+export const submitIdea = async (ideaData) => {
+  const res = await axios.post(`${API}/ideas`, ideaData, {
+    withCredentials: true,
+  });
+  return res.data;
+};
+
+export const fetchMyIdeas = async () => {
+  const res = await axios.get(`${API}/users/myIdeas`, {
+    withCredentials: true,
+  });
+  return res.data.data;
+};
