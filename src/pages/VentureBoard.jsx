@@ -18,7 +18,6 @@ function VentureBoard() {
         ]);
         setIdeas(ventureData.data);
         setCurrentUser(userData);
-
       } catch (err) {
         console.error(err);
       } finally {
@@ -29,11 +28,17 @@ function VentureBoard() {
   }, []);
 
   if (loading)
-    return <p className="p-6 text-center">Loading Venture Board...</p>;
+    return (
+      <div class="flex justify-center items-center gap-2 min-h-screen min-w-screen">
+        <div class="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.7s]"></div>
+        <div class="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.3s]"></div>
+        <div class="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.7s]"></div>
+      </div>
+    );
 
   return (
-    <>
-      <div className="bg-[#FAFAFA] px-4 md:px-8 py-10 text-[#333333]">
+    <div className="min-h-screen">
+      <div className="bg-[#FAFAFA] px-4  md:px-8 py-10 text-[#333333]">
         {/* Header */}
         <div className="text-center mb-10">
           <h1 className="text-[28px] font-bold font-inter">
@@ -71,7 +76,7 @@ function VentureBoard() {
         </div>
         <IdeaCard ideas={ideas} userRole={currentUser?.role} />
       </div>
-    </>
+    </div>
   );
 }
 

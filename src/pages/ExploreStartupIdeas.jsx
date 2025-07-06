@@ -59,7 +59,9 @@ export default function AllIdeas() {
       {/* hero section */}
       <div className="flex h-screen justify-between items-center px-8">
         <div className=" flex flex-col gap-2  w-6/12">
-          <p className="text-4xl font-bold font-inter text-end">All Startup Ideas</p>
+          <p className="text-4xl font-bold font-inter text-end">
+            All Startup Ideas
+          </p>
           <p className="text-lg text-end text-gray-600 font-inter">
             Turn your startup ideas into reality by sharing your concepts with a
             vibrant community of innovators, thinkers, and investors. Get
@@ -117,7 +119,11 @@ export default function AllIdeas() {
         {/* Content */}
         <div className="p-2  border-gray-400  rounded-lg ">
           {loading ? (
-            <p className="text-center text-sm">Loading ideas...</p>
+            <div class="flex justify-center items-center gap-2 min-h-screen min-w-screen">
+              <div class="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.7s]"></div>
+              <div class="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.3s]"></div>
+              <div class="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.7s]"></div>
+            </div>
           ) : error ? (
             <p className="text-center text-gray-500">{error}</p>
           ) : ideas.length === 0 ? (

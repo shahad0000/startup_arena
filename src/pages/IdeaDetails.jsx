@@ -167,7 +167,14 @@ export default function IdeaDetails() {
     }
   };
 
-  if (loading) return <p className="p-6">Loading idea...</p>;
+  if (loading)
+    return (
+      <div class="flex justify-center items-center gap-2 min-h-screen min-w-screen">
+        <div class="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.7s]"></div>
+        <div class="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.3s]"></div>
+        <div class="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.7s]"></div>
+      </div>
+    );
   if (error) return <p className="p-6 text-red-500">{error}</p>;
   if (!idea) return <p className="p-6">Idea not found.</p>;
 
@@ -202,7 +209,7 @@ export default function IdeaDetails() {
               {idea.description}
               <p className="mt-2 text-blue-800 ">
                 <a
-                href={idea.mvpLink || "#"}
+                  href={idea.mvpLink || "#"}
                   target="_blank"
                   className="flex gap-1 text-blue-800 hover:underline"
                 >
