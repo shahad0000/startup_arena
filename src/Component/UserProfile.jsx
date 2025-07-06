@@ -6,6 +6,7 @@ import { HiOutlineGlobe } from "react-icons/hi";
 import { MdLocationPin } from "react-icons/md";
 import { PiGenderFemale } from "react-icons/pi"
 import { TbUpload } from "react-icons/tb";
+import { getCurrentUser, updateProfile } from "../services/auth.service";
 
 function UserProfile() {
   const [isEditing, setIsEditing] = useState(false);
@@ -14,9 +15,7 @@ function UserProfile() {
   const [gender, setGender] = useState("Female");
   const [country, setCountry] = useState("Saudi Arabia");
   const [city, setCity] = useState("Riyadh");
-  const [avatar, setAvatar] = useState(
-    "https://plus.unsplash.com/premium_photo-1690407617542-2f210cf20d7e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D"
-  );
+  const [avatar, setAvatar] = useState("https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png");
   const fileInputRef = useRef();
  useEffect(() => {
     const savedData = JSON.parse(localStorage.getItem("profileData"));
@@ -28,9 +27,21 @@ function UserProfile() {
       setCity(savedData.city || city);
       setAvatar(savedData.avatar || avatar);
     }
+    const fetchUser = async () => {
+      const data = await getCurrentUser();
+      if (data) {
+        setName(data.name || savedData?.name || name);
+        setEmail(data.email || savedData?.email || email);
+        setGender(data.gender || savedData?.gender || gender);
+        setCountry(data.country || savedData?.country || country);
+        setCity(data.city || savedData?.city || city);
+        setAvatar(data.profilePic || savedData?.avatar || avatar);
+      }
+    };
+    fetchUser();
   }, []);
 
-  const handleSave = () => {
+  const handleSave = async () => {
     const data = {
       name,
       email,
@@ -40,13 +51,21 @@ function UserProfile() {
       avatar,
     };
     localStorage.setItem("profileData", JSON.stringify(data));
+    try {
+      await updateProfile(avatar);
+    } catch (err) {
+      console.error("Failed to update profile", err);
+    }
     setIsEditing(false);
   };
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setAvatar(imageUrl);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setAvatar(reader.result);
+      };
+      reader.readAsDataURL(file);
     }
   };
 
@@ -126,7 +145,7 @@ function UserProfile() {
 
       {/* Button */}
       <button
-        onClick={toggleEdit}
+        onClick={isEditing ? handleSave : toggleEdit}
         className="w-full py-2 mb-3 bg-blue-700 text-white font-semibold rounded-full hover:bg-blue-800 transition duration-200 shadow-md"
       >
         {isEditing ? "Save Profile" : "Edit Profile"}

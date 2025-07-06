@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaChevronDown } from "react-icons/fa";
 import {
   Disclosure,
@@ -12,6 +12,7 @@ import { Link, useLocation } from "react-router";
 import UserProfile from "../../Component/UserProfile";
 import { IoClose } from "react-icons/io5";
 import { fullLogo } from "../../public/ExporImage";
+import { getCurrentUser } from "../../services/auth.service";
 
 const navigation = [
   { name: "Explore", to: "/AllIdeas" },
@@ -27,7 +28,17 @@ function classNames(...classes) {
 function Nav() {
   const location = useLocation();
   const [showProfile, setShowProfile] = useState(false);
-  const [user] = useState({ role: "founder" });
+
+  const [user, setUser] = useState(null)
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const data = await getCurrentUser()
+      setUser(data)
+    }
+    fetchUser()
+  }, [])
+
   return (
     <>
       {/* NAVBAR */}
@@ -85,7 +96,7 @@ function Nav() {
                         </div>
                       )}
                       <img
-                        src="https://plus.unsplash.com/premium_photo-1690407617542-2f210cf20d7e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D"
+                        src={user?.profilePic || "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png"}
                         alt="Profile"
                         className="w-10 h-10 rounded-full object-cover ring-4 ring-blue-300 shadow-md"
                       />
@@ -131,12 +142,20 @@ function Nav() {
                 </Link>
               );
             })}
-            <Link
+            {/* <Link
               to={"/submitIdea"}
               className="bg-yellow-400 text-white px-1 py-2  text-sm rounded-md hover:bg-yellow-500"
             >
               Add Idea +
-            </Link>
+            </Link> */}
+            {user?.role === "founder" && (
+              <Link
+                to={"/submitIdea"}
+                className="bg-yellow-400 text-white px-1 py-2  text-sm rounded-md hover:bg-yellow-500"
+              >
+                Add Idea +
+              </Link>
+            )}
           </div>
         </DisclosurePanel>
       </Disclosure>

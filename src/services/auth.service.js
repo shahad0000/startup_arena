@@ -40,3 +40,15 @@ export const getCurrentUser = async () => {
     return null;
   }
 };
+
+// profilePic
+export const updateProfile = async (profilePic) => {
+  // console.log(profilePic)
+  const response = await axios.put(
+    `${API}/users/updateProfile`,
+    { profilePic },
+    { withCredentials: true }
+  );
+  console.log(response.data)
+  return response.data;
+};
