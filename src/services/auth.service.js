@@ -40,3 +40,12 @@ export const getCurrentUser = async () => {
     return null;
   }
 };
+
+
+export const logOut = async () => {
+  try {
+    const res = await axios.post(`${API}/auth/signout`)
+  } catch (err) {
+    console.error(err)
+  }
+}
