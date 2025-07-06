@@ -85,7 +85,7 @@ export default function AllIdeas() {
         </div>
 
         {/* Content */}
-        <div className="p-2 shadow-2xl border-gray-400 bg-white rounded-lg ">
+        <div className="p-2  border-gray-400  rounded-lg ">
           {loading ? (
             <p className="text-center text-sm">Loading ideas...</p>
           ) : error ? (

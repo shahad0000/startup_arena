@@ -37,7 +37,7 @@ export default function IdeaDetails() {
     duration: 30,
     isPrivate: false,
   });
-  const [score, setScore] = useState(100);
+  const [score, setScore] = useState(55);
 
   const handleSubmitMeeting = async (e) => {
     e.preventDefault();
