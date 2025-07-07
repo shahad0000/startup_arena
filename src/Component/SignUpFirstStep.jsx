@@ -31,7 +31,7 @@ function SignUpFirstStep({ formData = {}, setFormData, onNext }) {
   </div>
 
   {/* signup steps */}
-  <div className="flex justify-center items-center gap-4 mb-6">
+  {/* <div className="flex justify-center items-center gap-4 mb-6">
     <div className="py-1 px-1 rounded-full bg-[#1E40AF]">
       <p className="py-2 px-4 rounded-full bg-[#1E40AF] text-lg font-bold text-white">1</p>
     </div>
@@ -39,10 +39,10 @@ function SignUpFirstStep({ formData = {}, setFormData, onNext }) {
     <div className="py-1 px-1 rounded-full bg-[#1E40AF]">
       <p className="py-2 px-4 rounded-full bg-white text-lg font-bold text-black">2</p>
     </div>
-  </div>
+  </div> */}
 
   {/* form + image section */}
-  <div className="flex flex-col lg:flex-row items-center justify-center gap-10 w-full max-w-6xl bg-white p-6 rounded-lg shadow">
+  <div className="flex flex-col lg:flex-row items-center justify-center gap-10 w-full max-w-6xl  p-6 rounded-lg ">
     
     {/* Image */}
     <img

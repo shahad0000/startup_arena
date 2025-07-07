@@ -71,7 +71,8 @@ export const IdeaCard = ({ ideas = [], userRole }) => {
               </span>
             </div>
 
-            <div className="text-[18px] font-semibold mb-2">{idea.title}</div>
+            <div className="text-[18px] font-semibold mb-2"> <Link           to={`/detailIdea/${idea._id}`}
+> {idea.title}</Link></div>
 
             <p className="text-[14px] text-[#666666] line-clamp-3">
               {idea.description}

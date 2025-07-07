@@ -3,8 +3,15 @@ import axios from "axios";
 const API = import.meta.env.VITE_API_URL;
 
 export const scheduleMeeting = async (data) => {
-  const response = await axios.post(`${API}/zoom/create-meeting`, data, {
+  const res = await axios.post(`${API}/zoom/create-meeting`, data, {
     withCredentials: true,
   });
-  return response.data;
+  return res.data;
 };
+
+export const zoomRecordings = async () => {
+  const res = await axios.get(`${API}/zoom/recordings`);
+  console.log(res)
+  return res.data;
+};
+

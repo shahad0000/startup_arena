@@ -17,7 +17,7 @@ function SignUpSecondStep({ formData, setFormData, onBack, onSubmit }) {
   </div>
 
   {/* signup steps */}
-  <div className="flex justify-center items-center gap-4 mb-6">
+  {/* <div className="flex justify-center items-center gap-4 mb-6">
     <div className="p-1 rounded-full bg-[#1E40AF]">
       <div className="p-2 rounded-full bg-[#1E40AF] text-white text-lg font-bold">
         <FaCheck size={18} />
@@ -27,10 +27,10 @@ function SignUpSecondStep({ formData, setFormData, onBack, onSubmit }) {
     <div className="p-1 rounded-full bg-[#1E40AF]">
       <p className="py-2 px-4 rounded-full bg-[#1E40AF] text-lg font-bold text-white">2</p>
     </div>
-  </div>
+  </div> */}
 
   {/* image + form section */}
-  <div className="flex flex-col lg:flex-row justify-center items-center gap-10 bg-white p-6 rounded-lg shadow-md w-full max-w-5xl">
+  <div className="flex flex-col lg:flex-row justify-center items-center gap-10  p-6 rounded-lg  w-full max-w-5xl">
     {/* image */}
     <img src={investmentIdea} alt="Investment"   className="hidden lg:block h-40 sm:h-60 md:h-80 object-contain"
  />

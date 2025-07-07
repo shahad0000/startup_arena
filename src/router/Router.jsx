@@ -19,7 +19,9 @@ import Support from "../user/components/Support"
 import Footer from "../user/components/Footer"
 import VentureBoard from "../pages/VentureBoard"
 import NavAdmin from "../admin/pages/NavAdmin"
-
+import Landing from "../pages/Landing"
+import ReportManagement from "../admin/pages/ReportManagement"
+import ErorrPage from "../pages/ErorrPage"
 
 
 
@@ -51,6 +53,7 @@ const router = createBrowserRouter([
       { path: "/IdeaAnalysis/:id", element: <IdeaAnalysis /> },
       { path: "/detailIdea/:id", element: <IdeaDetails /> },
       { path: "/watchMeeting", element: <WatchMeetings /> },
+{ path: "*", element: <ErorrPage /> },
       //{ path: "/profile", element: <UserProfile/> },
     ],
   },
@@ -61,12 +64,13 @@ const router = createBrowserRouter([
       { index: true, element: <AdminLogin /> },
       { path: "adminDashboard", element: <AdminDashboard /> },
       { path: "manageComments", element: <ManageComments /> },
+      { path: "manageReport", element: <ReportManagement/>},
     ],
   },
   {
     path: "/",
     children: [
-      { index: true, path: "/", element: <LandingPage /> },
+      { index: true, path: "/", element: <Landing /> },
       { path: "/signup", element: <SignUpForm /> },
       { path: "/signin", element: <SignIn /> },
       { path: "admin", element:  <AdminLogin />   },

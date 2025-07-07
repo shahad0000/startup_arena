@@ -25,7 +25,7 @@ export default function RequestMeetingModal({
         </div>
 
         <form onSubmit={onSubmit} className="space-y-4">
-          <div>
+          <div className="flex flex-col gap-2">
             <label className="block text-sm font-medium">Topic</label>
             <input
               type="text"
@@ -38,7 +38,7 @@ export default function RequestMeetingModal({
             />
           </div>
 
-          <div>
+          <div className="flex flex-col gap-2">
             <label className="block text-sm font-medium">Date & Time</label>
             <input
               type="datetime-local"
@@ -50,7 +50,7 @@ export default function RequestMeetingModal({
             />
           </div>
 
-          <div>
+          <div className="flex flex-col gap-2">
             <label className="block text-sm font-medium">
               Duration (minutes)
             </label>

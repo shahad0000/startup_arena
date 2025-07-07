@@ -40,3 +40,11 @@ export const fetchMyIdeas = async () => {
   });
   return res.data.data;
 };
+
+export const fetchIdeaAnalytics = async (ideaId) => {
+  const res = await axios.get(`${API}/ideas/analytics/${ideaId}`, { // //:id
+    withCredentials: true,
+  });
+  console.log(res.data)
+  return res.data;
+};
