@@ -100,16 +100,14 @@ export default function AllIdeas() {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              <option value="recent">Recently Added</option>
+className=" text-sm px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"            >
+              <option value="recent" >Recently Added</option>
               <option value="oldest">Oldest</option>
             </select>
             <select
               value={voteSort}
               onChange={(e) => setVoteSort(e.target.value)}
-              className="border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
+className=" text-sm px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"            >
               <option value="popular">Most Upvoted</option>
               <option value="least">Least Upvoted</option>
             </select>

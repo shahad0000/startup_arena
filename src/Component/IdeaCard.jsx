@@ -110,14 +110,7 @@ export const IdeaCard = ({ ideas = [], userRole }) => {
             </div>
           </div>
         ))}
-      </div>
-
-      {/* Load More */}
-      <div className="flex justify-center mt-10">
-        <button className="border border-gray-300 px-6 py-3 rounded-[10px] text-[16px] font-medium focus:ring-opacity-50 transition duration-300 ease-in-out transform hover:scale-105">
-          Load More Ideas
-        </button>
-      </div>
+      </div>     
 
       {/* Modal */}
       <RequestMeetingModal
