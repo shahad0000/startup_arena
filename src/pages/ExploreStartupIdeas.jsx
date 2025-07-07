@@ -55,7 +55,7 @@ export default function AllIdeas() {
     });
 
   return (
-    <div className="min-h-screen min-w-screen bg-radial-[at_50%_75%] from-sky-200 via-blue-100 to-white to-90% font-ibm  text-[#333333]">
+    <div className="min-h-screen max-w-screen bg-radial-[at_50%_75%] from-sky-200 via-blue-100 to-white to-90%   text-[#333333]">
       {/* hero section */}
       <div className="flex h-screen justify-between items-center px-8">
         <div className=" flex flex-col gap-2  w-6/12">
@@ -84,7 +84,7 @@ export default function AllIdeas() {
           Discover innovative startup ideas from founders worldwide
         </p>
         {/* Filters Row */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4 bg-white p-4 rounded-xl shadow-sm mb-10">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4 bg-white p-4 rounded-xl shadow-sm mb-5">
           <div className="relative w-full md:w-1/3">
             <IoSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
             <input

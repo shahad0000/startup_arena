@@ -29,7 +29,7 @@ function VentureBoard() {
 
   if (loading)
     return (
-      <div class="flex justify-center items-center gap-2 min-h-screen min-w-screen bg-radial-[at_50%_75%] from-sky-200 via-blue-100 to-white to-90%">
+      <div class="flex justify-center items-center gap-2 min-h-screen max-w-screen bg-radial-[at_50%_75%] from-sky-200 via-blue-100 to-white to-90%">
         <div class="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.7s]"></div>
         <div class="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.3s]"></div>
         <div class="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.7s]"></div>
@@ -37,7 +37,7 @@ function VentureBoard() {
     );
 
   return (
-    <div className="min-h-screen min-w-screen bg-radial-[at_50%_75%] from-sky-200 via-blue-100 to-white to-90% font-ibm  text-[#333333]">
+    <div className="min-h-screen max-w-screen bg-radial-[at_50%_75%] from-sky-200 via-blue-100 to-white to-90% font-ibm  text-[#333333]">
       <div className=" px-4  md:px-8 py-10 text-[#333333]">
         {/* Header */}
         <div className="text-center mb-10">
@@ -51,7 +51,7 @@ function VentureBoard() {
         </div>
 
         {/* Filters Row */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4 bg-white p-4 rounded-xl shadow-sm mb-10">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4 bg-white p-4 rounded-xl shadow-sm mb-5">
           <div className="relative w-full md:w-1/3">
             <span className="absolute left-3 top-2.5 text-[#888888]">
               <IoSearch />

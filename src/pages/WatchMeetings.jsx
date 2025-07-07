@@ -29,7 +29,7 @@ const WatchMeetings = () => {
 
   if (loading) {
     return (
-      <div class="flex justify-center items-center gap-2 min-h-screen min-w-screen bg-radial-[at_50%_75%] from-sky-200 via-blue-100 to-white to-90%">
+      <div class="flex justify-center items-center gap-2 min-h-screen min-w-screen">
         <div class="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.7s]"></div>
         <div class="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.3s]"></div>
         <div class="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.7s]"></div>
@@ -47,7 +47,7 @@ const WatchMeetings = () => {
     );
   }
   return (
-    <div className="min-h-screen min-w-screen bg-radial-[at_50%_75%] from-sky-200 via-blue-100 to-white to-90% font-ibm  text-[#333333] py-10">
+    <div className="min-h-screen max-w-screen px-5 bg-radial-[at_50%_75%] from-sky-200 via-blue-100 to-white to-90% font-ibm  text-[#333333] py-10">
       <div className="max-w-7xl mx-auto ">
         {/* Header */}
         <div className="mb-6 text-center">
@@ -61,7 +61,7 @@ const WatchMeetings = () => {
           <hr className="border-t border-gray-200 mt-4 w-12 mx-auto" />
         </div>
         {/* Filters Section */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4 bg-white p-4 rounded-xl shadow-sm mb-10">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4 bg-white p-4 rounded-xl shadow-sm mb-5">
           <div className="relative w-full md:w-1/3">
             <IoSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
             <input

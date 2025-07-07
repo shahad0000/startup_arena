@@ -49,8 +49,8 @@ function Nav() {
   return (
     <>
       {/* NAVBAR */}
-      <Disclosure as="nav" className="bg-white border-b border-gray-300 ">
-        <div className="mx-auto py-1 max-w-7xl px-4 sm:px-6 lg:px-4">
+      <Disclosure as="nav" className="bg-white border-b border-gray-300  max-w-screen">
+        <div className=" py-1 max-w-7xl px-4 sm:px-6 lg:px-4 ">
           <div className="flex h-16 items-center justify-between">
             <div className="flex w-full justify-between items-center">
               <div className="flex items-center">
@@ -103,7 +103,7 @@ function Nav() {
                             </Link>
                           </div>
                         )}
-                        <div>
+                        <div className="w-10">
                           <img
                             src={ currentUser?.profilePic || "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png" }
                             alt="Profile"
