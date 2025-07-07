@@ -58,11 +58,14 @@ export default function AllIdeas() {
     <div className="min-h-screen max-w-screen bg-radial-[at_50%_75%] from-sky-200 via-blue-100 to-white to-90%   text-[#333333]">
       {/* hero section */}
       <div className="flex h-screen justify-center items-center px-8">
-        <div className=" flex flex-col justify-end items-end gap-2  w-6/12">
-          <p className="text-4xl font-bold font-inter text-end w-100">
+        <div className="w-6/12 flex justify-end ">
+          <img src={FindingIdeas} alt="" className="w-100" />
+        </div>
+        <div className=" flex flex-col justify-start items-start gap-2  w-6/12">
+          <p className="text-4xl font-bold font-inter text-start w-100">
             All Startup Ideas
           </p>
-          <p className="text-lg text-end text-gray-600 font-inter w-100">
+          <p className="text-lg text-start text-gray-600 font-inter w-100">
             Turn your startup ideas into reality by sharing your concepts with a
             vibrant community of innovators, thinkers, and investors. Get
             valuable, constructive feedback to refine your vision, and build
@@ -70,9 +73,6 @@ export default function AllIdeas() {
             Discover a world of innovation through startup ideas submitted by
             founders from across the globe.
           </p>
-        </div>
-        <div className="w-6/12 flex justify-start ">
-          <img src={FindingIdeas} alt="" className="w-100" />
         </div>
       </div>
 
