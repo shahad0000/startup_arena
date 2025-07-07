@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import { zoomRecordings } from "../services/zoom.service";
 import { FaFilter } from "react-icons/fa";
 import { FaVideo } from "react-icons/fa";
+import { IoSearch } from "react-icons/io5";
 const WatchMeetings = () => {
   const [meetings, setMeetings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [search, setSearch] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const loadMeetings = async () => {
@@ -36,7 +37,7 @@ const WatchMeetings = () => {
     );
   }
   const filterMeetings = meetings.filter((meeting) => {
-    return meeting.topic.toLowerCase().includes(search.toLocaleLowerCase());
+    return meeting.topic.toLowerCase().includes(searchTerm.toLocaleLowerCase());
   });
   if (error) {
     return (
@@ -47,7 +48,7 @@ const WatchMeetings = () => {
   }
   return (
     <div className="min-h-screen min-w-screen bg-radial-[at_50%_75%] from-sky-200 via-blue-100 to-white to-90% font-ibm  text-[#333333] py-10">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto ">
         {/* Header */}
         <div className="mb-6 text-center">
           <h1 className="text-3xl font-bold text-gray-900 flex justify-center items-center gap-2">
@@ -60,17 +61,15 @@ const WatchMeetings = () => {
           <hr className="border-t border-gray-200 mt-4 w-12 mx-auto" />
         </div>
         {/* Filters Section */}
-        <div className="flex w-full mb-6 justify-end">
-          <div className="flex items-center w-full max-w-sm relative">
-            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[#1E40AF] text-base">
-              <FaFilter />
-            </span>
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4 bg-white p-4 rounded-xl shadow-sm mb-10">
+          <div className="relative w-full md:w-1/3">
+            <IoSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
             <input
               type="text"
-              placeholder="Search meetings by topic..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="border border-gray-300 shadow-sm rounded-lg pl-10 pr-4 py-2 w-full text-sm text-gray-800 bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              placeholder="Search ideas..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full pl-10 pr-4 py-2 border outline-none border-[#969595] rounded-lg text-sm "
             />
           </div>
         </div>
@@ -85,7 +84,7 @@ const WatchMeetings = () => {
                 <div className="relative w-full pb-[56.25%]">
                   <iframe
                     src={meeting.share_url}
-                    className="absolute top-0 left-0 w-full h-full rounded-t-xl border-0"
+                    className="absolute top-0 left-0 w-full h-full rounded-t-xl border-0 scrollbar-none overflow-hidden"
                     allow="autoplay; fullscreen"
                     allowFullScreen
                   ></iframe>
@@ -105,7 +104,7 @@ const WatchMeetings = () => {
         </div>
         <div className="flex justify-center mt-10 text-sm text-gray-400 italic">
           You’ve reached the end. Stay tuned for more!
-        </div>{" "}
+        </div>
       </div>
     </div>
   );
