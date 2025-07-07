@@ -50,7 +50,7 @@ export const IdeaCard = ({ ideas = [], userRole }) => {
 
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-y-6 gap-x-4">
+      <div className="grid grid-cols-1 md:grid-cols-1 gap-y-6 gap-x-4">
         {ideas.map((idea) => (
           <div
             key={idea._id}
