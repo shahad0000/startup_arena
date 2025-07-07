@@ -16,7 +16,6 @@ const WatchMeetings = () => {
       try {
         const meetingData = await zoomRecordings();
         setMeetings(meetingData);
-        console.log(meetingData);
       } catch (err) {
         console.error("Zoom recordings error:", err);
         setError("Failed to load meetings.");

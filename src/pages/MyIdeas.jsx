@@ -50,10 +50,10 @@ export default function MyIdeas() {
       </div>
 
       {loading ? (
-        <div class="flex justify-center items-center gap-2 min-h-screen max-w-screen ">
-          <div class="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.7s]"></div>
-          <div class="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.3s]"></div>
-          <div class="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.7s]"></div>
+        <div className="flex justify-center items-center gap-2 min-h-screen max-w-screen ">
+          <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.7s]"></div>
+          <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.3s]"></div>
+          <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.7s]"></div>
         </div>
       ) : error ? (
         <p className="text-center text-red-500 text-sm">{error}</p>
@@ -68,12 +68,12 @@ export default function MyIdeas() {
             >
               <div>
                 <div className="flex gap-2 ">
-                  <h4 className="font-medium text-base mb-1">{idea.title}</h4>{" "}
+                  <h4 className="font-medium text-base mb-1">{idea.title}</h4>
                   <span className="flex items-center text-amber-400 font-medium">
                     <GoArrowUp className="mr-1" /> {idea.totalUpvotes}
                   </span>
                 </div>
-                <p className="text-sm text-gray-600 mb-2">{idea.description}</p>
+                <p className="text-sm text-gray-600 mb-2 whitespace-pre-line">{idea.description}</p>
                 <div className="flex items-center gap-2 text-sm">
                   {idea.category && (
                     <span

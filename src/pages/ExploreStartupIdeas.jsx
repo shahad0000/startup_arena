@@ -117,10 +117,10 @@ className=" text-sm px-4 py-2 rounded-full border border-gray-300 focus:outline-
         {/* Content */}
         <div className="  border-gray-400  rounded-lg ">
           {loading ? (
-            <div class="flex justify-center items-center gap-2 min-h-screen min-w-screen ">
-              <div class="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.7s]"></div>
-              <div class="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.3s]"></div>
-              <div class="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.7s]"></div>
+            <div className="flex justify-center items-center gap-2 min-h-screen min-w-screen ">
+              <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.7s]"></div>
+              <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.3s]"></div>
+              <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.7s]"></div>
             </div>
           ) : error ? (
             <p className="text-center text-gray-500">{error}</p>

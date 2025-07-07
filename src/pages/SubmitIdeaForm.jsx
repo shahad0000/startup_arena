@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { SubmitIdea } from "../public/ExporImage";
 import { useNavigate } from "react-router";
 import { submitIdea } from "../services/ideas.service";
 
@@ -11,7 +10,7 @@ export default function SubmitIdeaForm() {
     description: "",
     mvpLink: "",
     category: "",
-    country: "",
+    targetMarket: "",
   });
 
   const [error, setError] = useState(null);
@@ -123,8 +122,8 @@ export default function SubmitIdeaForm() {
                 Target Market <span className="text-red-500">*</span>
               </label>
               <select
-                name="country"
-                value={formData.country}
+                name="targetMarket"  
+                value={formData.targetMarket}
                 onChange={handleChange}
                 required
                 className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -153,7 +152,8 @@ export default function SubmitIdeaForm() {
               value={formData.description}
               onChange={handleChange}
               placeholder="Minimum 1000 characters"
-              maxLength={1000}
+              minLength={800}
+              maxLength={2500}
               required
               rows={6}
               className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
