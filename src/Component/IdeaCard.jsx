@@ -71,8 +71,9 @@ export const IdeaCard = ({ ideas = [], userRole }) => {
               </span>
             </div>
 
-            <div className="text-[18px] font-semibold mb-2"> <Link           to={`/detailIdea/${idea._id}`}
-> {idea.title}</Link></div>
+            <div className="text-[18px] font-semibold mb-2">
+              <Link to={`/detailIdea/${idea._id}`}> {idea.title}</Link>
+            </div>
 
             <p className="text-[14px] text-[#666666] line-clamp-3">
               {idea.description}
@@ -97,12 +98,12 @@ export const IdeaCard = ({ ideas = [], userRole }) => {
               {userRole === "investor" && (
                 <div>
                   <button
-                    onClick={() => { 
+                    onClick={() => {
                       setIdeaId(idea._id);
                       openModal();
                     }}
                     className="mt-4 bg-[#1E40AF] text-white px-4 py-2 rounded hover:bg-[#1e40afc6] w-full"
-                  >
+                  > 
                     Request Meeting
                   </button>
                 </div>
