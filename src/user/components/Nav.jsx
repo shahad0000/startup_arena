@@ -57,7 +57,7 @@ function Nav() {
                 {/* <p className="text-2xl font-bold text-[#1E40AF]">
                   Startup Arena
                 </p> */}
-                <Link to="/">
+                <Link to="/AllIdeas">
                   <img src={fullLogo} alt="" className="h-15" />
                 </Link>
               </div>
@@ -97,7 +97,7 @@ function Nav() {
                           <div>
                             <Link
                               to={"/submitIdea"}
-                              className="bg-[#1E40AF] text-white px-4 py-2 text-sm rounded-md font-medium hover:bg-blue-900"
+                              className="hidden md:flex bg-[#1E40AF] text-white px-4 py-2 text-sm rounded-md font-medium hover:bg-blue-900"
                             >
                               Add Idea +
                             </Link>
@@ -157,7 +157,7 @@ function Nav() {
             })}
             <Link
               to={"/submitIdea"}
-              className="bg-yellow-400 text-white px-1 py-2  text-sm rounded-md hover:bg-yellow-500"
+              className="bg-[#1E40AF] text-white px-1 py-2  text-sm rounded-md hover:bg-yellow-500"
             >
               Add Idea +
             </Link>
