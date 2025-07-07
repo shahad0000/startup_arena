@@ -92,7 +92,14 @@ export default function IdeaAnalysisPage() {
     loadAnalytics();
   }, [id]);
 
-  if (loading) return <p className="p-6">Loading analytics...</p>;
+    if (loading)
+    return (
+      <div class="flex justify-center items-center gap-2 min-h-screen min-w-screen bg-radial-[at_50%_75%] from-sky-200 via-blue-100 to-white to-90%">
+        <div class="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.7s]"></div>
+        <div class="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.3s]"></div>
+        <div class="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.7s]"></div>
+      </div>
+    );
   if (error) return <p className="p-6 text-red-500">{error}</p>;
   if (!idea) return <p className="p-6">Idea not found.</p>;
 
