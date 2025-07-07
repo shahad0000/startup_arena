@@ -1,47 +1,50 @@
-import React, { useEffect, useState } from "react";
-import { GoLinkExternal } from "react-icons/go";
+import { useEffect, useState } from "react";
+import RequestMeetingModal from "../Component/RequestMeetingModal";
 import { useParams, Link } from "react-router";
+
+// services
+import { fetchIdeaById } from "../services/ideas.service";
+import { fetchUserVote } from "../services/ideas.service";
+import { voteIdea } from "../services/ideas.service";
+import { fetchCommentsByIdeaId, postComment } from "../services/comments.service";
+import { voteOnComment } from "../services/comments.service";
+import { getCurrentUser } from "../services/auth.service";
+import { scheduleMeeting } from "../services/zoom.service";
+import { getUserById } from "../services/users.service";
+
+// icons
+import { GoLinkExternal } from "react-icons/go";
 import { CiCalendar } from "react-icons/ci";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
 import { RiSendPlaneFill } from "react-icons/ri";
 import { IoIosArrowBack } from "react-icons/io";
-import { fetchIdeaById } from "../services/ideas.service";
-import {
-  fetchCommentsByIdeaId,
-  postComment,
-} from "../services/comments.service";
-import { voteIdea } from "../services/ideas.service";
-import { getCurrentUser } from "../services/auth.service";
-import { fetchUserVote } from "../services/ideas.service";
-import { voteOnComment } from "../services/comments.service";
-import RequestMeetingModal from "../Component/RequestMeetingModal";
-import { scheduleMeeting } from "../services/zoom.service";
 import { FaStar } from "react-icons/fa";
 import { IoCalendarOutline } from "react-icons/io5";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 
 export default function IdeaDetails() {
+
   const { id } = useParams();
-  const [idea, setIdea] = useState(null);
+  const [idea, setIdea] = useState(null); // holds the fetched idea object
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [newComment, setNewComment] = useState("");
-  const [comments, setComments] = useState([]);
-  const [voteStatus, setVoteStatus] = useState(null);
-  const [currentUser, setCurrentUser] = useState(null);
-  const [netVotes, setNetVotes] = useState(0);
+  const [comments, setComments] = useState([]); // array of comment objects, each with id, author, content, time, up/down counts
+  const [voteStatus, setVoteStatus] = useState(null); 
+  const [currentUser, setCurrentUser] = useState(null); // for conditional features (voting, meetings)
+  const [netVotes, setNetVotes] = useState(0); // upvotes minus downvotes
+  const [showReport, setShowReport] = useState(null);
+
+  // Controls for the "Request Meeting" modal
   const [showModal, setShowModal] = useState(false);
   const [targetId, setTargetId] = useState(null);
   const [targetType, setTargetType] = useState("comment");
-  const [showReport, setShowReport] = useState(null);
-
   const [formData, setFormData] = useState({
     topic: "",
     start_time: "",
     duration: 30,
     isPrivate: false,
   });
-  const [score, setScore] = useState(55);
 
   const handleSubmitMeeting = async (e) => {
     e.preventDefault();
@@ -62,28 +65,48 @@ export default function IdeaDetails() {
 
   useEffect(() => {
     const init = async () => {
-      try {
+      try { 
+        // Get current user for voting and commenting
         const user = await getCurrentUser();
         setCurrentUser(user);
 
+        // Fetch the idea by ID, extract vote totals -> netVotes
         const ideaData = await fetchIdeaById(id);
         setIdea(ideaData.data);
         setNetVotes(ideaData.data.totalUpvotes - ideaData.data.totalDownvotes);
 
+        // Fetch all comments
         const commentsData = await fetchCommentsByIdeaId(id);
-        setComments(
-          commentsData.map((c) => ({
-            id: c._id,
-            user: c.userId,
-            author: c.userId?.name || "Unknown",
-            content: c.text,
-            time: new Date(c.createdAt).toLocaleString(),
-            upvotes: c.totalUpvotes,
-            downvotes: c.totalDownvotes,
-          }))
+        const commentsWithScores = await Promise.all(
+          commentsData.map(async (c) => {
+            let userScore = c.userId?.score;
+            if (userScore === undefined) {
+              try {
+                const userId = c.userId?._id || c.userId;
+                if (userId) {
+                  const userInfo = await getUserById(userId.id);
+                  userScore = userInfo?.score;
+                }
+              } catch (err) {
+                console.error("Failed to load user score", err);
+              }
+            }
+            return {
+              id: c._id,
+              user: c.userId,
+              author: c.userId?.name || "Unknown",
+              content: c.text,
+              time: new Date(c.createdAt).toLocaleString(),
+              upvotes: c.totalUpvotes,
+              downvotes: c.totalDownvotes,
+              score: typeof userScore === "number" ? userScore : 0,
+            };
+          })
         );
+        setComments(commentsWithScores);
 
         if (user?.id) {
+          // Fetch the user’s own vote on this idea (if logged in), so the arrow buttons can reflect it
           const vote = await fetchUserVote(user.id, id);
           setVoteStatus(vote === 1 ? "up" : vote === -1 ? "down" : null);
         }
@@ -97,6 +120,9 @@ export default function IdeaDetails() {
     init();
   }, [id]);
 
+  // If you’ve already upvoted, clicking again "clears" your vote (0)
+  // Otherwise sends 1 for an upvote
+  // Updates netVotes and voteStatus based on the API response
   const handleUpvote = async () => {
     try {
       const res = await voteIdea(id, voteStatus === "up" ? 0 : 1);
@@ -133,6 +159,7 @@ export default function IdeaDetails() {
           time: new Date(createdComment.createdAt).toLocaleString(),
           upvotes: createdComment.totalUpvotes || 0,
           downvotes: createdComment.totalDownvotes || 0,
+          score: currentUser?.score || 0,
         },
         ...comments,
       ]);
@@ -173,10 +200,10 @@ export default function IdeaDetails() {
 
   if (loading)
     return (
-      <div class="flex justify-center items-center gap-2 min-h-screen min-w-screen bg-radial-[at_50%_75%] from-sky-200 via-blue-100 to-white to-90%">
-        <div class="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.7s]"></div>
-        <div class="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.3s]"></div>
-        <div class="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.7s]"></div>
+      <div className="flex justify-center items-center gap-2 min-h-screen min-w-screen bg-radial-[at_50%_75%] from-sky-200 via-blue-100 to-white to-90%">
+        <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.7s]"></div>
+        <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.3s]"></div>
+        <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.7s]"></div>
       </div>
     );
   if (error) return <p className="p-6 text-red-500">{error}</p>;
@@ -288,8 +315,7 @@ export default function IdeaDetails() {
                 <div className="flex items-center gap-3">
                   <strong>{comment.author}</strong>
                   <p>
-                    {/* {setScore(10)} */}
-                    {score >= 100 ? (
+                    {comment.score >= 5 ? (
                       <div className="flex items-center">
                         <FaStar className="text-amber-400" />
                         <FaStar className="text-amber-400" />
@@ -297,25 +323,25 @@ export default function IdeaDetails() {
                         <FaStar className="text-amber-400" />
                         <FaStar className="text-amber-400" />
                       </div>
-                    ) : score >= 80 ? (
+                    ) : comment.score >= 4 ? (
                       <div className="flex items-center">
                         <FaStar className="text-amber-400" />
                         <FaStar className="text-amber-400" />
                         <FaStar className="text-amber-400" />
                         <FaStar className="text-amber-400" />
                       </div>
-                    ) : score >= 60 ? (
+                    ) : comment.score >= 3 ? (
                       <div className="flex items-center">
                         <FaStar className="text-amber-400" />
                         <FaStar className="text-amber-400" />
                         <FaStar className="text-amber-400" />
                       </div>
-                    ) : score >= 40 ? (
+                    ) : comment.score >= 2 ? (
                       <div className="flex items-center">
                         <FaStar className="text-amber-400" />
                         <FaStar className="text-amber-400" />
                       </div>
-                    ) : score >= 20 ? (
+                    ) : comment.score >= 1 ? (
                       <div className="flex items-center">
                         <FaStar className="text-amber-400" />
                       </div>
@@ -323,7 +349,6 @@ export default function IdeaDetails() {
                       ""
                     )}
                   </p>
-                  {/* {score >= 30 ? "Good"} */}
                 </div>
                 <span className="text-xs text-gray-400">{comment.time}</span>
               </div>
