@@ -57,12 +57,12 @@ export default function AllIdeas() {
   return (
     <div className="min-h-screen max-w-screen bg-radial-[at_50%_75%] from-sky-200 via-blue-100 to-white to-90%   text-[#333333]">
       {/* hero section */}
-      <div className="flex h-screen justify-between items-center px-8">
-        <div className=" flex flex-col gap-2  w-6/12">
-          <p className="text-4xl font-bold font-inter text-end">
+      <div className="flex h-screen justify-center items-center px-8">
+        <div className=" flex flex-col justify-end items-end gap-2  w-6/12">
+          <p className="text-4xl font-bold font-inter text-end w-100">
             All Startup Ideas
           </p>
-          <p className="text-lg text-end text-gray-600 font-inter">
+          <p className="text-lg text-end text-gray-600 font-inter w-100">
             Turn your startup ideas into reality by sharing your concepts with a
             vibrant community of innovators, thinkers, and investors. Get
             valuable, constructive feedback to refine your vision, and build
