@@ -21,7 +21,7 @@ import VentureBoard from "../pages/VentureBoard"
 import NavAdmin from "../admin/pages/NavAdmin"
 import Landing from "../pages/Landing"
 import ReportManagement from "../admin/pages/ReportManagement"
-
+import ErorrPage from "../pages/ErorrPage"
 
 
 
@@ -53,6 +53,7 @@ const router = createBrowserRouter([
       { path: "/IdeaAnalysis/:id", element: <IdeaAnalysis /> },
       { path: "/detailIdea/:id", element: <IdeaDetails /> },
       { path: "/watchMeeting", element: <WatchMeetings /> },
+{ path: "*", element: <ErorrPage /> },
       //{ path: "/profile", element: <UserProfile/> },
     ],
   },
