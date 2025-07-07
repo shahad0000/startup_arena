@@ -35,7 +35,7 @@ export default function SubmitIdeaForm() {
 
   return (
     <div>
-      <div className="flex flex-col justify-start items-center min-h-screen min-w-screen">
+      <div className="flex flex-col justify-start items-center min-h-screen max-w-screen">
         <div className="flex flex-col justify-around items-center p-5 rounded-lg w-250 ">
           <div className="flex flex-col h-25 justify-center items-center mb-4">
             <p className="text-4xl font-bold m-3">Draw Your Startup Idea</p>
