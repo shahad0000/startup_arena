@@ -18,6 +18,7 @@ import RequestMeetingModal from "../Component/RequestMeetingModal";
 import { scheduleMeeting } from "../services/zoom.service";
 import { FaStar } from "react-icons/fa";
 import { IoCalendarOutline } from "react-icons/io5";
+import { BiDotsVerticalRounded } from "react-icons/bi";
 
 export default function IdeaDetails() {
   const { id } = useParams();
@@ -32,6 +33,8 @@ export default function IdeaDetails() {
   const [showModal, setShowModal] = useState(false);
   const [targetId, setTargetId] = useState(null);
   const [targetType, setTargetType] = useState("comment");
+  const [showReport, setShowReport] = useState(null);
+
   const [formData, setFormData] = useState({
     topic: "",
     start_time: "",
@@ -326,40 +329,71 @@ export default function IdeaDetails() {
               </div>
               <p>{comment.content}</p>
 
-              <div className="flex gap-2 justify-end items-center">
-                {currentUser?.id === idea.founderId?.id && (
-                  <button
-                    onClick={() => {
-                      setTargetId(comment.id);
-                      setTargetType("comment");
-                      setShowModal(true);
-                    }}
-                    className="flex gap-1 items-center  text-sm text-blue-600  rounded-full bg-gray-100  px-1 py-1 "
-                  >
-                  <IoCalendarOutline  />  
-                  </button>
-                )}
-                <button
-                  className="p-1.5 rounded-full bg-gray-100 text-green-600 hover:bg-green-200"
-                  aria-label="upvote"
-                  onClick={() => handleCommentVote(comment.id, 1)}
-                >
-                  <FaChevronUp size={16} />
-                </button>
-                <span className="text-green-600 text-sm font-medium">
-                  {comment.upvotes}
-                </span>
-                <button
-                  className="p-1.5 rounded-full bg-gray-100 text-red-600 hover:bg-red-200"
-                  aria-label="downvote"
-                  onClick={() => handleCommentVote(comment.id, -1)}
-                >
-                  <FaChevronDown size={16} />
-                </button>
-                <span className="text-red-600 text-sm font-medium">
-                  {comment.downvotes}
-                </span>
-              </div>
+              <div className="flex  gap-2 justify-end items-center relative">
+  {/* زر التقويم إذا كان المعلق هو صاحب الفكرة */}
+  {currentUser?.id === idea.founderId?.id && (
+    <button
+      onClick={() => {
+        setTargetId(comment.id);
+        setTargetType("comment");
+        setShowModal(true);
+      }}
+      className="flex gap-1 items-center text-sm text-blue-600 rounded-full bg-gray-100 px-1 py-1"
+    >
+      <IoCalendarOutline />
+    </button>
+  )}
+
+  {/* زر الثلاث نقاط (قائمة المزيد) */}
+
+
+  {/* التصويت للأعلى */}
+  <button
+    className="p-1.5 rounded-full bg-gray-100 text-green-600 hover:bg-green-200"
+    aria-label="upvote"
+    onClick={() => handleCommentVote(comment.id, 1)}
+  >
+    <FaChevronUp size={16} />
+  </button>
+  <span className="text-green-600 text-sm font-medium">
+    {comment.upvotes}
+  </span>
+
+  {/* التصويت للأسفل */}
+  <button
+    className="p-1.5 rounded-full bg-gray-100 text-red-600 hover:bg-red-200"
+    aria-label="downvote"
+    onClick={() => handleCommentVote(comment.id, -1)}
+  >
+    <FaChevronDown size={16} />
+  </button>
+  <span className="text-red-600 text-sm font-medium">
+    {comment.downvotes}
+  </span>
+    <div className="relative">
+    <button
+      onClick={() =>
+        setShowReport((prev) => (prev === comment.id ? null : comment.id))
+      }
+      className="p-1.5 rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200"
+      aria-label="More options"
+    >
+      <BiDotsVerticalRounded size={18} />
+    </button>
+
+    {showReport === comment.id && (
+      <div className="absolute top-8 right-0 bg-white border border-gray-200 shadow-lg rounded-md z-20 w-28">
+        <button
+          onClick={() => handleReport(comment.id)}
+          className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-50"
+        >
+          Report
+        </button>
+      </div>
+    )}
+  </div>
+</div>
+
             </div>
           ))}
         </div>
