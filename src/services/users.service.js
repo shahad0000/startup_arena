@@ -6,3 +6,11 @@ export const getAllUsers = async () => {
   const response = await axios.get(`${API_URL}/api/users`);
   return response.data;
 };
+
+export const getUserById = async (id) => {
+  const response = await axios.get(
+    `${API_URL}/users/${id}`,
+    { withCredentials: true }
+  );
+  return response.data;
+};
