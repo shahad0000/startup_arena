@@ -1,7 +1,11 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react";
 import { FiLogOut } from "react-icons/fi";
 import { TbUpload } from "react-icons/tb";
-import { getCurrentUser, logOut, updateProfile } from "../services/auth.service";
+import {
+  getCurrentUser,
+  logOut,
+  updateProfile,
+} from "../services/auth.service";
 import { useNavigate } from "react-router";
 
 function UserProfile({ onUpdate }) {
@@ -11,9 +15,12 @@ function UserProfile({ onUpdate }) {
   const [gender, setGender] = useState("");
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
-  const [avatar, setAvatar] = useState("https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png");
+  const [role, setRole] = useState("");
+  const [avatar, setAvatar] = useState(
+    "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png"
+  );
   const fileInputRef = useRef();
- useEffect(() => {
+  useEffect(() => {
     const fetchUser = async () => {
       const data = await getCurrentUser();
       if (data) {
@@ -23,6 +30,7 @@ function UserProfile({ onUpdate }) {
         setCountry(data.country || country);
         setCity(data.city || city);
         setAvatar(data.profilePic || avatar);
+        setRole(data.role || role);
       }
     };
     fetchUser();
@@ -33,6 +41,7 @@ function UserProfile({ onUpdate }) {
       name,
       email,
       gender,
+      role,
       country,
       city,
       avatar,
@@ -92,7 +101,7 @@ function UserProfile({ onUpdate }) {
           />
           {isEditing && (
             <div className="absolute bottom-0 right-0 bg-blue-700 p-1.5 rounded-full">
-           <TbUpload className="text-white" />
+              <TbUpload className="text-white" />
             </div>
           )}
           <input
@@ -109,43 +118,50 @@ function UserProfile({ onUpdate }) {
       <div className="text-center space-y-1">
         {isEditing ? (
           <>
-              {/* <input
+            {/* <input
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 className="text-xl font-bold text-center text-gray-800 border-b-2 border-blue-400 focus:outline-none"
               /> */}
 
-            <h2 className=" text-xl font-bold text-center text-gray-800 border-b-2 border-white focus:outline-none">{name}</h2>
-           
+            <h2 className=" text-xl font-bold text-center text-gray-800 border-b-2 border-white focus:outline-none">
+              {name}
+            </h2>
           </>
         ) : (
           <>
-            <h2 className=" text-xl font-bold text-center text-gray-800 border-b-2 border-white focus:outline-none">{name}</h2></>)}
-            <p className="text-gray-400 text-sm cursor-not-allowed select-none">{email}</p>
-          
-        
+            <h2 className=" text-xl font-bold text-center text-gray-800 border-b-2 border-white focus:outline-none">
+              {name}
+            </h2>
+          </>
+        )}
+        <p className="text-gray-400 text-sm cursor-not-allowed select-none">
+          {email}
+        </p>
       </div>
 
       {/* Details */}
       <div className="bg-gray-100 rounded-xl px-4 py-3 text-sm text-gray-700 space-y-2 shadow-inner">
         <div className="flex justify-between">
           <span className="font-medium text-gray-600">Gender:</span>
-      
-            <span className="text-gray-800 font-semibold">{gender}</span>
-         
+
+          <span className="text-gray-800 font-semibold">{gender}</span>
+        </div>
+        <div className="flex justify-between">
+          <span className="font-medium text-gray-600">role:</span>
+
+          <span className="text-gray-800 font-semibold">{role}</span>
         </div>
         <div className="flex justify-between gap-2 md:gap-26">
           <span className="font-medium text-gray-600">Country:</span>
-  
-            <span className="text-gray-800 font-semibold">{country}</span>
-          
+
+          <span className="text-gray-800 font-semibold">{country}</span>
         </div>
         <div className="flex justify-between">
           <span className="font-medium text-gray-600">City:</span>
-     
-            <span className="text-gray-800 font-semibold">{city}</span>
-        
+
+          <span className="text-gray-800 font-semibold">{city}</span>
         </div>
       </div>
 
@@ -158,13 +174,14 @@ function UserProfile({ onUpdate }) {
       </button>
 
       {/* Save Button */}
-      <button onClick={handleLogout} className="flex gap-1  justify-center w-full py-2 bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white  px-4 border border-red-500 hover:border-transparent rounded-full">
+      <button
+        onClick={handleLogout}
+        className="flex gap-1  justify-center w-full py-2 bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white  px-4 border border-red-500 hover:border-transparent rounded-full"
+      >
         <FiLogOut className="mt-1" /> LogOut
       </button>
     </div>
-
-
-  )
+  );
 }
 
-export default UserProfile
+export default UserProfile;
