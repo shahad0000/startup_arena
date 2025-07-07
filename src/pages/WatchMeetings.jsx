@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { zoomRecordings } from "../services/zoom.service";
-import { FaFilter } from "react-icons/fa";
 import { FaVideo } from "react-icons/fa";
 import { IoSearch } from "react-icons/io5";
+
 const WatchMeetings = () => {
   const [meetings, setMeetings] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -47,8 +47,6 @@ const WatchMeetings = () => {
     );
   }
 
-
-
   return (
     <div className="min-h-screen max-w-screen px-5 bg-radial-[at_50%_75%] from-sky-200 via-blue-100 to-white to-90% font-ibm  text-[#333333] py-10">
       <div className="max-w-7xl mx-auto ">
@@ -76,7 +74,6 @@ const WatchMeetings = () => {
             />
           </div>
         </div>
-        {/* Meeting Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-y-6 gap-x-4">
           {filterMeetings.map((meeting, index) => (
             <div
@@ -85,12 +82,22 @@ const WatchMeetings = () => {
             >
               <div className="aspect-video w-full">
                 <div className="relative w-full pb-[56.25%]">
-                  <iframe
-                    src={meeting.share_url}
-                    className="absolute top-0 left-0 w-full h-full rounded-t-xl border-0 scrollbar-none overflow-hidden"
-                    allow="autoplay; fullscreen"
-                    allowFullScreen
-                  ></iframe>
+                  {meeting.recording_files &&
+                  meeting.recording_files.length > 0 ? (
+                    meeting.recording_files
+                      .filter((file) => file.file_type === "MP4")
+                      .map((file) => (
+                        <video
+                          key={file.id}
+                          controls
+                          className="absolute top-0 left-0 w-full h-full rounded-t-xl"
+                          src={file.download_url} 
+                          preload="metadata"
+                        />
+                      ))
+                  ) : (
+                    <p>No video available</p>
+                  )}
                 </div>
               </div>
 
