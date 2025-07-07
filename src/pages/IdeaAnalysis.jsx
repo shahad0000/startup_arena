@@ -97,7 +97,7 @@ export default function IdeaAnalysisPage() {
   if (!idea) return <p className="p-6">Idea not found.</p>;
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen min-w-screen">
       <Link
         to="/MyIdeas"
         className="flex items-center gap-1 text-blue-600 hover:text-blue-800"

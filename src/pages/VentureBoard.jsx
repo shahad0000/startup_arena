@@ -37,7 +37,7 @@ function VentureBoard() {
     );
 
   return (
-    <div className="bg-radial-[at_50%_75%] from-sky-200 via-blue-100 to-white to-90% font-ibm  text-[#333333]">
+    <div className="min-h-screen min-w-screen bg-radial-[at_50%_75%] from-sky-200 via-blue-100 to-white to-90% font-ibm  text-[#333333]">
       <div className=" px-4  md:px-8 py-10 text-[#333333]">
         {/* Header */}
         <div className="text-center mb-10">
