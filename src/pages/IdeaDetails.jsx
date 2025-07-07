@@ -327,7 +327,7 @@ export default function IdeaDetails() {
                 </div>
                 <span className="text-xs text-gray-400">{comment.time}</span>
               </div>
-              <p className="whitespace-pre-line">{comment.content}</p>
+              <p className="whitespace-pre-line">{comment.content.trim()}</p>
 
               <div className="flex  gap-2 justify-end items-center relative">
                 {/* زر التقويم إذا كان المعلق هو صاحب الفكرة */}
