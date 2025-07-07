@@ -29,7 +29,7 @@ export default function MyIdeas() {
   }, []);
 
   return (
-    <div className="bg-white px-4 md:px-10 py-10 text-[#333] min-h-screen min-w-screen  mx-auto">
+    <div className=" px-4 md:px-10 py-10  min-h-screen min-w-screen  mx-auto bg-radial-[at_50%_75%] from-sky-200 via-blue-100 to-white to-90% font-ibm  text-[#333333]">
       {/* Header */}
       <div className="mb-6">
         <h1 className="text-xl font-bold">My Ideas</h1>

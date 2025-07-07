@@ -55,7 +55,7 @@ export default function AllIdeas() {
     });
 
   return (
-    <div className="bg-white font-ibm  text-[#333333]">
+    <div className="bg-radial-[at_50%_75%] from-sky-200 via-blue-100 to-white to-90% font-ibm  text-[#333333]">
       {/* hero section */}
       <div className="flex h-screen justify-between items-center px-8">
         <div className=" flex flex-col gap-2  w-6/12">
@@ -76,7 +76,7 @@ export default function AllIdeas() {
         </div>
       </div>
 
-      <div className=" p-5 bg-gray-50 flex flex-col gap-2 mb-5">
+      <div className=" p-5 w-full px-10  flex flex-col gap-2">
         <p className="text-[28px] font-bold font-inter">
           Explore Startup Ideas
         </p>
@@ -92,7 +92,7 @@ export default function AllIdeas() {
               placeholder="Search ideas..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full pl-10 pr-4 py-2 border outline-none border-[#969595] rounded-lg text-sm "
             />
           </div>
 
@@ -117,7 +117,7 @@ export default function AllIdeas() {
         </div>
 
         {/* Content */}
-        <div className="p-2  border-gray-400  rounded-lg ">
+        <div className="  border-gray-400  rounded-lg ">
           {loading ? (
             <div class="flex justify-center items-center gap-2 min-h-screen min-w-screen">
               <div class="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.7s]"></div>
