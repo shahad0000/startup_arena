@@ -43,7 +43,7 @@ export default function MyIdeas() {
         <h3 className="font-semibold text-lg">Your Submitted Ideas</h3>
         <Link
           to={"/submitIdea"}
-          className="bg-yellow-400 text-white px-4 py-2 text-sm rounded-md hover:bg-yellow-500"
+          className="bg-[#1E40AF] text-white px-4 py-2 text-sm rounded-md hover:bg-yellow-500"
         >
           Add Idea +
         </Link>

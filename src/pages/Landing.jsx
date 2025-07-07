@@ -49,14 +49,14 @@ const staggerContainer = {
             <motion.a
               key={item}
               href={`#${item.toLowerCase().replace(/\s+/g, '-')}`}
-              className="hover:text-blue-700 transition relative group"
+              className="hover:text-[#1E40AF] transition relative group"
               custom={i}
               initial="hidden"
               animate="visible"
               variants={fadeIn}
             >
               {item}
-              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-700 scale-x-0 origin-left transform transition-transform duration-300 group-hover:scale-x-100" />
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[#1E40AF] scale-x-0 origin-left transform transition-transform duration-300 group-hover:scale-x-100" />
             </motion.a>
           ))}
         </nav>
@@ -64,14 +64,14 @@ const staggerContainer = {
         {/* CTA Buttons */}
         <div className="hidden md:flex space-x-3">
           <motion.button
-            className="px-6 py-2 text-sm font-semibold border border-blue-700 text-blue-700 rounded-full hover:bg-blue-700 hover:text-white transition-all duration-300"
+            className="px-6 py-2 text-sm font-semibold border border-blue-700 text-[#1E40AF] rounded-full hover:bg-[#1E40AF] hover:text-white transition-all duration-300"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
           <Link to={"/signin"} >Log In</Link>  
           </motion.button>
           <motion.button
-            className="px-6 py-2 text-sm font-semibold bg-blue-700 text-white rounded-full shadow-lg hover:bg-blue-800 transition-all duration-300"
+            className="px-6 py-2 text-sm font-semibold bg-[#1E40AF] text-white rounded-full shadow-lg hover:bg-blue-800 transition-all duration-300"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -104,17 +104,17 @@ const staggerContainer = {
             <a
               key={item}
               href={`#${item.toLowerCase().replace(/\s+/g, '-')}`}
-              className="block text-gray-700 hover:text-blue-700 transition"
+              className="block text-gray-700 hover:text-[#1E40AF] transition"
               onClick={() => setIsOpen(false)}
             >
               {item}
             </a>
           ))}
           <div className="flex flex-col gap-2 pt-4">
-            <Link to={"/signin"} className="w-full px-4 py-2 text-sm border border-blue-700 text-blue-700 rounded-full hover:bg-blue-700 hover:text-white transition">
+            <Link to={"/signin"} className="w-full px-4 py-2 text-sm border border-blue-700 text-[#1E40AF] rounded-full hover:bg-[#1E40AF] hover:text-white transition">
               Log In
             </Link>
-            <Link to={"/signup"} className="w-full px-4 py-2 text-sm bg-blue-700 text-white rounded-full hover:bg-blue-800 transition">
+            <Link to={"/signup"} className="w-full px-4 py-2 text-sm bg-[#1E40AF] text-white rounded-full hover:bg-blue-800 transition">
               Get Started
             </Link>
           </div>
@@ -255,7 +255,7 @@ const staggerContainer = {
       initial={{ opacity: 0, y: 10 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="text-teal-600 font-semibold uppercase text-sm mb-3 tracking-wider"
+      className="text-blue-600 font-semibold uppercase text-sm mb-3 tracking-wider"
     >
       Client Voices
     </motion.p>
@@ -317,7 +317,7 @@ const staggerContainer = {
           className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 relative overflow-hidden group"
         >
           {/* Decorative accent line on left */}
-          <div className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-blue-500 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          <div className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-[#1E40AF] to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
           {/* Stars */}
           <div className="flex text-yellow-400 mb-4 text-xl">★★★★★</div>
@@ -396,9 +396,7 @@ const staggerContainer = {
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Logo and Tagline */}
           <div className="col-span-full md:col-span-1 text-center md:text-left mb-6 md:mb-0">
-            <h1 className="text-2xl font-extrabold tracking-tight text-white mb-3">
-              StartUp Arena
-            </h1>
+            <img src="" alt="" />
             <p className="text-sm leading-relaxed">
               Empowering startups to build, grow, and conquer their markets with expert guidance and cutting-edge solutions.
             </p>
