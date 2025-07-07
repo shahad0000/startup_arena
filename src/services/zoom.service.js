@@ -11,7 +11,6 @@ export const scheduleMeeting = async (data) => {
 
 export const zoomRecordings = async () => {
   const res = await axios.get(`${API}/zoom/recordings`);
-  console.log(res)
   return res.data;
 };
 
