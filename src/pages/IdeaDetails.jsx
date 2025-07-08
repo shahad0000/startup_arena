@@ -24,6 +24,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import { FaStar } from "react-icons/fa";
 import { IoCalendarOutline } from "react-icons/io5";
 import { BiDotsVerticalRounded } from "react-icons/bi";
+import { FaRegCalendarAlt } from "react-icons/fa";
 
 export default function IdeaDetails() {
   const { id } = useParams();
@@ -243,9 +244,9 @@ export default function IdeaDetails() {
                 // setIdeaId(idea._id);
                 // openModal();
               }}
-              className=" bg-[#1E40AF] text-white px-4 py-2 text-sm font-medium rounded hover:bg-[#1e40afc6] w-full"
+              className=" flex items-center gap-2 bg-[#1E40AF] text-white px-4 py-2 text-sm font-medium rounded hover:bg-[#1e40afc6] w-full"
             >
-              Request Meeting
+              <FaRegCalendarAlt /> Request Meeting
             </button>
           </div>
         </div>

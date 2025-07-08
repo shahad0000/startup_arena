@@ -4,6 +4,7 @@ import tagColors from "../Component/CatagoryColors";
 import { Link } from "react-router";
 import RequestMeetingModal from "./RequestMeetingModal.jsx";
 import { scheduleMeeting } from "../services/zoom.service";
+import { FaRegCalendarAlt } from "react-icons/fa";
 
 export const IdeaCard = ({ ideas = [], userRole }) => {
   const [showModal, setShowModal] = useState(false);
@@ -191,9 +192,9 @@ export const IdeaCard = ({ ideas = [], userRole }) => {
                         setIdeaId(idea._id);
                         openModal();
                       }}
-                      className=" bg-[#1E40AF] text-white px-4 py-2 text-sm font-medium rounded hover:bg-[#1e40afc6] w-full"
+                      className=" flex items-center gap-2 bg-[#1E40AF] text-white px-4 py-2 text-sm font-medium rounded hover:bg-[#1e40afc6] w-full"
                     >
-                      Request Meeting
+                      <FaRegCalendarAlt /> Request Meeting
                     </button>
                   </div>
                 )}
