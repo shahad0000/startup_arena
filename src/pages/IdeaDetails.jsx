@@ -6,7 +6,10 @@ import { useParams, Link } from "react-router";
 import { fetchIdeaById } from "../services/ideas.service";
 import { fetchUserVote } from "../services/ideas.service";
 import { voteIdea } from "../services/ideas.service";
-import { fetchCommentsByIdeaId, postComment } from "../services/comments.service";
+import {
+  fetchCommentsByIdeaId,
+  postComment,
+} from "../services/comments.service";
 import { voteOnComment } from "../services/comments.service";
 import { getCurrentUser } from "../services/auth.service";
 import { scheduleMeeting } from "../services/zoom.service";
@@ -23,14 +26,13 @@ import { IoCalendarOutline } from "react-icons/io5";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 
 export default function IdeaDetails() {
-
   const { id } = useParams();
   const [idea, setIdea] = useState(null); // holds the fetched idea object
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [newComment, setNewComment] = useState("");
   const [comments, setComments] = useState([]); // array of comment objects, each with id, author, content, time, up/down counts
-  const [voteStatus, setVoteStatus] = useState(null); 
+  const [voteStatus, setVoteStatus] = useState(null);
   const [currentUser, setCurrentUser] = useState(null); // for conditional features (voting, meetings)
   const [netVotes, setNetVotes] = useState(0); // upvotes minus downvotes
   const [showReport, setShowReport] = useState(null);
@@ -65,7 +67,7 @@ export default function IdeaDetails() {
 
   useEffect(() => {
     const init = async () => {
-      try { 
+      try {
         // Get current user for voting and commenting
         const user = await getCurrentUser();
         setCurrentUser(user);
@@ -232,7 +234,6 @@ export default function IdeaDetails() {
               <p className="text-[#202020] font-bold">{idea.founderId?.name}</p>
               <p className="italic text-xs font-light">
                 {idea.founderId?.email}
-                justUser@example.com
               </p>
             </div>
           </div>
