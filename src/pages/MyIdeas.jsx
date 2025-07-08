@@ -62,69 +62,72 @@ export default function MyIdeas() {
       ) : (
 <div className="space-y-4 mb-12 flex flex-col-reverse gap-3">
   {ideas.map((idea) => (
-    <div
-      key={idea._id}
-      className="bg-white rounded-md p-4 flex justify-between items-start shadow-sm border border-gray-100"
-    >
-      <div className="flex-1 w-full pr-4">
-        {/* Title + Upvotes */}
-        <div className="flex justify-between items-start mb-1">
-          <h4 className="font-semibold text-base text-gray-900">{idea.title}</h4>
-          <span className="flex items-center text-amber-400 text-sm font-medium">
-            <GoArrowUp className="mr-1" />
-            {idea.totalUpvotes}
-          </span>
-        </div>
-
-        {/* Description */}
-        <p className="text-sm text-gray-600 mb-2 line-clamp-1">
-          {idea.description}
-        </p>
-
-        {/* Tag */}
-        {idea.category && (
-          <span
-            className={`${
-              tagColors[idea.category.toLowerCase()] ||
-              "bg-gray-200 text-gray-700"
-            } px-3 py-1 rounded-full text-xs font-medium inline-block`}
-          >
-            {idea.category}
-          </span>
-        )}
-      </div>
-
-      <div className="relative">
-        <button
-          className="text-gray-400 hover:text-gray-600"
-          onClick={() =>
-            setActiveMenu(activeMenu === idea._id ? null : idea._id)
-          }
-        >
-          <BiDotsVerticalRounded size={20} />
-        </button>
-
-        {activeMenu === idea._id && (
-          <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 shadow-md rounded-md z-10">
-            <Link
-              to={`/detailIdea/${idea._id}`}
-              className="block w-full px-4 py-2 text-sm text-left hover:bg-gray-100"
-            >
-              View Detail
-            </Link>
-            <Link
-              to={`/IdeaAnalysis/${idea._id}`}
-              className="block w-full px-4 py-2 text-sm text-left hover:bg-gray-100"
-            >
-              Analysis
-            </Link>
-            <button className="block w-full px-4 py-2 text-sm text-left text-red-600 hover:bg-gray-100">
-              Delete
-            </button>
-          </div>
-        )}
-      </div>
+   <div
+  key={idea._id}
+  className="bg-white rounded-md p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 shadow-sm border border-gray-100"
+>
+  <div className="flex-1 min-w-0">
+    {/* Title + Upvotes */}
+    <div className="flex justify-between items-start mb-1">
+      <h4 className="font-semibold text-base text-gray-900 truncate">
+        {idea.title}
+      </h4>
+      <span className="flex items-center text-amber-500 text-sm font-medium">
+        <GoArrowUp className="mr-1" />
+        {idea.totalUpvotes}
+      </span>
     </div>
+
+    {/* Description limited to 50% width */}
+    <div className="w-full sm:w-1/2">
+      <p className="text-sm text-gray-600 mb-2 line-clamp-1">
+        {idea.description}
+      </p>
+    </div>
+
+    {idea.category && (
+      <span
+        className={`${
+          tagColors[idea.category.toLowerCase()] || "bg-gray-200 text-gray-700"
+        } px-3 py-1 rounded-full text-xs font-medium inline-block`}
+      >
+        {idea.category}
+      </span>
+    )}
+  </div>
+
+  <div className="relative self-start">
+    <button
+      type="button"
+      className="text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-300 rounded"
+      onClick={() => setActiveMenu(activeMenu === idea._id ? null : idea._id)}
+    >
+      <BiDotsVerticalRounded size={20} />
+    </button>
+
+    {activeMenu === idea._id && (
+      <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 shadow-lg rounded-md z-10 origin-top-right">
+        <Link
+          to={`/detailIdea/${idea._id}`}
+          className="block px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100 rounded-t-md"
+        >
+          View Detail
+        </Link>
+        <Link
+          to={`/IdeaAnalysis/${idea._id}`}
+          className="block px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100"
+        >
+          Analysis
+        </Link>
+        <button
+          className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100 rounded-b-md"
+        >
+          Delete
+        </button>
+      </div>
+    )}
+  </div>
+</div>
   ))}
 </div>
 
