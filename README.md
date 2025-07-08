@@ -1,77 +1,76 @@
-# Routes
+# Startup Arena
 
-## Admin :
+##  وصف المشروع
 
-GET /api/admin/users
+**Startup Arena** هي منصة تعاونية تتيح للمؤسسين الطموحين والنقاد والمستثمرين مشاركة أفكار المشاريع الناشئة وتقييمها. تهدف المنصة إلى تعزيز روح الابتكار، وتبادل الآراء البنّاءة، والتواصل بين رواد الأعمال.
 
-DELETE /api/admin/users/:id
+### الميزات الرئيسية:
 
-## Auth :
+- إرسال أفكار مشاريع ناشئة مع تفاصيل مثل الوصف، الفئة، السوق المستهدف، ورابط MVP.
+- التصويت على الأفكار (إعجاب/عدم إعجاب) مع تحديثات فورية.
+- إذا حصلت الفكرة على أكثر من 100 صوت إيجابي، يتم تأهيلها للظهور في **لوحة المشاريع الواعدة (Venture Board)**.
+- يمكن للمؤسس طلب اجتماع مع الناقد مباشرةً من قسم التعليقات لمناقشة الفكرة أو الحصول على ملاحظات.
+- يمكن للمستثمر طلب اجتماع مع المؤسس لمناقشة فرص الاستثمار أو التعاون.
+- جدولة اجتماعات Zoom عامة أو خاصة بين المستخدمين.
+- استقبال إشعارات عبر البريد الإلكتروني تتضمن:
+- تأكيد الاجتماع
+- تذكير قبل موعد الاجتماع
+- عرض معلومات الاجتماع وتسجيلاته (إن توفرت).
 
-POST /api/auth/signup
-Request: {
-Name,
-Email,
-Password,
-Gender,
-Role,
-Age,
-Country,
-City,
-}
-POST /api/auth/signin
-Request: {
-Email,
-Password
-}
-POST /api/auth/signout
+---
 
-## Users:
+## أعضاء الفريق
 
-GET /api/users/me Get current logged-in user profile
-GET /api/users/:id Get by ID
-GET /api/users/myIdeas Get all ideas by the current user
+| الاسم                   | حساب GitHub |
+|------------------------|-------------|
+| شوق الكنهل             | [@shouqak](https://github.com/shouqak) |
+| عبدالرحمن النفيسي      | [@abdulrhman3657](https://github.com/abdulrhman3657) |
+| سعد الزريع             | [@SaadAlzarea](https://github.com/SaadAlzarea) |
+| شهد العريفي            | [@shahad0000](https://github.com/shahad0000) |
 
-## Admin authorities
+---
 
-GET /api/admin/users/:id       Get user by ID
-GET /api/admin/users       Get all users
+## التصميم على Figma
 
-## Ideas:
+[Figma Prototype](https://www.figma.com/design/FKv53OZsyK5Guw01zyvzRi/Final-project?node-id=0-1&t=cShWvriiTttgJwNL-1)
 
-POST /api/ideas     Create a new idea
-Request: {
-title,
-category
-description,
-mvpLink,
-target
-}
-GET /api/ideas          Get all ideas
-GET /api/users/:userId/ideas    Get all ideas submitted by a specific user   // commented for now
-GET /api/ideas/:id      Get one idea with full details
-DELETE /api/ideas/:id       Delete idea (only by owner)
+---
 
-## Votes:
+## 🌐 رابط النشر
 
-POST /api/ideas/vote/       Post a vote (upvote or downvote) on an idea
-Request: {
-ideaId: "68617bf98f706bc1665d2ba9",
-value: 1 or -1
-}
-GET /api/ideas/vote/:id/    Get all vote // needs editing 
+[الموقع المباشر](https://finalproject-frontend-3xzr.onrender.com/)
 
-## Comments:
-GET /api/comments/       Get all comments
-GET /api/comments/:id    Get all comments for one idea by its id
-POST /api/comments/      Create a comment to an idea
-Request: { ideaId, userId, text }
-DELETE /api/comments/:id    Delete a comment (only by owner)
+---
 
-## Venture Ideas:
-GET /api/venture-board      Get all ideas that are on the venture board
-GET /api/venture-board/:id      Get details of a venture board idea
+## واجهة المستخدم
 
-## Analytics
+- تسجيل دخول وتسجيل مستخدم جديد مع تحديد الدور (مؤسس، ناقد، مستثمر)
+- إرسال فكرة مشروع تتضمن: الوصف، الفئة، السوق المستهدف، ورابط MVP
+- نظام تصويت مباشر (صوت إعجاب / عدم إعجاب)
+- ظهور الفكرة في لوحة المشاريع الواعدة عند الوصول إلى أكثر من 100 صوت إيجابي
+- صفحة تفاصيل الفكرة تشمل:
+  - عدد الأصوات
+  - قسم التعليقات
+  - طلب اجتماع من المؤسس إلى الناقد
+  - طلب اجتماع من المستثمر إلى المؤسس
+- تكامل مع Zoom:
+  - جدولة الاجتماعات (عامة أو خاصة)
+  - عرض معلومات الاجتماع
+  - تسجيلات الاجتماعات (إن وُجدت)
+- إشعارات عبر البريد الإلكتروني و تذكير الاجتماع
+- تصميم متجاوب باستخدام Tailwind CSS
+- واجهة حديثة وبسيطة باستخدام React
 
-GET /api/ideas/:id/analytics        Get analytics of an idea       // needs editing
+---
+
+## التقنيات المستخدمة
+
+| الطبقة         | التقنية              |
+|----------------|----------------------|
+| الواجهة الأمامية | React، JavaScript، Tailwind CSS |
+| الخادم         | Node.js، Express، TypeScript |
+| قاعدة البيانات | MongoDB              |
+| API خارجي      | Zoom API             |
+
+---
+
