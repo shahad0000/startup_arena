@@ -9,6 +9,7 @@ import { voteIdea } from "../services/ideas.service"
 import {
   fetchCommentsByIdeaId,
   postComment,
+  reportComment,
 } from "../services/comments.service"
 import { voteOnComment } from "../services/comments.service"
 import { getCurrentUser } from "../services/auth.service"
@@ -192,6 +193,15 @@ export default function IdeaDetails() {
       console.error("Error voting on comment:", err)
     }
   }
+
+  const handleReport = async (commentId) => {
+    try {
+      await reportComment(commentId);
+      setShowReport(null);
+    } catch (err) {
+      console.error("Failed to report comment:", err);
+    }
+  };
 
   if (loading)
     return (
