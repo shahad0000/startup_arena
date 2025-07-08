@@ -48,3 +48,10 @@ export const fetchIdeaAnalytics = async (ideaId) => {
   console.log(res.data)
   return res.data;
 };
+
+export const deleteIdea = async (id) => {
+  const res = await axios.delete(`${API}/ideas/${id}`, {
+    withCredentials: true,
+  });
+  return res.data;
+};

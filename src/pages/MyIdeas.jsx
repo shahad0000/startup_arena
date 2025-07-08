@@ -4,7 +4,7 @@ import { FiEdit3 } from "react-icons/fi";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import tagColors from "../Component/CatagoryColors";
 import { Link } from "react-router";
-import { fetchMyIdeas } from "../services/ideas.service";
+import { deleteIdea, fetchMyIdeas } from "../services/ideas.service";
 
 export default function MyIdeas() {
   const [showPopup, setShowPopup] = useState(false);
@@ -27,6 +27,21 @@ export default function MyIdeas() {
     };
     loadIdeas();
   }, []);
+
+  const handleDelete = async (id) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this idea?"
+    );
+    if (!confirmDelete) return;
+    try {
+      await deleteIdea(id);
+      setIdeas((prev) => prev.filter((idea) => idea._id !== id));
+      setActiveMenu(null);
+    } catch (err) {
+      console.error("Failed to delete idea", err);
+      alert("Failed to delete idea");
+    }
+  };
 
   return (
     <div className=" px-4 md:px-10 py-10  min-h-screen max-w-screen  mx-auto bg-radial-[at_50%_75%] from-sky-200 via-blue-100 to-white to-90% font-ibm  text-[#333333]">
@@ -105,29 +120,27 @@ export default function MyIdeas() {
       <BiDotsVerticalRounded size={20} />
     </button>
 
-    {activeMenu === idea._id && (
-      <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 shadow-lg rounded-md z-10 origin-top-right">
-        <Link
-          to={`/detailIdea/${idea._id}`}
-          className="block px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100 rounded-t-md"
-        >
-          View Detail
-        </Link>
-        <Link
-          to={`/IdeaAnalysis/${idea._id}`}
-          className="block px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100"
-        >
-          Analysis
-        </Link>
-        <button
-          className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100 rounded-b-md"
-        >
-          Delete
-        </button>
+        {activeMenu === idea._id && (
+          <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 shadow-md rounded-md z-10">
+            <Link
+              to={`/detailIdea/${idea._id}`}
+              className="block w-full px-4 py-2 text-sm text-left hover:bg-gray-100"
+            >
+              View Detail
+            </Link>
+            <Link
+              to={`/IdeaAnalysis/${idea._id}`}
+              className="block w-full px-4 py-2 text-sm text-left hover:bg-gray-100"
+            >
+              Analysis
+            </Link>
+            <button onClick={() => handleDelete(idea._id)} className="block w-full px-4 py-2 text-sm text-left text-red-600 hover:bg-gray-100">
+              Delete
+            </button>
+          </div>
+        )}
       </div>
-    )}
-  </div>
-</div>
+    </div>
   ))}
 </div>
       )}
