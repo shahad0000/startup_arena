@@ -203,10 +203,10 @@ export default function IdeaDetails() {
 
   if (loading)
     return (
-      <div class="flex justify-center items-center gap-2 min-h-screen max-w-screen bg-radial-[at_50%_75%] from-sky-200 via-blue-100 to-white to-90%">
-        <div class="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.7s]"></div>
-        <div class="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.3s]"></div>
-        <div class="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.7s]"></div>
+      <div className="flex justify-center items-center gap-2 min-h-screen max-w-screen bg-radial-[at_50%_75%] from-sky-200 via-blue-100 to-white to-90%">
+        <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.7s]"></div>
+        <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.3s]"></div>
+        <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.7s]"></div>
       </div>
     );
   if (error) return <p className="p-6 text-red-500">{error}</p>;
@@ -345,7 +345,7 @@ export default function IdeaDetails() {
               <div className="flex justify-between">
                 <div className="flex items-center gap-3">
                   <strong>{comment.author}</strong>
-                  <p>
+                  <div>
                     {comment.score >= 5 ? (
                       <div className="flex items-center">
                         <FaStar className="text-amber-400" />
@@ -379,7 +379,7 @@ export default function IdeaDetails() {
                     ) : (
                       ""
                     )}
-                  </p>
+                  </div>
                 </div>
                 <span className="text-xs text-gray-400">{comment.time}</span>
               </div>
