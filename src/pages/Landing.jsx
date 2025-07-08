@@ -68,7 +68,7 @@ const staggerContainer = {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-          <Link to={"/signin"} >Log In</Link>  
+          <Link to={"/signin"} >SignIn</Link>  
           </motion.button>
           <motion.button
             className="px-6 py-2 text-sm font-semibold bg-[#1E40AF] text-white rounded-full shadow-lg hover:bg-blue-800 transition-all duration-300"
