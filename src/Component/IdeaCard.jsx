@@ -111,9 +111,6 @@ export const IdeaCard = ({ ideas = [], userRole }) => {
             </div>
           </div>
         ))}
-<<<<<<< HEAD
-      </div>     
-=======
       </div> */}
 
       <div className="grid grid-cols-1 md:grid-cols-1  gap-y-7 gap-x-4">
@@ -212,7 +209,6 @@ export const IdeaCard = ({ ideas = [], userRole }) => {
           Load More Ideas
         </button>
       </div>
->>>>>>> b-saad-8
 
       {/* Modal */}
       <RequestMeetingModal
