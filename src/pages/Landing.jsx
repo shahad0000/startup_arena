@@ -33,10 +33,10 @@ const staggerContainer = {
   const menuItems = ["Home", "Solutions", "Success Stories", "Contact"];
 
   return (
-        <div className="font-sans antialiased text-gray-800 bg-gray-50 min-h-screen">
+        <div className="font-sans antialiased text-gray-800 bg-gray-50 min-h-screen ">
 
       {/* Navbar */}
-     <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-lg shadow-sm">
+     <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-lg shadow-sm py-1">
       <div className="max-w-7xl mx-auto px-4 flex items-center justify-between ">
         {/* Logo */}
         <Link to="/">
@@ -123,7 +123,7 @@ const staggerContainer = {
     </header>
 
       {/* Hero Section */}
-      <section id="home" className="relative bg-gradient-to-br from-blue-700 to-indigo-900 text-white  h-screen px-6 overflow-hidden">
+<section id="home" className="relative bg-gradient-to-br from-blue-700 to-indigo-900 text-white  md:px-12 overflow-hidden flex items-center">
   <div className="absolute inset-0 z-0 opacity-10">
     <svg className="w-full h-full" viewBox="0 0 1440 800" fill="none" xmlns="http://www.w3.org/2000/svg">
       <ellipse cx="250" cy="150" rx="400" ry="200" fill="currentColor" className="text-blue-400" />
@@ -132,13 +132,13 @@ const staggerContainer = {
     </svg>
   </div>
 
-  <div className="relative z-10 max-w-7xl mx-auto">
+  <div className="relative z-10 max-w-screen-xl mx-auto w-full">
     <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
       
       {/* Text Content */}
-      <div className="text-center lg:text-left lg:max-w-xl">
+      <div className="text-center mt-5 lg:text-left lg:max-w-xl w-full">
         <motion.h1
-          className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-6 tracking-tight drop-shadow-lg"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-6 tracking-tight drop-shadow-lg"
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
@@ -169,7 +169,7 @@ const staggerContainer = {
       </div>
 
       <motion.div
-        className="w-full lg:w-1/2"
+        className="w-full lg:w-1/2 mt-12 lg:mt-0"
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
@@ -177,7 +177,7 @@ const staggerContainer = {
         <img
           src={image}
           alt="Dashboard Preview"
-          className="mx-auto w-full max-w-2xl "
+          className="mx-auto w-full max-w-2xl object-contain h-auto"
         />
       </motion.div>
     </div>
