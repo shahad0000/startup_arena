@@ -130,8 +130,6 @@ export default function MyIdeas() {
 </div>
   ))}
 </div>
-
-
       )}
     </div>
   );
