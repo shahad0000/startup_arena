@@ -49,7 +49,10 @@ function Nav() {
   return (
     <>
       {/* NAVBAR */}
-      <Disclosure as="nav" className="bg-white border-b border-gray-300  max-w-screen">
+      <Disclosure
+        as="nav"
+        className="bg-white border-b border-gray-300  max-w-screen"
+      >
         <div className=" py-1 max-w-7xl px-4 sm:px-6 lg:px-4 ">
           <div className="flex h-16 items-center justify-between">
             <div className="flex w-full justify-between items-center">
@@ -63,24 +66,26 @@ function Nav() {
               </div>
 
               <div className="hidden sm:flex space-x-6">
-                {navigation.map((item) => {
-                  const isActive = location.pathname === item.to;
-                  return (
-                    <Link
-                      key={item.name}
-                      to={item.to}
-                      aria-current={isActive ? "page" : undefined}
-                      className={classNames(
-                        isActive
-                          ? "underline text-[#1E40AF]"
-                          : "text-gray-800 hover:underline hover:text-[#1E40AF]",
-                        "rounded-md px-3 py-2 text-sm font-medium transition transform duration-300 ease-in-out hover:scale-103 "
-                      )}
-                    >
-                      {item.name}
-                    </Link>
-                  );
-                })}
+                <div>
+                  {navigation.map((item) => {
+                    const isActive = location.pathname === item.to;
+                    return (
+                      <Link
+                        key={item.name}
+                        to={item.to}
+                        aria-current={isActive ? "page" : undefined}
+                        className={classNames(
+                          isActive
+                            ? "underline text-[#1E40AF]"
+                            : "text-gray-800 hover:underline hover:text-[#1E40AF]",
+                          "rounded-md px-3 py-2 text-sm font-medium transition transform duration-300 ease-in-out hover:scale-103 "
+                        )}
+                      >
+                        {item.name}
+                      </Link>
+                    );
+                  })}
+                </div>
               </div>
 
               {/* USER BUTTON */}
@@ -105,7 +110,10 @@ function Nav() {
                         )}
                         <div className="w-10">
                           <img
-                            src={ currentUser?.profilePic || "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png" }
+                            src={
+                              currentUser?.profilePic ||
+                              "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png"
+                            }
                             alt="Profile"
                             className="w-10 h-10 rounded-full object-cover ring-4 ring-blue-300 shadow-md"
                           />

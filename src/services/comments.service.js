@@ -32,3 +32,12 @@ export const voteOnComment = async ({ commentId, ideaId, vote, userId }) => {
 
   return res.data;
 };
+
+export const reportComment = async (commentId) => {
+  const res = await axios.post(
+    `${API}/comments/report`,
+    { commentId },
+    { withCredentials: true }
+  );
+  return res.data;
+};

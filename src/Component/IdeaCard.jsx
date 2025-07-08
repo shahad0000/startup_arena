@@ -7,6 +7,9 @@ import { scheduleMeeting } from "../services/zoom.service";
 import { FaRegCalendarAlt } from "react-icons/fa";
 
 export const IdeaCard = ({ ideas = [], userRole }) => {
+
+  console.log(ideas)
+
   const [showModal, setShowModal] = useState(false);
   const [IdeaId, setIdeaId] = useState(null);
 
@@ -158,18 +161,17 @@ export const IdeaCard = ({ ideas = [], userRole }) => {
               <div className="flex items-center gap-5 h-full mt-2">
                 <div className="rounded-full border border-gray-500 flex items-center h-full">
                   <img
-                    src={idea.profilePic}
+                    src={idea.founderId?.profilePic || "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png"}
                     alt=""
                     className="w-8 h-8 rounded-full"
                   />
                 </div>
                 <div className="text-[13px] text-[#888888]">
                   <p className="text-[#202020] font-bold">
-                    {idea.founderId?.name}
+                    {idea?.founderId?.name || "name"}
                   </p>
                   <p className="italic text-xs font-light">
-                    {idea.founderId?.email}
-                    justUser@example.com
+                    {idea?.founderId?.email || "user@example.com"}
                   </p>
                 </div>
               </div>
@@ -204,12 +206,6 @@ export const IdeaCard = ({ ideas = [], userRole }) => {
         ))}
       </div>
 
-      {/* Load More */}
-      <div className="flex justify-center mt-10">
-        <button className="border border-gray-300 px-6 py-3 rounded-[10px] text-[16px] font-medium focus:ring-opacity-50 transition duration-300 ease-in-out transform hover:scale-105">
-          Load More Ideas
-        </button>
-      </div>
 
       {/* Modal */}
       <RequestMeetingModal
