@@ -25,7 +25,7 @@
 |------------------------|-------------|
 | شوق الكنهل             | [@shouqak](https://github.com/shouqak) |
 | عبدالرحمن النفيسي      | [@abdulrhman3657](https://github.com/abdulrhman3657) |
-| سعد الزريع             | [@SaadAlzarea](https://github.com/SaadAlzarea) |
+| سعد الزارع             | [@SaadAlzarea](https://github.com/SaadAlzarea) |
 | شهد العريفي            | [@shahad0000](https://github.com/shahad0000) |
 
 ---
