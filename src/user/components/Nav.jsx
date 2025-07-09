@@ -47,7 +47,7 @@ function Nav() {
   };
 
   return (
-    <div className="flex justify-between max-w-screen">
+    <div className="flex justify-between max-w-screen lg:mx-4">
       {/* NAVBAR */}
       <Disclosure as="nav"  className="bg-white border-b border-gray-300 w-full">
         <div className="py-1  px-4 sm:px-6 lg:px-4">

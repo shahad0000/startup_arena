@@ -25,7 +25,7 @@ function SignIn() {
 
   return (
     <>
-<div className="flex flex-col p-4 bg-gray-50">
+<div className="flex min-h-screen flex-col p-4 bg-gray-50">
 
   {/* Container for Image + Form */}
 <div className="w-full flex flex-col lg:flex-row justify-center items-center ">
@@ -39,7 +39,7 @@ function SignIn() {
   </div>
 
   {/* Right: Sign In Form */}
-  <div className="w-full lg:w-1/3 max-w-md ">
+  <div className="w-full  lg:w-1/3 max-w-md ">
    <div className="text-center ">
     <p className="text-2xl font-bold">SIGN IN</p>
     <p className="font-medium text-gray-600">Welcome Back!</p>
