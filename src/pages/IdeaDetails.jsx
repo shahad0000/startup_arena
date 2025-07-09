@@ -231,7 +231,7 @@ export default function IdeaDetails() {
     return <div className="text-center py-20 text-red-500">{error}</div>;
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-white via-slate-50 to-slate-100 text-[#333] font-sans">
+    <div className="min-h-screen pb-3 w-full bg-gradient-to-br from-white via-slate-50 to-slate-100 text-[#333] font-sans">
       <div className="bg-white/80 backdrop-blur-sm shadow-sm border-b border-gray-100 sticky top-0 z-10">
         <div className="w-full px-4  lg:px-34 md:px-8 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
