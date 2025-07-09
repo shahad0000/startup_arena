@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { FiLogOut } from "react-icons/fi";
+import { FiLogOut, FiEdit, FiSave } from "react-icons/fi";
 import { TbUpload } from "react-icons/tb";
 import {
   getCurrentUser,
@@ -15,7 +15,6 @@ function UserProfile({ onUpdate }) {
   const [gender, setGender] = useState("");
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
-  const [role, setRole] = useState("");
   const [avatar, setAvatar] = useState(
     "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png"
   );
@@ -59,6 +58,7 @@ function UserProfile({ onUpdate }) {
     }
     setIsEditing(false);
   };
+
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -86,100 +86,150 @@ function UserProfile({ onUpdate }) {
     }
   };
 
+  const gccCountries = [
+    "Saudi Arabia",
+    "Kuwait",
+    "The United Arab Emirates",
+    "Qatar",
+    "Bahrain",
+    "Oman",
+  ];
+
   return (
-    <div className=" mx-auto bg-gradient-to-br from-white via-gray-50 to-white rounded-3xl shadow-2xl overflow-hidden p-7 space-y-6 border border-gray-200">
-      {/* Avatar */}
-      <div className="flex flex-col items-center space-y-2">
-        <div
-          className="relative cursor-pointer"
-          onClick={() => isEditing && fileInputRef.current.click()}
-        >
-          <img
-            src={avatar}
-            alt="Profile"
-            className="w-32 h-32 rounded-full object-cover ring-4 ring-blue-200 shadow-md"
-          />
-          {isEditing && (
-            <div className="absolute bottom-0 right-0 bg-blue-700 p-1.5 rounded-full">
-              <TbUpload className="text-white" />
-            </div>
-          )}
-          <input
-            type="file"
-            accept="image/*"
-            ref={fileInputRef}
-            onChange={handleImageChange}
-            className="hidden"
-          />
+    <div className="mx-auto bg-gradient-to-br from-white via-gray-50 to-white rounded-3xl shadow-2xl overflow-hidden p-5 space-y-6 border border-gray-200  w-100">
+      <div className="bg-[#1E40AF] py-5 flex flex-col gap-3 rounded-t-3xl shadow-b shadow-2xl">
+        {/* Avatar */}
+        <div className="flex flex-col items-center space-y-2 ">
+          <div
+            className="relative cursor-pointer"
+            onClick={() => isEditing && fileInputRef.current.click()}
+          >
+            <img
+              src={avatar}
+              alt="Profile"
+              className="w-32 h-32 rounded-full object-cover ring-4 ring-[#1E40AF] shadow-md"
+            />
+            {isEditing && (
+              <div className="absolute bottom-0 right-0 bg-[#1E40AF] p-1.5 rounded-full">
+                <TbUpload className="text-white" />
+              </div>
+            )}
+            <input
+              type="file"
+              accept="image/*"
+              ref={fileInputRef}
+              onChange={handleImageChange}
+              className="hidden"
+            />
+          </div>
         </div>
-      </div>
 
-      {/* Info */}
-      <div className="text-center space-y-1">
-        {isEditing ? (
-          <>
-            {/* <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="text-xl font-bold text-center text-gray-800 border-b-2 border-blue-400 focus:outline-none"
-              /> */}
-
-            <h2 className=" text-xl font-bold text-center text-gray-800 border-b-2 border-white focus:outline-none">
+        {/* Info */}
+        <div className="text-center space-y-1 bg-[#1E40AF] text-white">
+          {isEditing ? (
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="text-xl font-bold text-center  border p-1 border-white focus:outline-none bg-transparent w-fit rounded-md"
+              placeholder="Your name"
+            />
+          ) : (
+            <h2 className="text-xl font-bold text-center p-1  focus:outline-none">
               {name}
             </h2>
-          </>
-        ) : (
-          <>
-            <h2 className=" text-xl font-bold text-center text-gray-800 border-b-2 border-white focus:outline-none">
-              {name}
-            </h2>
-          </>
-        )}
-        <p className="text-gray-400 text-sm cursor-not-allowed select-none">
-          {email}
-        </p>
+          )}
+          <p className=" text-sm cursor-not-allowed select-none">{email}</p>
+        </div>
       </div>
 
       {/* Details */}
-      <div className="bg-gray-100 rounded-xl px-4 py-3 text-sm text-gray-700 space-y-2 shadow-inner">
-        <div className="flex justify-between">
-          <span className="font-medium text-gray-600">Gender:</span>
-
-          <span className="text-gray-800 font-semibold">{gender}</span>
+      <div className=" rounded-xl px-4 py-3 text-sm text-gray-700 space-y-3">
+        {/* Gender Field */}
+        <div className="flex flex-col">
+          <label className="font-medium text-gray-600 mb-1">Gender:</label>
+          {isEditing ? (
+            <select
+              value={gender}
+              onChange={(e) => setGender(e.target.value)}
+              className="border rounded-lg px-3 py-2 text-gray-800 w-full"
+            >
+              <option value="">Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+          ) : (
+            <span className="border border-gray-400  p-2 rounded-md text-gray-800 font-medium">
+              {gender || "Not specified"}
+            </span>
+          )}
         </div>
-        <div className="flex justify-between">
-          <span className="font-medium text-gray-600">role:</span>
 
-          <span className="text-gray-800 font-semibold">{role}</span>
+        {/* Country Field */}
+        <div className="flex flex-col">
+          <label className="font-medium text-gray-600 mb-1">Country:</label>
+          {isEditing ? (
+            <select
+              value={country}
+              onChange={(e) => setCountry(e.target.value)}
+              className="border rounded-lg px-3 py-2 text-gray-800 w-full"
+            >
+              <option value="">Select country</option>
+              {gccCountries.map((country) => (
+                <option key={country} value={country}>
+                  {country}
+                </option>
+              ))}
+            </select>
+          ) : (
+            <span className="text-gray-800 border border-gray-400 rounded-md font-medium p-2">
+              {country || "Not specified"}
+            </span>
+          )}
         </div>
-        <div className="flex justify-between gap-2 md:gap-26">
-          <span className="font-medium text-gray-600">Country:</span>
 
-          <span className="text-gray-800 font-semibold">{country}</span>
-        </div>
-        <div className="flex justify-between">
-          <span className="font-medium text-gray-600">City:</span>
-
-          <span className="text-gray-800 font-semibold">{city}</span>
+        {/* City Field */}
+        <div className="flex flex-col">
+          <label className="font-medium text-gray-600 mb-1">City:</label>
+          {isEditing ? (
+            <input
+              type="text"
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+              className="border rounded-lg px-3 py-2 text-gray-800 w-full"
+              placeholder="Enter your city"
+            />
+          ) : (
+            <span className="text-gray-800 border border-gray-400 rounded-md font-medium p-2">
+              {city || "Not specified"}
+            </span>
+          )}
         </div>
       </div>
 
-      {/* Button */}
-      <button
-        onClick={isEditing ? handleSave : toggleEdit}
-        className="w-full py-2 mb-3 bg-blue-700 text-white font-semibold rounded-full hover:bg-blue-800 transition duration-200 shadow-md"
-      >
-        {isEditing ? "Save Profile" : "Edit Profile"}
-      </button>
+      {/* Action Buttons */}
+      <div className="space-y-3">
+        <button
+          onClick={isEditing ? handleSave : toggleEdit}
+          className={`w-full py-3 text-white font-semibold rounded-full transition duration-200 shadow-md flex items-center justify-center gap-2 ${
+            isEditing
+              ? "bg-[#1E40AF] hover:bg-[#1E40AF]"
+              : "bg-[#1E40AF] hover:bg-[#1E40AF]"
+          }`}
+        >
+          {isEditing ? <FiSave size={18} /> : <FiEdit size={18} />}
+          {isEditing ? "Save Changes" : "Edit Profile"}
+        </button>
 
-      {/* Save Button */}
-      <button
-        onClick={handleLogout}
-        className="flex gap-1  justify-center w-full py-2 bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white  px-4 border border-red-500 hover:border-transparent rounded-full"
-      >
-        <FiLogOut className="mt-1" /> LogOut
-      </button>
+        <button
+          onClick={handleLogout}
+          className="flex gap-2 justify-center items-center w-full py-2 bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white px-4 border border-red-500 hover:border-transparent rounded-full"
+        >
+          <FiLogOut size={18} />
+          <span>Log Out</span>
+        </button>
+      </div>
     </div>
   );
 }
