@@ -94,7 +94,7 @@ function UserProfile({ onUpdate }) {
   ];
 
   return (
-    <div className="mx-auto bg-gradient-to-br from-white via-gray-50 to-white rounded-3xl shadow-2xl overflow-hidden p-5 space-y-6 border border-gray-200  w-100">
+    <div className="mx-auto bg-gradient-to-br from-white via-gray-50 to-white rounded-3xl shadow-2xl overflow-hidden p-5 space-y-6 border border-gray-200  w-75 md:w-100 lg:w-110">
       <div className="bg-[#1E40AF] py-5 flex flex-col gap-3 rounded-t-3xl shadow-b shadow-2xl">
         {/* Avatar */}
         <div className="flex flex-col items-center space-y-2 ">
@@ -206,13 +206,13 @@ function UserProfile({ onUpdate }) {
       </div>
 
       {/* Action Buttons */}
-      <div className="space-y-3">
+      <div className="flex items-center gap-2 ">
         <button
           onClick={isEditing ? handleSave : toggleEdit}
-          className={`w-full py-3 text-white font-semibold rounded-full transition duration-200 shadow-md flex items-center justify-center gap-2 ${
+          className={`w-full py-2 text-white font-semibold rounded-full transition duration-200 shadow-md flex items-center justify-center gap-2 ${
             isEditing
-              ? "bg-[#1E40AF] hover:bg-[#1E40AF]"
-              : "bg-[#1E40AF] hover:bg-[#1E40AF]"
+              ? "bg-[#1E40AF] hover:bg-[#809dff] border"
+              : "bg-[#1E40AF] hover:bg-[#809dff]"
           }`}
         >
           {isEditing ? <FiSave size={18} /> : <FiEdit size={18} />}
@@ -221,7 +221,7 @@ function UserProfile({ onUpdate }) {
 
         <button
           onClick={handleLogout}
-          className="flex gap-2 justify-center items-center w-full py-2 bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white px-4 border border-red-500 hover:border-transparent rounded-full"
+          className="flex gap-2 justify-center items-center w-full py-2 bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white  border border-red-500 hover:border-transparent rounded-full"
         >
           <FiLogOut size={18} />
           <span>Log Out</span>
