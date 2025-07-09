@@ -30,7 +30,7 @@ function SignUpSecondStep({ formData, setFormData, onBack, onSubmit }) {
   </div> */}
 
   {/* image + form section */}
-  <div className="flex flex-col lg:flex-row justify-center items-center gap-10  p-6 rounded-lg  w-full max-w-5xl">
+  <div className="flex flex-col lg:flex-row justify-center  items-center gap-10  p-6 rounded-lg  w-full max-w-5xl">
     {/* image */}
     <img src={investmentIdea} alt="Investment"   className="hidden lg:block h-40 sm:h-60 md:h-80 object-contain"
  />
