@@ -25,13 +25,12 @@ function SignIn() {
 
   return (
     <>
-<div className="flex flex-col min-h-screen justify-center items-center p-4 bg-gray-50">
- 
+<div className="flex flex-col p-4 bg-gray-50">
 
   {/* Container for Image + Form */}
-<div className="w-full max-w-7xl rounded-lg  flex flex-col lg:flex-row items-center  ">
+<div className="w-full flex flex-col lg:flex-row justify-center items-center ">
   {/* Left: Image Section */}
-  <div className="hidden lg:flex w-full lg:w-2/3 aspect-[5-1/50] mx-auto">
+  <div className="hidden lg:flex w-full lg:w-2/3 aspect-[5-1/50] mx-auto m-0">
     <img
       src={investmentIdea}
       alt="Investment Illustration"
@@ -40,7 +39,7 @@ function SignIn() {
   </div>
 
   {/* Right: Sign In Form */}
-  <div className="w-full lg:w-1/3 max-w-md">
+  <div className="w-full lg:w-1/3 max-w-md ">
    <div className="text-center ">
     <p className="text-2xl font-bold">SIGN IN</p>
     <p className="font-medium text-gray-600">Welcome Back!</p>
