@@ -1,5 +1,5 @@
 import React from "react";
-import { investmentIdea } from "../public/ExporImage";
+import investmentIdea from "../public/images/Market-launch-pana.png";
 import { FaCheck } from "react-icons/fa6";
 
 function SignUpSecondStep({ formData, setFormData, onBack, onSubmit }) {
@@ -9,114 +9,117 @@ function SignUpSecondStep({ formData, setFormData, onBack, onSubmit }) {
   };
   return (
     <div className="flex flex-col min-h-screen justify-center items-center px-4 py-6 bg-gray-50">
-  {/* signup text */}
-  <div className="mb-6 text-center">
-    <p className="text-2xl font-bold mb-2">SIGNUP</p>
-    <p className="text-lg font-bold">Create New Account</p>
-    <p className="text-sm font-medium text-[#9CA3AF]">Join our startup community</p>
-  </div>
-
-  {/* signup steps */}
-  {/* <div className="flex justify-center items-center gap-4 mb-6">
-    <div className="p-1 rounded-full bg-[#1E40AF]">
-      <div className="p-2 rounded-full bg-[#1E40AF] text-white text-lg font-bold">
-        <FaCheck size={18} />
+      {/* Signup Header */}
+      <div className="mb-8 text-center">
+        <p className="text-2xl font-bold mb-1">SIGNUP</p>
+        <p className="text-lg font-bold">Create New Account</p>
+        <p className="text-sm font-medium text-gray-500 mt-1">
+          Join our startup community
+        </p>
       </div>
-    </div>
-    <p><sup className="text-3xl font-extrabold text-[#1E40AF]">______</sup></p>
-    <div className="p-1 rounded-full bg-[#1E40AF]">
-      <p className="py-2 px-4 rounded-full bg-[#1E40AF] text-lg font-bold text-white">2</p>
-    </div>
-  </div> */}
 
-  {/* image + form section */}
-  <div className="flex flex-col lg:flex-row justify-center items-center gap-10  p-6 rounded-lg  w-full max-w-5xl">
-    {/* image */}
-    <img src={investmentIdea} alt="Investment"   className="hidden lg:block h-40 sm:h-60 md:h-80 object-contain"
- />
-
-    {/* form */}
-    <div className="w-full max-w-md">
-      <div className="text-black flex flex-col gap-4">
-        <div>
-          <label className="text-md font-medium">Age:</label>
-          <input
-            type="number"
-            name="age"
-            placeholder="e.g. 25"
-            className="border border-gray-400 rounded-sm pl-2 h-10 w-full outline-none"
-            value={formData.age}
-            onChange={handleChange}
-            required
+      {/* Image & Form Section */}
+      <div className="w-full max-w-6xl flex flex-col lg:flex-row justify-between items-center gap-12 p-6 rounded-lg ">
+        {/* Left - Image (visible only on large screens) */}
+        <div className="hidden lg:flex w-full lg:w-3/3 aspect-[51/0] mx-auto">
+          <img
+            src={investmentIdea}
+            alt="Investment Illustration"
+            className="w-full h-auto object-contain"
           />
         </div>
 
-        <div>
-          <label className="text-md font-medium">Gender</label>
-          <select
-            name="gender"
-            value={formData.gender}
-            onChange={handleChange}
-            required
-            className="border border-gray-400 rounded-sm pl-2 h-10 w-full outline-none"
+        {/* Right - Form */}
+        <div className="w-full lg:w-1/2 max-w-md">
+          <form
+            onSubmit={(e) => e.preventDefault()}
+            className="flex flex-col gap-5"
           >
-            <option value="">Select gender</option>
-            <option>Male</option>
-            <option>Female</option>
-          </select>
-        </div>
+            {/* Age Field */}
+            <div>
+              <label className="block text-sm font-medium mb-1">Age:</label>
+              <input
+                type="number"
+                name="age"
+                placeholder="e.g. 25"
+                value={formData.age}
+                onChange={handleChange}
+                className="border border-gray-400 rounded-sm pl-3 pr-3 h-10 w-full outline-none focus:ring-2 focus:ring-blue-300"
+                required
+              />
+            </div>
 
-        <div>
-          <label className="text-md font-medium">Country</label>
-          <select
-            name="country"
-            value={formData.country}
-            onChange={handleChange}
-            required
-            className="border border-gray-400 rounded-sm pl-2 h-10 w-full outline-none"
-          >
-            <option value="">Select country</option>
-            <option>Saudi Arabia</option>
-            <option>Kuwait</option>
-            <option>The United Arab Emirates</option>
-            <option>Qatar</option>
-            <option>Bahrain</option>
-            <option>Oman</option>
-          </select>
-        </div>
+            {/* Gender Field */}
+            <div>
+              <label className="block text-sm font-medium mb-1">Gender</label>
+              <select
+                name="gender"
+                value={formData.gender}
+                onChange={handleChange}
+                required
+                className="border border-gray-400 rounded-sm pl-3 pr-3 h-10 w-full outline-none focus:ring-2 focus:ring-blue-300"
+              >
+                <option value="">Select gender</option>
+                <option>Male</option>
+                <option>Female</option>
+              </select>
+            </div>
 
-        <div>
-          <label className="text-md font-medium">City</label>
-          <input
-            type="text"
-            name="city"
-            value={formData.city}
-            onChange={handleChange}
-            className="border border-gray-400 rounded-sm pl-2 h-10 w-full outline-none"
-            placeholder="Enter your city"
-            required
-          />
-        </div>
+            {/* Country Field */}
+            <div>
+              <label className="block text-sm font-medium mb-1">Country</label>
+              <select
+                name="country"
+                value={formData.country}
+                onChange={handleChange}
+                required
+                className="border border-gray-400 rounded-sm pl-3 pr-3 h-10 w-full outline-none focus:ring-2 focus:ring-blue-300"
+              >
+                <option value="">Select country</option>
+                <option>Saudi Arabia</option>
+                <option>Kuwait</option>
+                <option>The United Arab Emirates</option>
+                <option>Qatar</option>
+                <option>Bahrain</option>
+                <option>Oman</option>
+              </select>
+            </div>
 
-        <div className="flex gap-2 mt-4">
-          <button
-            onClick={onBack}
-            className="text-sm font-medium py-2 w-full rounded-lg bg-gray-300 text-black"
-          >
-            Back
-          </button>
-          <button
-            onClick={onSubmit}
-            className="text-sm font-medium py-2 w-full rounded-lg bg-[#1E40AF] text-white"
-          >
-            Submit
-          </button>
+            {/* City Field */}
+            <div>
+              <label className="block text-sm font-medium mb-1">City</label>
+              <input
+                type="text"
+                name="city"
+                value={formData.city}
+                onChange={handleChange}
+                placeholder="Enter your city"
+                className="border border-gray-400 rounded-sm pl-3 pr-3 h-10 w-full outline-none focus:ring-2 focus:ring-blue-300"
+                required
+              />
+            </div>
+
+            {/* Buttons */}
+            <div className="flex gap-4 mt-4">
+              <button
+                type="button"
+                onClick={onBack}
+                className="py-2 w-full rounded-lg bg-gray-300 text-black text-sm font-medium hover:bg-gray-400 transition-colors"
+              >
+                Back
+              </button>
+              <button
+                type="button"
+                onClick={onSubmit}
+                className="py-2 w-full rounded-lg bg-[#1E40AF] text-white text-sm font-medium hover:bg-blue-800 transition-colors"
+              >
+                Submit
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
-  </div>
-</div>
-
   );
 }
 

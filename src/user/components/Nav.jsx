@@ -47,45 +47,43 @@ function Nav() {
   };
 
   return (
-    <>
+    <div className="flex justify-between max-w-screen">
       {/* NAVBAR */}
-      <Disclosure
-        as="nav"
-        className="bg-white border-b border-gray-300  max-w-screen"
-      >
-        <div className=" py-1 max-w-7xl px-4 sm:px-6 lg:px-4 ">
+      <Disclosure as="nav"  className="bg-white border-b border-gray-300 w-full">
+        <div className="py-1  px-4 sm:px-6 lg:px-4">
           <div className="flex h-16 items-center justify-between">
             <div className="flex w-full justify-between items-center">
               <div className="flex items-center">
-                {/* <p className="text-2xl font-bold text-[#1E40AF]">
-                  Startup Arena
-                </p> */}
                 <Link to="/AllIdeas">
-                  <img src={fullLogo} alt="" className="h-15" />
+                  <img src={fullLogo} alt="Logo" className="h-15" />
                 </Link>
               </div>
 
               <div className="hidden sm:flex space-x-6">
-                <div>
-                  {navigation.map((item) => {
-                    const isActive = location.pathname === item.to;
-                    return (
-                      <Link
-                        key={item.name}
-                        to={item.to}
-                        aria-current={isActive ? "page" : undefined}
-                        className={classNames(
-                          isActive
-                            ? "underline text-[#1E40AF]"
-                            : "text-gray-800 hover:underline hover:text-[#1E40AF]",
-                          "rounded-md px-3 py-2 text-sm font-medium transition transform duration-300 ease-in-out hover:scale-103 "
-                        )}
-                      >
-                        {item.name}
-                      </Link>
-                    );
-                  })}
-                </div>
+                {navigation.map((item) => {
+                  const isActive = location.pathname === item.to;
+
+                  // this for hidden my idea if user unequal founder
+                  if (item.name === "My Ideas" && currentUser?.role !== "founder") {
+                    return null;
+                  }
+
+                  return (
+                    <Link
+                      key={item.name}
+                      to={item.to}
+                      aria-current={isActive ? "page" : undefined}
+                      className={classNames(
+                        isActive
+                          ? "underline text-[#1E40AF]"
+                          : "text-gray-800 hover:underline hover:text-[#1E40AF]",
+                        "rounded-md px-3 py-2 text-sm font-medium transition transform duration-300 ease-in-out hover:scale-103"
+                      )}
+                    >
+                      {item.name}
+                    </Link>
+                  );
+                })}
               </div>
 
               {/* USER BUTTON */}
@@ -99,14 +97,12 @@ function Nav() {
                       <span className="sr-only">Open user menu</span>
                       <div className="flex items-center gap-5">
                         {currentUser?.role === "founder" && (
-                          <div>
-                            <Link
-                              to={"/submitIdea"}
-                              className="hidden md:flex bg-[#1E40AF] text-white px-4 py-2 text-sm rounded-md font-medium hover:bg-blue-900"
-                            >
-                              Add Idea +
-                            </Link>
-                          </div>
+                          <Link
+                            to={"/submitIdea"}
+                            className="hidden md:flex bg-[#1E40AF] text-white px-4 py-2 text-sm rounded-md font-medium hover:bg-blue-900"
+                          >
+                            Add Idea +
+                          </Link>
                         )}
                         <div className="w-10">
                           <img
@@ -130,23 +126,23 @@ function Nav() {
             <div className="sm:hidden flex items-center">
               <DisclosureButton className="group inline-flex items-center justify-center rounded-md p-2 text-gray-600 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-[#1E40AF]">
                 <span className="sr-only">Open main menu</span>
-                <Bars3Icon
-                  className="block size-6 group-data-open:hidden"
-                  aria-hidden="true"
-                />
-                <XMarkIcon
-                  className="hidden size-6 group-data-open:block"
-                  aria-hidden="true"
-                />
+                <Bars3Icon className="block size-6 group-data-open:hidden" aria-hidden="true" />
+                <XMarkIcon className="hidden size-6 group-data-open:block" aria-hidden="true" />
               </DisclosureButton>
             </div>
           </div>
         </div>
 
+        {/* MOBILE NAV */}
         <DisclosurePanel className="sm:hidden">
           <div className="space-y-1 px-2 pt-2 pb-3">
             {navigation.map((item) => {
               const isActive = location.pathname === item.to;
+
+              if (item.name === "My Ideas" && currentUser?.role !== "founder") {
+                return null;
+              }
+
               return (
                 <Link
                   key={item.name}
@@ -156,25 +152,30 @@ function Nav() {
                     isActive
                       ? "bg-[#1E40AF] text-white"
                       : "text-gray-800 hover:bg-gray-200 font-extrabold hover:text-[#1E40AF]",
-                    "block rounded-md px-3 py-2 text-base font-medium transition "
+                    "block rounded-md px-3 py-2 text-base font-medium transition"
                   )}
                 >
                   {item.name}
                 </Link>
               );
             })}
-            <Link
-              to={"/submitIdea"}
-              className="bg-[#1E40AF] text-white px-1 py-2  text-sm rounded-md hover:bg-yellow-500"
-            >
-              Add Idea +
-            </Link>
+
+            {/* Add Idea Button for Founder */}
+            {currentUser?.role === "founder" && (
+              <Link
+                to={"/submitIdea"}
+                className="bg-[#1E40AF] text-white px-1 py-2 text-sm rounded-md hover:bg-yellow-500"
+              >
+                Add Idea +
+              </Link>
+            )}
           </div>
         </DisclosurePanel>
       </Disclosure>
 
+      {/* PROFILE MODAL */}
       {showProfile && (
-        <div className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center">
+        <div className="fixed inset-0 z-50 bg-black/40 flex w-full items-center justify-center">
           <div className="relative">
             <button
               className="absolute -top-4 -right-4 bg-white text-[#1E40AF] rounded-full p-1 shadow"
@@ -186,7 +187,7 @@ function Nav() {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }
 

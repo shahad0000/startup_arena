@@ -124,7 +124,7 @@ export const IdeaCard = ({ ideas = [], userRole }) => {
             className="bg-white drop-shadow-lg  rounded-lg p-4 relative transform transition-transform duration-300 ease-in-out hover:translate-1 hover:scale-100"
           >
             <div className="absolute right-4 top-4 text-amber-300 px-2 py-1 rounded flex items-center gap-1">
-              <GoArrowUp /> {idea.totalUpvotes}
+              <GoArrowUp /> {idea.totalUpvotes - idea.totalDownvotes}
             </div>
 
             <div className="flex flex-wrap gap-2 mb-3">
