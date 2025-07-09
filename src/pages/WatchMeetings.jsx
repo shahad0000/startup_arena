@@ -74,7 +74,7 @@ const WatchMeetings = () => {
                     placeholder="Search meetings..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-64 pl-9 pr-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/80 backdrop-blur-sm transition-all text-sm"
+                    className="w-30 lg:w-64 pl-9 pr-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/80 backdrop-blur-sm transition-all text-sm"
                   />
                 </div>
               </div>
@@ -83,13 +83,13 @@ const WatchMeetings = () => {
         </div>
   
         {/* Main Content */}
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto lg:px-6 px-3">
           {filterMeetings.length === 0 ? (
             <div className="text-center py-12">
               <p className="text-gray-500 text-lg">No meetings found.</p>
             </div>
           ) : (
-            <div className="px-6 py-8 sm:px-8 md:px-10 border-l-4 border-r-4 border-double border-gray-200 bg-gradient-to-b from-slate-50 to-white">
+            <div className="px-3 py-6 lg:px-6 lg:py-8 sm:px-8 md:px-10 border-l-4 border-r-4 border-double border-gray-200 bg-gradient-to-b from-slate-50 to-white">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filterMeetings.map((meeting, index) => (
                   <div
