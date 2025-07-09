@@ -8,15 +8,7 @@ function SignUpSecondStep({ formData, setFormData, onBack, onSubmit }) {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
   return (
-    <div className="flex flex-col min-h-screen justify-center items-center px-4 py-6 bg-gray-50">
-      {/* Signup Header */}
-      <div className="mb-8 text-center">
-        <p className="text-2xl font-bold mb-1">SIGNUP</p>
-        <p className="text-lg font-bold">Create New Account</p>
-        <p className="text-sm font-medium text-gray-500 mt-1">
-          Join our startup community
-        </p>
-      </div>
+   <div className="flex flex-col min-h-screen justify-center items-center px-4 py-6 bg-gray-50"> 
 
       {/* Image & Form Section */}
       <div className="w-full max-w-6xl flex flex-col lg:flex-row justify-between items-center gap-12 p-6 rounded-lg ">
@@ -29,25 +21,29 @@ function SignUpSecondStep({ formData, setFormData, onBack, onSubmit }) {
           />
         </div>
 
-        {/* Right - Form */}
-        <div className="w-full lg:w-1/2 max-w-md">
-          <form
-            onSubmit={(e) => e.preventDefault()}
-            className="flex flex-col gap-5"
-          >
-            {/* Age Field */}
-            <div>
-              <label className="block text-sm font-medium mb-1">Age:</label>
-              <input
-                type="number"
-                name="age"
-                placeholder="e.g. 25"
-                value={formData.age}
-                onChange={handleChange}
-                className="border border-gray-400 rounded-sm pl-3 pr-3 h-10 w-full outline-none focus:ring-2 focus:ring-blue-300"
-                required
-              />
-            </div>
+    {/* Right - Form */}
+    <div className="w-full lg:w-1/2 max-w-md">
+     <div className="mb-8 text-center">
+    <p className="text-2xl font-bold mb-1">SIGNUP</p>
+    <p className="text-lg font-bold">Create New Account</p>
+    <p className="text-sm font-medium text-gray-500 mt-1">
+      Join our startup community
+    </p>
+  </div>
+      <form onSubmit={(e) => e.preventDefault()} className="flex flex-col gap-5">
+        {/* Age Field */}
+        <div>
+          <label className="block text-sm font-medium mb-1">Age:</label>
+          <input
+            type="number"
+            name="age"
+            placeholder="e.g. 25"
+            value={formData.age}
+            onChange={handleChange}
+            className="border border-gray-400 rounded-sm pl-3 pr-3 h-10 w-full outline-none focus:ring-2 focus:ring-blue-300"
+            required
+          />
+        </div>
 
             {/* Gender Field */}
             <div>
