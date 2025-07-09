@@ -19,9 +19,7 @@ function SignUpFirstStep({ formData = {}, setFormData, onNext }) {
     setFormData((prev) => ({ ...prev, role }));
   };
   return (
-<div className="flex flex-col min-h-screen justify-center items-center px-4 py-6 bg-gray-50">
-  {/* Signup Header */}
- 
+<div className="flex flex-col min-h-screen justify-center items-center px-4 py-6 bg-gray-50"> 
 
   {/* Image & Form Section */}
   <div className="w-full max-w-6xl flex flex-col lg:flex-row items-center justify-between gap-12 p-6 rounded-lg ">

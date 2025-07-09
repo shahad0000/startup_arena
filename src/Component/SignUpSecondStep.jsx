@@ -8,9 +8,7 @@ function SignUpSecondStep({ formData, setFormData, onBack, onSubmit }) {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
   return (
-   <div className="flex flex-col min-h-screen justify-center items-center px-4 py-6 bg-gray-50">
-  {/* Signup Header */}
- 
+   <div className="flex flex-col min-h-screen justify-center items-center px-4 py-6 bg-gray-50"> 
 
       {/* Image & Form Section */}
       <div className="w-full max-w-6xl flex flex-col lg:flex-row justify-between items-center gap-12 p-6 rounded-lg ">
