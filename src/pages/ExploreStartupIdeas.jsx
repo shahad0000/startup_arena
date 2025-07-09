@@ -78,7 +78,7 @@ export default function AllIdeas() {
 
               <div className="flex items-center gap-3">
                 <div className="relative">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-900 w-4 h-4" />
                   <input
                     type="text"
                     placeholder="Search ideas..."
@@ -89,11 +89,11 @@ export default function AllIdeas() {
                 </div>
                 <div className="flex gap-2">
                   <div className="relative">
-                  <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 text-black w-4 h-4 pointer-events-none" />
+                  <ChevronDown className="absolute textg right-3 top-1/2 transform -translate-y-1/2  w-4 h-4 pointer-events-none z-10" />
                   <select
                       value={sortBy}
                       onChange={(e) => setSortBy(e.target.value)}
-                      className="pl-8 pr-10 py-2.5 bg-white text-gray-800 font-medium border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1E40AF] appearance-none backdrop-blur-sm text-xs cursor-pointer transition-all"
+                      className="pl-8 pr-10 py-2.5 bg-white text-gray-400 font-medium border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1E40AF] appearance-none backdrop-blur-sm text-xs cursor-pointer transition-all"
                     >
                       <option value="recent">Recent</option>
                       <option value="oldest">Oldest</option>
@@ -101,11 +101,11 @@ export default function AllIdeas() {
                   </div>
 
                   <div className="relative">
-                    <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 text-black w-4 h-4 pointer-events-none" />
+                    <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2  w-4 h-4 pointer-events-none z-10" />
                     <select
                       value={voteSort}
                       onChange={(e) => setVoteSort(e.target.value)}
-                      className="pl-8 pr-6 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white/80 backdrop-blur-sm text-xs appearance-none cursor-pointer min-w-[120px] transition-all"
+                      className="pl-8 pr-10 py-2.5 bg-white text-gray-400 font-medium border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1E40AF] appearance-none backdrop-blur-sm text-xs cursor-pointer transition-all"
                     >
                       <option value="popular">Most Voted</option>
                       <option value="least">Least Voted</option>
