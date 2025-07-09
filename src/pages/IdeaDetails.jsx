@@ -21,11 +21,9 @@ import { GoLinkExternal } from "react-icons/go"
 import { CiCalendar } from "react-icons/ci"
 import { FaChevronDown, FaChevronUp } from "react-icons/fa6"
 import { RiSendPlaneFill } from "react-icons/ri"
-import { IoIosArrowBack } from "react-icons/io"
 import { FaStar } from "react-icons/fa"
 import { IoCalendarOutline } from "react-icons/io5"
 import { BiDotsVerticalRounded } from "react-icons/bi"
-import { FaRegCalendarAlt } from "react-icons/fa"
 
 export default function IdeaDetails() {
   const { id } = useParams()

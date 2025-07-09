@@ -20,7 +20,7 @@ const tagColors = {
   gaming: 'bg-violet-100 text-violet-800',
   manufacturing: 'bg-zinc-100 text-zinc-800',
   logistics: 'bg-amber-100 text-amber-800',
-  other: 'bg-gray-100 text-gray-800',
+  other: 'bg-orange-100 text-orange-800',
 };
 
 export default tagColors;
