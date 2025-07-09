@@ -62,7 +62,7 @@ function VentureBoard() {
     );
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-white via-[#f0f9ff] to-[#e0f2fe] text-[#333] font-sans relative overflow-hidden">
+    <div className="min-h-screen w-full bg-gradient-to-br from-white via-slate-50 to-slate-100 text-[#333] font-sans relative overflow-hidden">
       {/* Background Icon */}
       <img
         src="https://static.thenounproject.com/png/profit-icon-4491647-512.png"
