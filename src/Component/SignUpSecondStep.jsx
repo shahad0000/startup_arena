@@ -10,13 +10,7 @@ function SignUpSecondStep({ formData, setFormData, onBack, onSubmit }) {
   return (
    <div className="flex flex-col min-h-screen justify-center items-center px-4 py-6 bg-gray-50">
   {/* Signup Header */}
-  <div className="mb-8 text-center">
-    <p className="text-2xl font-bold mb-1">SIGNUP</p>
-    <p className="text-lg font-bold">Create New Account</p>
-    <p className="text-sm font-medium text-gray-500 mt-1">
-      Join our startup community
-    </p>
-  </div>
+ 
 
   {/* Image & Form Section */}
   <div className="w-full max-w-6xl flex flex-col lg:flex-row justify-between items-center gap-12 p-6 rounded-lg ">
@@ -32,6 +26,13 @@ function SignUpSecondStep({ formData, setFormData, onBack, onSubmit }) {
 
     {/* Right - Form */}
     <div className="w-full lg:w-1/2 max-w-md">
+     <div className="mb-8 text-center">
+    <p className="text-2xl font-bold mb-1">SIGNUP</p>
+    <p className="text-lg font-bold">Create New Account</p>
+    <p className="text-sm font-medium text-gray-500 mt-1">
+      Join our startup community
+    </p>
+  </div>
       <form onSubmit={(e) => e.preventDefault()} className="flex flex-col gap-5">
         {/* Age Field */}
         <div>

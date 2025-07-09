@@ -26,10 +26,7 @@ function SignIn() {
   return (
     <>
 <div className="flex flex-col min-h-screen justify-center items-center p-4 bg-gray-50">
-  <div className="text-center ">
-    <p className="text-2xl font-bold">SIGN IN</p>
-    <p className="font-medium text-gray-600">Welcome Back!</p>
-  </div>
+ 
 
   {/* Container for Image + Form */}
 <div className="w-full max-w-7xl rounded-lg  flex flex-col lg:flex-row items-center  ">
@@ -44,6 +41,10 @@ function SignIn() {
 
   {/* Right: Sign In Form */}
   <div className="w-full lg:w-1/3 max-w-md">
+   <div className="text-center ">
+    <p className="text-2xl font-bold">SIGN IN</p>
+    <p className="font-medium text-gray-600">Welcome Back!</p>
+  </div>
     <form onSubmit={handleSubmit} className="flex flex-col w-full gap-4">
       {/* Email Field */}
       <div className="flex flex-col gap-1 w-full">
