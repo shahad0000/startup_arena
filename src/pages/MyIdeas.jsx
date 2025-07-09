@@ -4,7 +4,8 @@ import { FiEdit3 } from "react-icons/fi";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import tagColors from "../Component/CatagoryColors";
 import { Link } from "react-router";
-import { deleteIdea, fetchMyIdeas } from "../services/ideas.service";
+import { fetchMyIdeas, deleteIdea } from "../services/ideas.service";
+import Swal from "sweetalert2";
 
 export default function MyIdeas() {
   const [showPopup, setShowPopup] = useState(false);
@@ -12,6 +13,31 @@ export default function MyIdeas() {
   const [ideas, setIdeas] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+
+  const handleDelete = async (id) => {
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "This idea will be permanently deleted!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#6c757d",
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "Cancel",
+      reverseButtons: true,
+    });
+
+    if (result.isConfirmed) {
+      try {
+        await deleteIdea(id);
+        setIdeas(ideas.filter((idea) => idea._id !== id));
+        Swal.fire("Deleted!", "Idea has been deleted.", "success");
+      } catch (err) {
+        console.error("Delete failed:", err);
+        Swal.fire("Error", "Failed to delete idea.", "error");
+      }
+    }
+  };
 
   useEffect(() => {
     const loadIdeas = async () => {
@@ -27,21 +53,6 @@ export default function MyIdeas() {
     };
     loadIdeas();
   }, []);
-
-  const handleDelete = async (id) => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this idea?"
-    );
-    if (!confirmDelete) return;
-    try {
-      await deleteIdea(id);
-      setIdeas((prev) => prev.filter((idea) => idea._id !== id));
-      setActiveMenu(null);
-    } catch (err) {
-      console.error("Failed to delete idea", err);
-      alert("Failed to delete idea");
-    }
-  };
 
   return (
     <div className=" px-4 md:px-10 py-10  min-h-screen max-w-screen  mx-auto bg-radial-[at_50%_75%] from-sky-200 via-blue-100 to-white to-90% font-ibm  text-[#333333]">
@@ -77,48 +88,47 @@ export default function MyIdeas() {
       ) : (
 <div className="space-y-4 mb-12 flex flex-col-reverse gap-3">
   {ideas.map((idea) => (
-   <div
-  key={idea._id}
-  className="bg-white rounded-md p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 shadow-sm border border-gray-100"
->
-  <div className="flex-1 min-w-0">
-    {/* Title + Upvotes */}
-    <div className="flex justify-between items-start mb-1">
-      <h4 className="font-semibold text-base text-gray-900 truncate">
-        {idea.title}
-      </h4>
-      <span className="flex items-center text-amber-500 text-sm font-medium">
-        <GoArrowUp className="mr-1" />
-        {idea.totalUpvotes}
-      </span>
-    </div>
-
-    {/* Description limited to 50% width */}
-    <div className="w-full sm:w-1/2">
-      <p className="text-sm text-gray-600 mb-2 line-clamp-1">
-        {idea.description}
-      </p>
-    </div>
-
-    {idea.category && (
-      <span
-        className={`${
-          tagColors[idea.category.toLowerCase()] || "bg-gray-200 text-gray-700"
-        } px-3 py-1 rounded-full text-xs font-medium inline-block`}
-      >
-        {idea.category}
-      </span>
-    )}
-  </div>
-
-  <div className="relative self-start">
-    <button
-      type="button"
-      className="text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-300 rounded"
-      onClick={() => setActiveMenu(activeMenu === idea._id ? null : idea._id)}
+    <div
+      key={idea._id}
+      className="bg-white rounded-md p-4 flex justify-between items-start shadow-sm border border-gray-100"
     >
-      <BiDotsVerticalRounded size={20} />
-    </button>
+      <div className="flex-1 w-full pr-4">
+        {/* Title + Upvotes */}
+        <div className="flex justify-between items-start mb-1">
+          <h4 className="font-semibold text-base text-gray-900">{idea.title}</h4>
+          <span className="flex items-center text-amber-400 text-sm font-medium">
+            <GoArrowUp className="mr-1" />
+            {idea.totalUpvotes}
+          </span>
+        </div>
+
+        {/* Description */}
+        <p className="text-sm text-gray-600 mb-2 line-clamp-1">
+          {idea.description}
+        </p>
+
+        {/* Tag */}
+        {idea.category && (
+          <span
+            className={`${
+              tagColors[idea.category.toLowerCase()] ||
+              "bg-gray-200 text-gray-700"
+            } px-3 py-1 rounded-full text-xs font-medium inline-block`}
+          >
+            {idea.category}
+          </span>
+        )}
+      </div>
+
+      <div className="relative">
+        <button
+          className="text-gray-400 hover:text-gray-600"
+          onClick={() =>
+            setActiveMenu(activeMenu === idea._id ? null : idea._id)
+          }
+        >
+          <BiDotsVerticalRounded size={20} />
+        </button>
 
         {activeMenu === idea._id && (
           <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 shadow-md rounded-md z-10">
@@ -134,7 +144,10 @@ export default function MyIdeas() {
             >
               Analysis
             </Link>
-            <button onClick={() => handleDelete(idea._id)} className="block w-full px-4 py-2 text-sm text-left text-red-600 hover:bg-gray-100">
+            <button
+              className="block w-full px-4 py-2 text-sm text-left text-red-600 hover:bg-gray-100"
+              onClick={() => handleDelete(idea._id)}
+            >
               Delete
             </button>
           </div>
@@ -143,6 +156,8 @@ export default function MyIdeas() {
     </div>
   ))}
 </div>
+
+
       )}
     </div>
   );
