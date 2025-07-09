@@ -56,7 +56,7 @@ export const IdeaCard = ({ ideas = [], userRole }) => {
         {ideas.map((idea) => (
           <div
             key={idea._id}
-            className="bg-white drop-shadow-lg  rounded-lg p-9 relative transform transition-transform duration-300 ease-in-out hover:translate-1 hover:scale-100"
+            className="bg-white drop-shadow-lg rounded-lg lg:p-9 relative transform transition-transform duration-300 ease-in-out hover:translate-1 hover:scale-100"
           >
             <div className="p-6 pb-4">
               <div className="flex items-start justify-between mb-4">
@@ -95,7 +95,7 @@ export const IdeaCard = ({ ideas = [], userRole }) => {
             </div>
 
             {/* Card Footer */}
-            <div className="px-6 py-4 bg-gray-50 border-t border-gray-100">
+            <div className="lg:px-6 lg:py-4 p-2 bg-gray-50 border-t border-gray-100">
               <div className="flex items-center justify-between">
                 {/* Founder Info */}
                 <div className="flex items-center gap-3">
@@ -125,8 +125,8 @@ export const IdeaCard = ({ ideas = [], userRole }) => {
 
                 {/* Action Buttons */}
                 <div className="flex items-center gap-2">
-                  <Link to={`/detailIdea/${idea._id}`} className="flex items-center gap-2 bg-blue-900 hover:bg-blue-800 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
-                    <Eye className="w-4 h-4" />
+                  <Link to={`/detailIdea/${idea._id}`} className="flex items-center px-2 gap-2 bg-blue-900 hover:bg-blue-800 text-white lg:px-4 lg:py-2 rounded-lg text-xs lg:text-sm lg:font-medium transition-colors">
+                    <Eye className="lg:w-4 lg:h-4" />
                     View Details
                   </Link>
                   {userRole === "investor" && (
@@ -135,9 +135,9 @@ export const IdeaCard = ({ ideas = [], userRole }) => {
                         setIdeaId(idea._id);
                         openModal();
                       }}
-                      className="flex items-center gap-2 cursor-pointer bg-blue-800 hover:bg-blue-700  text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+                      className="flex items-center p-1 gap-2 cursor-pointer bg-blue-800 hover:bg-blue-700 text-white lg:px-4 lg:py-2 rounded-lg text-xs lg:text-sm lg:font-medium transition-colors"
                     >
-                      <Calendar className="w-4 h-4" />
+                      <Calendar className="w-3 h-3 lg:w-4 lg:h-4" />
                       Meet
                     </button>
                   )}

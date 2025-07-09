@@ -76,7 +76,7 @@ export default function AllIdeas() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-3">
+              <div className="flex flex-col lg:flex-row items-center gap-3">
                 <div className="relative">
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-900 w-4 h-4" />
                   <input
@@ -84,10 +84,10 @@ export default function AllIdeas() {
                     placeholder="Search ideas..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-64 pl-9 pr-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/80 backdrop-blur-sm transition-all text-sm"
+                    className="w-30 lg:w-64 pl-9 pr-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white/80 backdrop-blur-sm transition-all text-sm"
                   />
                 </div>
-                <div className="flex gap-2">
+                <div className="hidden lg:flex gap-2">
                   <div className="relative">
                   <ChevronDown className="absolute textg right-3 top-1/2 transform -translate-y-1/2  w-4 h-4 pointer-events-none z-10" />
                   <select
@@ -118,7 +118,7 @@ export default function AllIdeas() {
         </div>
 
         {/* Main Content */}
-        <div className="max-w-7xl mx-auto px-6 ">
+        <div className="max-w-7xl mx-auto md:px-3 lg:px-6 ">
           {loading ? (
             <div className="flex justify-center items-center min-h-[400px]">
               <div className="flex gap-2">
@@ -138,7 +138,7 @@ export default function AllIdeas() {
               </p>
             </div>
           ) : (
-            <div className="px-6 py-8 sm:px-8 md:px-10 border-l-4 border-r-4 border-double border-gray-200 bg-gradient-to-b from-slate-50 to-white">
+            <div className="p-1 lg:px-6 lg:py-8 sm:px-8 md:px-10 border-l-4 border-r-4 border-double border-gray-200 bg-gradient-to-b from-slate-50 to-white">
               <IdeaCard ideas={filteredIdeas} userRole={currentUser?.role} />
             </div>
           )}
