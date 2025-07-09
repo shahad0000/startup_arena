@@ -24,6 +24,7 @@ import { RiSendPlaneFill } from "react-icons/ri"
 import { FaStar } from "react-icons/fa"
 import { IoCalendarOutline } from "react-icons/io5"
 import { BiDotsVerticalRounded } from "react-icons/bi"
+import Swal from "sweetalert2"
 
 export default function IdeaDetails() {
   const { id } = useParams()
@@ -196,6 +197,15 @@ export default function IdeaDetails() {
     try {
       await reportComment(commentId);
       setShowReport(null);
+      Swal.fire({
+        toast: true,
+        position: "top-end",
+        icon: "success",
+        title: "Report submitted!",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+      });
     } catch (err) {
       console.error("Failed to report comment:", err);
     }
