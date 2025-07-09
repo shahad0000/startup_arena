@@ -88,8 +88,8 @@ function VentureBoard() {
         <div className="bg-white/80 backdrop-blur-sm border border-gray-200 shadow-md rounded-xl px-6 py-5 flex flex-col lg:flex-row items-center justify-between gap-4 mb-10">
           {/* Search */}
           <div className="flex lg:w-[70%]">
-            <div className="p-2 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg shadow-sm">
-              <TrendingUp className="w-5 h-5 text-white" />
+            <div className="p-2 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg shadow-sm mx-2">
+              <TrendingUp className="w-6 h-6 text-white" />
             </div>
             <div className="relative w-full">
               <IoSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />

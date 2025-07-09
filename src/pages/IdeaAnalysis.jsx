@@ -13,8 +13,9 @@ import {
   Pie,
   Cell,
   Legend,
-} from "recharts";  
+} from "recharts";
 import { fetchIdeaAnalytics, fetchIdeaById } from "../services/ideas.service";
+import { BarChart3 } from "lucide-react";
 
 const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff7f50"];
 
@@ -92,7 +93,7 @@ export default function IdeaAnalysisPage() {
     loadAnalytics();
   }, [id]);
 
-    if (loading)
+  if (loading)
     return (
       <div class="flex justify-center items-center gap-2 min-h-screen max-w-screen bg-radial-[at_50%_75%] from-sky-200 via-blue-100 to-white to-90%">
         <div class="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:.7s]"></div>
@@ -104,30 +105,54 @@ export default function IdeaAnalysisPage() {
   if (!idea) return <p className="p-6">Idea not found.</p>;
 
   return (
-    <div className="min-h-screen min-w-screen">
-      <Link
-        to="/MyIdeas"
-        className="flex items-center gap-1 text-blue-600 hover:text-blue-800"
-      >
-        <IoIosArrowBack />
-        Back
-      </Link>
-      <div className="mx-auto px-4 md:px-10 py-10 text-[#333]">
-        <div className="bg-white border border-gray-200 rounded-lg p-6 space-y-6">
+    <div className="min-h-screen w-full bg-gradient-to-br from-white via-slate-50 to-slate-100 text-[#333] font-sans">
+      {/* Header Section */}
+      <div className="bg-white/80 backdrop-blur-sm shadow-sm border-b border-gray-100 sticky top-0 z-10">
+        <div className="max-w-6xl mx-auto px-4 md:px-8 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg shadow-sm">
+              <BarChart3 className="w-5 h-5 text-white" />
+            </div>
+            <div>
+              <h1 className="text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+                Idea Analysis
+              </h1>
+              <p className="text-gray-600 text-xs">
+                Visualize demographic engagement
+              </p>
+            </div>
+          </div>
+          <Link
+            to="/MyIdeas"
+            className="text-sm text-blue-600 hover:text-blue-800 flex items-center gap-1"
+          >
+            <IoIosArrowBack className="text-base" />
+            Back
+          </Link>
+        </div>
+      </div>
+
+      <div className="max-w-6xl my-5 mx-auto">
+        {/* Main Card */}
+        <div className="bg-white border border-gray-200 rounded-lg p-6 space-y-6 shadow-sm">
+          {/* Idea Overview */}
           <div className="flex justify-between items-start">
             <div>
               <h2 className="text-xl font-semibold">{idea.title}</h2>
               <p className="text-gray-600 text-sm mt-1">{idea.description}</p>
               <div className="mt-3 flex gap-2 flex-wrap">
                 <span className="inline-flex items-center gap-1 px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">
-                  {idea.tag}
+                  {idea.category}
                 </span>
               </div>
             </div>
           </div>
 
+          {/* Demographics Section */}
           <div className="border-t pt-6">
-            <h3 className="text-md font-semibold mb-4">Demographic Breakdown</h3>
+            <h3 className="text-md font-semibold mb-4">
+              Demographic Breakdown
+            </h3>
             <div className="grid md:grid-cols-3 gap-8">
               {/* Age Groups */}
               <div className="flex flex-col">
@@ -145,9 +170,14 @@ export default function IdeaAnalysisPage() {
                         fill="#8884d8"
                         label
                       >
-                        {(idea.demographicData?.ageGroups || []).map((entry, index) => (
-                          <Cell key={`cell-age-${index}`} fill={COLORS[index % COLORS.length]} />
-                        ))}
+                        {(idea.demographicData?.ageGroups || []).map(
+                          (entry, index) => (
+                            <Cell
+                              key={`cell-age-${index}`}
+                              fill={COLORS[index % COLORS.length]}
+                            />
+                          )
+                        )}
                       </Pie>
                       <Tooltip />
                       <Legend />
@@ -158,7 +188,7 @@ export default function IdeaAnalysisPage() {
 
               {/* Vote */}
               <div className="flex flex-col">
-                <h4 className="text-sm font-medium mb-2">vote</h4>
+                <h4 className="text-sm font-medium mb-2">Vote</h4>
                 <div className="h-[250px] w-full">
                   <ResponsiveContainer width="100%" height="100%">
                     <PieChart>
@@ -172,9 +202,14 @@ export default function IdeaAnalysisPage() {
                         fill="#ffc658"
                         label
                       >
-                        {(idea.demographicData?.vote || []).map((entry, index) => (
-                          <Cell key={`cell-vote-${index}`} fill={COLORS[index % COLORS.length]} />
-                        ))}
+                        {(idea.demographicData?.vote || []).map(
+                          (entry, index) => (
+                            <Cell
+                              key={`cell-vote-${index}`}
+                              fill={COLORS[index % COLORS.length]}
+                            />
+                          )
+                        )}
                       </Pie>
                       <Tooltip />
                       <Legend />
@@ -199,9 +234,14 @@ export default function IdeaAnalysisPage() {
                         fill="#82ca9d"
                         label
                       >
-                        {(idea.demographicData?.gender || []).map((entry, index) => (
-                          <Cell key={`cell-gender-${index}`} fill={COLORS[index % COLORS.length]} />
-                        ))}
+                        {(idea.demographicData?.gender || []).map(
+                          (entry, index) => (
+                            <Cell
+                              key={`cell-gender-${index}`}
+                              fill={COLORS[index % COLORS.length]}
+                            />
+                          )
+                        )}
                       </Pie>
                       <Tooltip />
                       <Legend />
@@ -220,7 +260,11 @@ export default function IdeaAnalysisPage() {
                       <XAxis dataKey="name" />
                       <YAxis />
                       <Tooltip />
-                      <Bar dataKey="value" fill="#ffc658" radius={[4, 4, 0, 0]} />
+                      <Bar
+                        dataKey="value"
+                        fill="#ffc658"
+                        radius={[4, 4, 0, 0]}
+                      />
                     </BarChart>
                   </ResponsiveContainer>
                 </div>
@@ -236,7 +280,11 @@ export default function IdeaAnalysisPage() {
                       <XAxis dataKey="name" />
                       <YAxis />
                       <Tooltip />
-                      <Bar dataKey="value" fill="#ff7f50" radius={[4, 4, 0, 0]} />
+                      <Bar
+                        dataKey="value"
+                        fill="#ff7f50"
+                        radius={[4, 4, 0, 0]}
+                      />
                     </BarChart>
                   </ResponsiveContainer>
                 </div>
