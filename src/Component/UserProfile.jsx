@@ -29,7 +29,6 @@ function UserProfile({ onUpdate }) {
         setCountry(data.country || country);
         setCity(data.city || city);
         setAvatar(data.profilePic || avatar);
-        setRole(data.role || role);
       }
     };
     fetchUser();
@@ -40,7 +39,6 @@ function UserProfile({ onUpdate }) {
       name,
       email,
       gender,
-      role,
       country,
       city,
       avatar,
