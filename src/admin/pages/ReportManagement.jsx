@@ -115,7 +115,7 @@ export default function ReportManagement() {
                 <th className="px-4 py-2">Comment</th>
                 <th className="px-4 py-2">Reports</th>
                 <th className="px-4 py-2">Comment ID</th>
-                <th className="px-4 py-2">User ID</th>
+                <th className="px-4 py-2">User Email</th>
                 <th className="px-4 py-2">Actions</th>
               </tr>
             </thead>
@@ -134,7 +134,7 @@ export default function ReportManagement() {
                     <td className="px-4 py-2 text-gray-700">{report.text}</td>
                     <td className="px-4 py-2">{report.count}</td>
                     <td className="px-4 py-2 text-gray-500">{report.id}</td>
-                    <td className="px-4 py-2 text-gray-500">{report.userId}</td>
+                    <td className="px-4 py-2 text-gray-500">{report?.userId?.email}</td>
                     <td className="px-4 py-2 space-x-2">
                       <button
                         onClick={() => handleDeleteComment(report.id)}
