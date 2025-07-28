@@ -39,6 +39,9 @@ const SignUpForm = () => {
       }
 
       const data = await signUp(formData);
+      if (data?.data?.user) {
+        localStorage.setItem("profileData", JSON.stringify(data.data.user));
+      }
       console.log("Sending signup data:", formData);
       Swal.fire({
         toast: true,
