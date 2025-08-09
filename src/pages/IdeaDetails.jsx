@@ -4,6 +4,8 @@ import { useParams } from "react-router";
 import { Lightbulb } from "lucide-react";
 import { Link } from "react-router";
 import { IoIosArrowBack } from "react-icons/io";
+import { MdSummarize } from "react-icons/md";
+import { getIdeaSummary } from "../services/summarize.service";
 
 // Services
 import { fetchIdeaById } from "../services/ideas.service";
@@ -41,7 +43,8 @@ export default function IdeaDetails() {
   const [netVotes, setNetVotes] = useState(0);
   const [showReport, setShowReport] = useState(null);
   const [userRole, setUserRole] = useState(null);
-
+  const [isSummarized, setIsSummarized] = useState(false);
+  const [summary, setSummary] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [targetId, setTargetId] = useState(null);
   const [targetType, setTargetType] = useState("comment");
@@ -69,7 +72,6 @@ export default function IdeaDetails() {
         targetId,
       };
       const meeting = await scheduleMeeting(payload);
-      console.log("Meeting created:", meeting);
       setShowModal(false);
       setFormData({
         topic: "",
@@ -218,6 +220,41 @@ export default function IdeaDetails() {
       console.error("Failed to report comment:", err);
     }
   };
+  const toggleSummary = async () => {
+    if (isSummarized) {
+      setIsSummarized(false);
+      return;
+    }
+
+    if (!summary) {
+      Swal.fire({
+        title: "Generating Summary...",
+        text: "Please wait while we summarize this idea.",
+        allowOutsideClick: false,
+        showConfirmButton: false,
+        willOpen: () => {
+          Swal.showLoading();
+        },
+      });
+
+      try {
+        const fetchedSummary = await getIdeaSummary(idea._id);
+        setSummary(fetchedSummary);
+        Swal.close();
+      } catch (err) {
+        console.error("Error fetching summary", err);
+        Swal.fire({
+          title: "Error",
+          text: "Failed to generate summary. Please try again.",
+          icon: "error",
+          confirmButtonColor: "#EF4444",
+        });
+        return;
+      }
+    }
+
+    setIsSummarized(true); 
+  };
 
   if (loading)
     return (
@@ -285,7 +322,7 @@ export default function IdeaDetails() {
               }}
               className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#1E40AF] text-white px-4 py-2 text-sm font-medium rounded hover:bg-[#1e40afc6]"
             >
-              <CiCalendar /> Request Meeting
+              <CiCalendar /> Meet
             </button>
           )}
         </div>
@@ -316,7 +353,24 @@ export default function IdeaDetails() {
                 </div>
 
                 <div className="text-[15px] break-words whitespace-pre-line mb-3 w-full">
-                  {idea.description}
+                  {isSummarized ? (
+                    <div>
+                      <div className="bg-blue-50 border-l-4 border-blue-400 p-3 mb-3 rounded">
+                        <p className="text-blue-800 font-semibold text-sm mb-2">
+                          📝 AI Summary:
+                        </p>
+                        <p className="text-gray-700">{summary}</p>
+                      </div>
+                      <button
+                        onClick={toggleSummary}
+                        className="text-blue-600 text-sm hover:underline"
+                      >
+                        ← Show original description
+                      </button>
+                    </div>
+                  ) : (
+                    idea.description
+                  )}
                 </div>
 
                 <p
@@ -336,38 +390,51 @@ export default function IdeaDetails() {
               </div>
 
               {/* Voting Section */}
-              <div className="flex flex-row md:flex-col items-center justify-center gap-2 md:gap-3 mt-4 md:mt-0 md:ml-6 bg-gray-50 rounded-md p-2">
-                {/* Upvote */}
-                <button
-                  disabled={!currentUser}
-                  onClick={handleUpvote}
-                  className={`p-2 rounded-full transition-all duration-150 shadow-sm focus:outline-none ${
-                    voteStatus === "up"
-                      ? "bg-green-100 text-green-700"
-                      : "bg-white text-gray-500 hover:bg-green-50 hover:text-green-600"
-                  }`}
-                  aria-label="Upvote"
-                >
-                  <FaChevronUp size={18} />
-                </button>
+              <div className="flex flex-row md:flex-col items-center justify-center gap-2 md:gap-3 mt-4 md:mt-0 md:ml-6 ">
+                <div className="flex flex-row flex-1 md:flex-col items-center justify-center gap-2 md:gap-3 bg-gray-50 rounded-md p-2">
+                  {/* Upvote */}
+                  <button
+                    disabled={!currentUser}
+                    onClick={handleUpvote}
+                    className={`p-2 rounded-full transition-all duration-150 shadow-sm focus:outline-none ${
+                      voteStatus === "up"
+                        ? "bg-green-100 text-green-700"
+                        : "bg-white text-gray-500 hover:bg-green-50 hover:text-green-600"
+                    }`}
+                    aria-label="Upvote"
+                  >
+                    <FaChevronUp size={18} />
+                  </button>
 
-                {/* Vote Count */}
-                <span className="text-base font-semibold text-gray-700 px-1">
-                  {netVotes}
-                </span>
+                  {/* Vote Count */}
+                  <span className="text-base font-semibold text-gray-700 px-1">
+                    {netVotes}
+                  </span>
 
-                {/* Downvote */}
+                  {/* Downvote */}
+                  <button
+                    disabled={!currentUser}
+                    onClick={handleDownvote}
+                    className={`p-2 rounded-full transition-all duration-150 shadow-sm focus:outline-none ${
+                      voteStatus === "down"
+                        ? "bg-red-100 text-red-700"
+                        : "bg-white text-gray-500 hover:bg-red-50 hover:text-red-600"
+                    }`}
+                    aria-label="Downvote"
+                  >
+                    <FaChevronDown size={18} />
+                  </button>
+                </div>
                 <button
-                  disabled={!currentUser}
-                  onClick={handleDownvote}
-                  className={`p-2 rounded-full transition-all duration-150 shadow-sm focus:outline-none ${
-                    voteStatus === "down"
-                      ? "bg-red-100 text-red-700"
-                      : "bg-white text-gray-500 hover:bg-red-50 hover:text-red-600"
-                  }`}
-                  aria-label="Downvote"
+                  onClick={toggleSummary}
+                  className="text-blue-800 cursor-pointer hover:text-blue-900 transition-colors"
+                  title={
+                    isSummarized
+                      ? "Show original description"
+                      : "Summarize idea"
+                  }
                 >
-                  <FaChevronDown size={18} />
+                  <MdSummarize size={33} />
                 </button>
               </div>
             </div>
