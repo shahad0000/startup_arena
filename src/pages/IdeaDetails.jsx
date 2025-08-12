@@ -71,8 +71,18 @@ export default function IdeaDetails() {
         targetType,
         targetId,
       };
-      const meeting = await scheduleMeeting(payload);
       setShowModal(false);
+      Swal.fire({
+        title: "Scheduling Meeting...",
+        text: "Please wait while we schedule the meeting.",
+        allowOutsideClick: false,
+        showConfirmButton: false,
+        willOpen: () => {
+          Swal.showLoading();
+        },
+      });
+      const meeting = await scheduleMeeting(payload);
+      Swal.close();
       setFormData({
         topic: "",
         start_time: "",
