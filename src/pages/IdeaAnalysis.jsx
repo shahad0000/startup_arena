@@ -32,12 +32,27 @@ function aggregateAnalytics(votes) {
   let upVotes = 0;
   let downVotes = 0;
 
+  const normalize = (value) => (value ? value.trim().toLowerCase() : null);
+
+  const normalizeCity = (value) =>
+    value ? value.trim().replace(/\s+/g, " ").toLowerCase() : null;
+
+  const formatLabel = (type, key) => {
+    if (!key) return "";
+    return key
+      .split(" ")
+      .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+      .join(" ");
+  };
+
   votes.forEach((v) => {
     if (v.value === 1) upVotes += 1;
     if (v.value === -1) downVotes += 1;
     if (!v.userId) return;
+
     const { age, gender, country, city } = v.userId;
 
+    // Age groups
     if (typeof age === "number") {
       if (age < 25) ageGroupsCount["18-24"] += 1;
       else if (age < 35) ageGroupsCount["25-34"] += 1;
@@ -45,19 +60,30 @@ function aggregateAnalytics(votes) {
       else ageGroupsCount["45+"] += 1;
     }
 
-    if (gender) genderCount[gender] = (genderCount[gender] || 0) + 1;
-    if (country) countryCount[country] = (countryCount[country] || 0) + 1;
-    if (city) cityCount[city] = (cityCount[city] || 0) + 1;
+    // Gender normalization
+    const g = normalize(gender);
+    if (g) genderCount[g] = (genderCount[g] || 0) + 1;
+
+    // Country normalization
+    const ctry = normalize(country);
+    if (ctry) countryCount[ctry] = (countryCount[ctry] || 0) + 1;
+
+    // City normalization
+    const cty = normalizeCity(city);
+    if (cty) cityCount[cty] = (cityCount[cty] || 0) + 1;
   });
 
-  const mapToArray = (obj) =>
-    Object.keys(obj).map((name) => ({ name, value: obj[name] }));
+  const mapToArray = (obj, type) =>
+    Object.keys(obj).map((name) => ({
+      name: formatLabel(type, name),
+      value: obj[name],
+    }));
 
   return {
     ageGroups: mapToArray(ageGroupsCount).filter((g) => g.value > 0),
-    gender: mapToArray(genderCount),
-    countries: mapToArray(countryCount),
-    cities: mapToArray(cityCount),
+    gender: mapToArray(genderCount, "gender"),
+    countries: mapToArray(countryCount, "country"),
+    cities: mapToArray(cityCount, "city"),
     vote: [
       { name: "Up vote", value: upVotes },
       { name: "Down vote", value: downVotes },
@@ -275,9 +301,17 @@ export default function IdeaAnalysisPage() {
                 <h4 className="text-sm font-medium mb-2">City</h4>
                 <div className="h-[250px] w-full">
                   <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={idea.demographicData?.cities || []}>
+                    <BarChart
+                      data={idea.demographicData?.cities || []}
+                      margin={{ top: 20, right: 30, left: 20, bottom: 15 }}
+                    >
                       <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="name" />
+                      <XAxis
+                        dataKey="name"
+                        interval={0}
+                        angle={-30}
+                        textAnchor="end"
+                      />
                       <YAxis />
                       <Tooltip />
                       <Bar

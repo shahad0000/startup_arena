@@ -1,18 +1,26 @@
 import React from "react";
 import investmentIdea from "../public/images/Market-launch-pana.png";
-import { FaCheck } from "react-icons/fa6";
+import { Country, City } from "country-state-city";
 
 function SignUpSecondStep({ formData, setFormData, onBack, onSubmit }) {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
-  return (
-   <div className="flex flex-col min-h-screen justify-center items-center px-4 py-6 bg-gray-50"> 
 
-      {/* Image & Form Section */}
-      <div className="w-full max-w-6xl flex flex-col lg:flex-row justify-between items-center gap-12 p-6 rounded-lg ">
-        {/* Left - Image (visible only on large screens) */}
+  // Load countries from library
+  const countries = Country.getAllCountries();
+
+  // Load cities only for the selected country
+  const cities = formData.country
+    ? City.getCitiesOfCountry(formData.country) // expects ISO code
+    : [];
+
+  return (
+    <div className="flex flex-col min-h-screen justify-center items-center px-4 py-6 bg-gray-50">
+      <div className="w-full max-w-6xl flex flex-col lg:flex-row justify-between items-center gap-12 p-6 rounded-lg">
+        
+        {/* Left - Image */}
         <div className="hidden lg:flex w-full lg:w-3/3 aspect-[51/0] mx-auto">
           <img
             src={investmentIdea}
@@ -21,31 +29,33 @@ function SignUpSecondStep({ formData, setFormData, onBack, onSubmit }) {
           />
         </div>
 
-    {/* Right - Form */}
-    <div className="w-full lg:w-1/2 max-w-md">
-     <div className="mb-8 text-center">
-    <p className="text-2xl font-bold mb-1">SIGNUP</p>
-    <p className="text-lg font-bold">Create New Account</p>
-    <p className="text-sm font-medium text-gray-500 mt-1">
-      Join our startup community
-    </p>
-  </div>
-      <form onSubmit={(e) => e.preventDefault()} className="flex flex-col gap-5">
-        {/* Age Field */}
-        <div>
-          <label className="block text-sm font-medium mb-1">Age:</label>
-          <input
-            type="number"
-            name="age"
-            placeholder="e.g. 25"
-            value={formData.age}
-            onChange={handleChange}
-            className="border border-gray-400 rounded-sm pl-3 pr-3 h-10 w-full outline-none focus:ring-2 focus:ring-blue-300"
-            required
-          />
-        </div>
+        {/* Right - Form */}
+        <div className="w-full lg:w-1/2 max-w-md">
+          <div className="mb-8 text-center">
+            <p className="text-2xl font-bold mb-1">SIGNUP</p>
+            <p className="text-lg font-bold">Create New Account</p>
+            <p className="text-sm font-medium text-gray-500 mt-1">
+              Join our startup community
+            </p>
+          </div>
 
-            {/* Gender Field */}
+          <form onSubmit={(e) => e.preventDefault()} className="flex flex-col gap-5">
+            
+            {/* Age */}
+            <div>
+              <label className="block text-sm font-medium mb-1">Age:</label>
+              <input
+                type="number"
+                name="age"
+                placeholder="e.g. 25"
+                value={formData.age}
+                onChange={handleChange}
+                className="border border-gray-400 rounded-sm pl-3 pr-3 h-10 w-full outline-none focus:ring-2 focus:ring-blue-300"
+                required
+              />
+            </div>
+
+            {/* Gender */}
             <div>
               <label className="block text-sm font-medium mb-1">Gender</label>
               <select
@@ -61,38 +71,49 @@ function SignUpSecondStep({ formData, setFormData, onBack, onSubmit }) {
               </select>
             </div>
 
-            {/* Country Field */}
+            {/* Country */}
             <div>
               <label className="block text-sm font-medium mb-1">Country</label>
               <select
                 name="country"
                 value={formData.country}
-                onChange={handleChange}
+                onChange={(e) => {
+                  setFormData((prev) => ({
+                    ...prev,
+                    country: e.target.value,
+                    city: "", // reset city when country changes
+                  }));
+                }}
                 required
                 className="border border-gray-400 rounded-sm pl-3 pr-3 h-10 w-full outline-none focus:ring-2 focus:ring-blue-300"
               >
                 <option value="">Select country</option>
-                <option>Saudi Arabia</option>
-                <option>Kuwait</option>
-                <option>The United Arab Emirates</option>
-                <option>Qatar</option>
-                <option>Bahrain</option>
-                <option>Oman</option>
+                {countries.map((c) => (
+                  <option key={c.isoCode} value={c.isoCode}>
+                    {c.name}
+                  </option>
+                ))}
               </select>
             </div>
 
-            {/* City Field */}
+            {/* City */}
             <div>
               <label className="block text-sm font-medium mb-1">City</label>
-              <input
-                type="text"
+              <select
                 name="city"
                 value={formData.city}
                 onChange={handleChange}
-                placeholder="Enter your city"
-                className="border border-gray-400 rounded-sm pl-3 pr-3 h-10 w-full outline-none focus:ring-2 focus:ring-blue-300"
                 required
-              />
+                disabled={!formData.country}
+                className="border border-gray-400 rounded-sm pl-3 pr-3 h-10 w-full outline-none focus:ring-2 focus:ring-blue-300"
+              >
+                <option value="">Select city</option>
+                {cities.map((city) => (
+                  <option key={city.name} value={city.name}>
+                    {city.name}
+                  </option>
+                ))}
+              </select>
             </div>
 
             {/* Buttons */}
