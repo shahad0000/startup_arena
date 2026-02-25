@@ -15,6 +15,9 @@ function SignIn() {
     e.preventDefault();
     try {
       const data = await signIn(email, password);
+      if (data?.data?.user) {
+        localStorage.setItem("profileData", JSON.stringify(data.data.user));
+      }
       console.log("Signed in", data);
       navigate("/allIdeas");
     } catch (err) {

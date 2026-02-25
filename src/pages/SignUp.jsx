@@ -2,9 +2,8 @@ import { useState } from "react";
 import SignUpFirstStep from "../Component/SignUpFirstStep";
 import SignUpSecondStep from "../Component/SignUpSecondStep";
 import { signUp } from "../services/auth.service";
-import { Link, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
-import { SlArrowLeft } from "react-icons/sl";
 const SignUpForm = () => {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
@@ -39,6 +38,9 @@ const SignUpForm = () => {
       }
 
       const data = await signUp(formData);
+      if (data?.data?.user) {
+        localStorage.setItem("profileData", JSON.stringify(data.data.user));
+      }
       console.log("Sending signup data:", formData);
       Swal.fire({
         toast: true,
@@ -49,7 +51,6 @@ const SignUpForm = () => {
         timer: 3000,
         timerProgressBar: true,
       });
-      console.log(data)
       navigate("/allIdeas");
     } catch (err) {
         console.error("Signup failed:", err);

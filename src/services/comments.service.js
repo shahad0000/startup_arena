@@ -1,43 +1,38 @@
-import axios from "axios";
+import apiClient from "./apiClient";
 
 const API = import.meta.env.VITE_API_URL;
 
 export const fetchCommentsByIdeaId = async (ideaId) => {
-  const res = await axios.get(`${API}/comments/idea/${ideaId}`, {
-    withCredentials: true,
-  });
+  const res = await apiClient.get(`${API}/comments/idea/${ideaId}`);
   return res.data.data;
 };
 
 export const postComment = async (ideaId, text) => {
-  const res = await axios.post(
+  const res = await apiClient.post(
     `${API}/comments/idea/${ideaId}`,
     { ideaId, text },
-    { withCredentials: true }
   );
   return res.data.data;
 };
 
 export const voteOnComment = async ({ commentId, ideaId, vote, userId }) => {
-  const res = await axios.post(
+  const res = await apiClient.post(
     `${API}/comments/vote`,
     {
       commentId,
       ideaId,
       vote,
       userId,
-    },
-    { withCredentials: true }
+    }
   );
 
   return res.data;
 };
 
 export const reportComment = async (commentId) => {
-  const res = await axios.post(
+  const res = await apiClient.post(
     `${API}/comments/report`,
     { commentId },
-    { withCredentials: true }
   );
   return res.data;
 };

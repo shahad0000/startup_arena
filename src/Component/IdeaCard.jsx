@@ -6,8 +6,6 @@ import { scheduleMeeting } from "../services/zoom.service";
 import { ArrowUp, Eye, Calendar } from "lucide-react";
 
 export const IdeaCard = ({ ideas = [], userRole }) => {
-  console.log(ideas);
-
   const [showModal, setShowModal] = useState(false);
   const [IdeaId, setIdeaId] = useState(null);
 

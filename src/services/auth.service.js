@@ -1,18 +1,22 @@
-import axios from "axios";
+import apiClient from "./apiClient";
 
 const API = import.meta.env.VITE_API_URL;
 
 export const signIn = async (email, password) => {
-  const response = await axios.post(
+  const response = await apiClient.post(
     `${API}/auth/signin`,
-    { email, password },
-    { withCredentials: true }
+    { email, password }
   );
-  return response.data;
+  const data = response.data;
+  if (data?.data) {
+    localStorage.setItem("accessToken", data.data.accessToken);
+    localStorage.setItem("refreshToken", data.data.refreshToken);
+  }
+  return data;
 };
 
 export const signUp = async (formData) => {
-  const response = await axios.post(
+  const response = await apiClient.post(
     `${API}/auth/signup`,
     {
       name: formData.name,
@@ -23,17 +27,19 @@ export const signUp = async (formData) => {
       gender: formData.gender,
       country: formData.country,
       city: formData.city,
-    },
-    { withCredentials: true }
+    }
   );
-  return response.data;
+  const data = response.data;
+  if (data?.data) {
+    localStorage.setItem("accessToken", data.data.accessToken);
+    localStorage.setItem("refreshToken", data.data.refreshToken);
+  }
+  return data;
 };
 
 export const getCurrentUser = async () => {
   try {
-    const res = await axios.get(`${API}/users/me`, {
-      withCredentials: true,
-    });
+    const res = await apiClient.get(`${API}/users/me`);
     return res.data;
   } catch (err) {
     console.error("Failed to fetch current user", err);
@@ -44,10 +50,9 @@ export const getCurrentUser = async () => {
 // profilePic
 export const updateProfile = async (profilePic) => {
   // console.log(profilePic)
-  const response = await axios.put(
+  const response = await apiClient.put(
     `${API}/users/updateProfile`,
-    { profilePic },
-    { withCredentials: true }
+    { profilePic }
   );
   console.log(response.data)
   return response.data;
@@ -55,11 +60,12 @@ export const updateProfile = async (profilePic) => {
 
 export const logOut = async () => {
   try {
-      const res = await axios.post(
+      const res = await apiClient.post(
         `${API}/auth/signout`,
-        {},
-        { withCredentials: true }
+        {}
       );
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
     console.log(res.data)
   } catch (err) {
     console.error(err)
